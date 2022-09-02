@@ -1,5 +1,6 @@
 import { useRoutes } from "react-router";
 import Gnb from "./components/gnb";
+import GlobalStyle from "./GlobalStyle";
 import { routes } from "./router";
 
 const App = () => {
@@ -7,6 +8,7 @@ const App = () => {
 
   return (
     <>
+      <GlobalStyle />
       <Gnb />
       {elem}
     </>
