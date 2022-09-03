@@ -8,6 +8,7 @@ body {
 ul {
   list-style: none;
   padding: 0;
+  margin: 0
 }
 
 #root {
@@ -16,6 +17,7 @@ ul {
   padding: 0 ;
   display: inline;
   height: 200vw;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 a {
   color: #000;

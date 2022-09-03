@@ -5,7 +5,7 @@ import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const SlideWrapper = styled.section`
+const SlideWrapper = styled.div`
   position: relative;
 `;
 
@@ -47,7 +47,7 @@ function Slick({
     [autoplay, loop, speed]
   );
   return (
-    <SlideWrapper className={className}>
+    <SlideWrapper className={`slider-container ${className}`}>
       <StyledSlider {...settings}>{children}</StyledSlider>
     </SlideWrapper>
   );
