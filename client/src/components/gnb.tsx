@@ -19,6 +19,8 @@ const SideMenu = styled.ul`
   flex-direction: column;
   gap: 10px;
   margin-left: 30px;
+  font-weight: bold;
+  font-size: 20px;
 `;
 
 const Gnb = () => (
