@@ -32,4 +32,9 @@ app.post("/api/users/register", (req, res) => {
   });
 });
 
+app.post("/login", (req, res) => {
+  //요청된 이메일을 데이터베이스에서 있는지 찾는다.
+  //
+});
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
