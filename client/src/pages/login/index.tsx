@@ -3,3 +3,4 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+const LoginFormText = styled.p`
