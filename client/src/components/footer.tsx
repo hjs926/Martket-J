@@ -5,6 +5,7 @@ const FooterBox = styled.div`
   margin: 100px auto 0;
   padding: 50px 0 50px;
   background: #1f1f1f;
+  // TODO 메인페이지에서 푸터가 너무 아래로 가있으면 삭제
   position: relative;
   transform: translateY(100%);
 `;
