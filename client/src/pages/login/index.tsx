@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const LoginPageContainer = styled.div`
@@ -23,7 +24,8 @@ const LoginInputLabel = styled.label`
   overflow: hidden;
   display: block;
   margin-bottom: 12px;
-  border: 1px solid #bfbfbf;
+  /* border: 1px solid #bfbfbf; */
+  border-bottom: 1px solid #bfbfbf;
   border-radius: 0;
   color: #555;
 `;
@@ -36,6 +38,9 @@ const LoginInput = styled.input`
   border: 0 none;
   color: #353535;
   font-size: 12px;
+  &:focus {
+    outline: none;
+  }
 `;
 
 const LoginIdSaveCheckBox = styled.p`
@@ -90,7 +95,7 @@ const LoginPage = () => {
           </LoginIdSaveCheckBox>
           <LoginButton>로그인</LoginButton>
           <LoginSignUp>
-            <a href="#">회원가입</a>
+            <Link to="/signup">회원가입</Link>
           </LoginSignUp>
         </LoginForm>
       </LoginWrap>
