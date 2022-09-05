@@ -25,8 +25,9 @@ const SideMenu = styled.ul`
 
 const Gnb = () => (
   <SideMenuBar className="gnb">
-    <Logo id="logo" src="/Market_logo.png" alt="logo" />
-
+    <Link to="/">
+      <Logo id="logo" src="/Market_logo.png" alt="logo" />
+    </Link>
     <SideMenu>
       <li>
         <Link to="/">홈</Link>
