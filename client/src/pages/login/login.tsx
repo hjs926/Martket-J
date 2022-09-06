@@ -1,3 +1,5 @@
+import axios from "axios";
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -78,16 +80,53 @@ const LoginDiv = styled.div`
 `;
 
 const LoginPage = () => {
+  console.log("로그인페이지입니다.");
+  const LOGIN_URL = "로그인 api호출 주소 넣어야함";
+  const AUTH_URL = "인증 api호출 주소 넣어야함";
+
+  const idRef = useRef<HTMLInputElement>(null); // 제너릭으로 antd의 Input 컴포넌트를 넣음
+  const passwordRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
+
+  useEffect(() => {
+    idRef.current?.focus();
+  }, []);
+
+  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const user_id = idRef.current!.value; // idRef.current 까지 하면 null 혹은 Input이 나옴 Non-null assertion을 사용해서 null일 가능성을 없애줌. 타입이 Input으로 고정됨
+    const user_password = passwordRef.current!.value;
+
+    await axios
+      .post(LOGIN_URL, {
+        email: user_id,
+        password: user_password,
+      })
+      .then((response) => console.log(response));
+    const data = await axios.get(AUTH_URL);
+    console.log(data);
+  };
+
   return (
     <LoginPageContainer>
       <LoginWrap>
         <LoginDiv>회원 로그인</LoginDiv>
-        <LoginForm>
+        <LoginForm onSubmit={onSubmitHandler}>
           <LoginInputLabel>
-            <LoginInput id="login" type="text" placeholder="아이디" />
+            <LoginInput
+              id="login"
+              type="text"
+              placeholder="아이디"
+              ref={idRef}
+            />
           </LoginInputLabel>
           <LoginInputLabel>
-            <LoginInput id="password" type="password" placeholder="비밀번호" />
+            <LoginInput
+              id="password"
+              type="password"
+              placeholder="비밀번호"
+              ref={passwordRef}
+            />
           </LoginInputLabel>
           <LoginIdSaveCheckBox>
             <input type="checkbox" />
