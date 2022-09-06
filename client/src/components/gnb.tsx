@@ -20,13 +20,14 @@ const SideMenu = styled.ul`
   gap: 10px;
   margin-left: 30px;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 17px;
 `;
 
 const Gnb = () => (
   <SideMenuBar className="gnb">
-    <Logo id="logo" src="/Market_logo.png" alt="logo" />
-
+    <Link to="/">
+      <Logo id="logo" src="/Market_logo.png" alt="logo" />
+    </Link>
     <SideMenu>
       <li>
         <Link to="/">홈</Link>
@@ -39,6 +40,10 @@ const Gnb = () => (
       </li>
       <li>
         <Link to="/login">로그인</Link>
+      </li>
+      <li>
+        <br />
+        <Link to="/community">COMMUNITY</Link>
       </li>
     </SideMenu>
   </SideMenuBar>
