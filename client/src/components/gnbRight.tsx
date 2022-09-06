@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const HeaderRight = styled.div`
@@ -22,8 +23,12 @@ const GnbRight = () => {
   return (
     <HeaderRight>
       <div>
-        <HeaderRightBtn href="#">LOIN/JOIN</HeaderRightBtn>
-        <HeaderRightBtn href="#">CART () </HeaderRightBtn>
+        <Link to="/login">
+          <HeaderRightBtn>LOIN/JOIN</HeaderRightBtn>
+        </Link>
+        <Link to="/cart">
+          <HeaderRightBtn>CART () </HeaderRightBtn>
+        </Link>
       </div>
     </HeaderRight>
   );

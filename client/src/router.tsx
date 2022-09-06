@@ -3,7 +3,7 @@ import Index from "./pages/index";
 import CartIndex from "./pages/cart/index";
 import ProductsIndex from "./pages/products/index";
 import Id from "./pages/products/[id]";
-import LoginIndex from "./pages/login";
+import LoginIndex from "./pages/login/login";
 import CommunityPage from "./components/community";
 import SignUpPage from "./pages/login/signup";
 
