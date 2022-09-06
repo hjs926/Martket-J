@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import axios from "axios";
+import { useRef } from "react";
 
 const SignUpContainer = styled.div`
   margin: 50px 120px 0 100px;
@@ -65,25 +67,62 @@ const SignUpSpan = styled.span`
 `;
 
 const SignUpPage = () => {
+  console.log("회원가입페이지입니다.");
+
+  const SIGNUP_URL = "회원가입 api호출 주소 넣어야함";
+  axios.defaults.withCredentials = true; //쿠키 가져오는 설정
+
+  const idRef = useRef<HTMLInputElement>(null); // 제너릭으로 antd의 Input 컴포넌트를 넣음
+  const passwordRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
+  const retrypasswordRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
+  const nameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+
+  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const user_id = idRef.current!.value; // idRef.current 까지 하면 null 혹은 Input이 나옴 Non-null assertion을 사용해서 null일 가능성을 없애줌. 타입이 Input으로 고정됨
+    const user_password = passwordRef.current!.value;
+    const user_Retrypassword = retrypasswordRef.current!.value;
+    const user_name = nameRef.current!.value;
+    const email = emailRef.current!.value;
+
+    await axios.post(SIGNUP_URL, {
+      id: user_id,
+      password: user_password,
+      retrypassword: user_Retrypassword,
+      name: user_name,
+      email,
+    });
+  };
+
   return (
     <SignUpContainer>
       <SignUpWrap>
-        <SignUpForm>
+        <SignUpForm onSubmit={onSubmitHandler}>
           <SignUpSpan>회원계정 만들기</SignUpSpan>
           <SignUpInputLabel>
-            <SignUpInput type="text" placeholder="아이디" />
+            <SignUpInput type="text" placeholder="아이디" ref={idRef} />
           </SignUpInputLabel>
           <SignUpInputLabel>
-            <SignUpInput type="password" placeholder="비밀번호" />
+            <SignUpInput
+              type="password"
+              placeholder="비밀번호"
+              ref={passwordRef}
+            />
           </SignUpInputLabel>
           <SignUpInputLabel>
-            <SignUpInput type="password" placeholder="비밀번호 확인" />
+            <SignUpInput
+              type="password"
+              placeholder="비밀번호 확인"
+              ref={retrypasswordRef}
+            />
           </SignUpInputLabel>
           <SignUpInputLabel>
-            <SignUpInput type="text" placeholder="닉네임" />
+            <SignUpInput type="text" placeholder="닉네임" ref={nameRef} />
           </SignUpInputLabel>
           <SignUpInputLabel>
-            <SignUpInput type="email" placeholder="이메일" />
+            <SignUpInput type="email" placeholder="이메일" ref={emailRef} />
           </SignUpInputLabel>
         </SignUpForm>
         <SignUpBtnContainer>
