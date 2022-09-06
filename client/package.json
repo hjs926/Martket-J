@@ -11,9 +11,11 @@
   "dependencies": {
     "@tanstack/react-query": "^4.2.3",
     "@tanstack/react-query-devtools": "^4.2.3",
+    "antd": "^4.23.0",
     "axios": "^0.27.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-dropzone": "^14.2.2",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-slick": "^0.29.0",
