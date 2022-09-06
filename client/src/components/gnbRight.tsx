@@ -6,14 +6,13 @@ const HeaderRight = styled.div`
   right: 90px;
   top: 42px;
   z-index: 99;
-`;
-
-const HeaderRightBtn = styled.a`
-  line-height: 30px;
-  margin-left: 15px;
-  font-size: 14px;
-  color: black;
-  font-weight: 600;
+  span {
+    line-height: 30px;
+    margin-left: 15px;
+    font-size: 14px;
+    color: black;
+    font-weight: 600;
+  }
 `;
 
 /**
@@ -24,10 +23,10 @@ const GnbRight = () => {
     <HeaderRight>
       <div>
         <Link to="/login">
-          <HeaderRightBtn>LOIN/JOIN</HeaderRightBtn>
+          <span>LOIN/JOIN</span>
         </Link>
         <Link to="/cart">
-          <HeaderRightBtn>CART () </HeaderRightBtn>
+          <span>CART () </span>
         </Link>
       </div>
     </HeaderRight>

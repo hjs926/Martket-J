@@ -6,29 +6,27 @@ const SideMenuBar = styled.nav`
   top: 0;
   left: 0;
   z-index: 90;
-`;
-
-const Logo = styled.img`
-  width: 200px;
-`;
-
-const SideMenu = styled.ul`
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-left: 30px;
-  font-weight: bold;
-  font-size: 17px;
+  img {
+    width: 200px;
+  }
+  ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 30px;
+    font-weight: bold;
+    font-size: 17px;
+  }
 `;
 
 const Gnb = () => (
   <SideMenuBar className="gnb">
     <Link to="/">
-      <Logo id="logo" src="/Market_logo.png" alt="logo" />
+      <img id="logo" src="/Market_logo.png" alt="logo" />
     </Link>
-    <SideMenu>
+    <ul>
       <li>
         <Link to="/">홈</Link>
       </li>
@@ -45,7 +43,7 @@ const Gnb = () => (
         <br />
         <Link to="/community">COMMUNITY</Link>
       </li>
-    </SideMenu>
+    </ul>
   </SideMenuBar>
 );
 

@@ -18,27 +18,32 @@ const SignUpForm = styled.form`
   flex-direction: column;
   width: 450px;
   margin: 0px auto;
-`;
+  label {
+    overflow: hidden;
+    display: block;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #bfbfbf;
+    border-radius: 0;
+    color: #555;
+    input {
+      width: 100%;
+      height: 53px;
+      padding: 0 0 0 3px;
+      border: 0 none;
+      color: #353535;
+      font-size: 17px;
+      font-weight: bold;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
 
-const SignUpInputLabel = styled.label`
-  overflow: hidden;
-  display: block;
-  margin-bottom: 12px;
-  /* border: 1px solid #bfbfbf; */
-  border-bottom: 1px solid #bfbfbf;
-  border-radius: 0;
-  color: #555;
-`;
-const SignUpInput = styled.input`
-  width: 100%;
-  height: 53px;
-  padding: 0 0 0 3px;
-  border: 0 none;
-  color: #353535;
-  font-size: 17px;
-  font-weight: bold;
-  &:focus {
-    outline: none;
+  span {
+    display: inline-block;
+    font-size: 23px;
+    font-weight: bold;
+    margin-bottom: 40px;
   }
 `;
 
@@ -50,20 +55,13 @@ const SignUpBtnContainer = styled.div`
   height: 45px;
   line-height: 38px;
   justify-content: center;
-`;
-const SignUpBtn = styled.button`
-  width: 100%;
-  font-size: 15px;
-
-  background-color: #1f1f1f;
-  color: #fff;
-  cursor: pointer;
-`;
-const SignUpSpan = styled.span`
-  display: inline-block;
-  font-size: 23px;
-  font-weight: bold;
-  margin-bottom: 40px;
+  button {
+    width: 100%;
+    font-size: 15px;
+    background-color: #1f1f1f;
+    color: #fff;
+    cursor: pointer;
+  }
 `;
 
 const SignUpPage = () => {
@@ -100,33 +98,29 @@ const SignUpPage = () => {
     <SignUpContainer>
       <SignUpWrap>
         <SignUpForm onSubmit={onSubmitHandler}>
-          <SignUpSpan>회원계정 만들기</SignUpSpan>
-          <SignUpInputLabel>
-            <SignUpInput type="text" placeholder="아이디" ref={idRef} />
-          </SignUpInputLabel>
-          <SignUpInputLabel>
-            <SignUpInput
-              type="password"
-              placeholder="비밀번호"
-              ref={passwordRef}
-            />
-          </SignUpInputLabel>
-          <SignUpInputLabel>
-            <SignUpInput
+          <span>회원계정 만들기</span>
+          <label>
+            <input type="text" placeholder="아이디" ref={idRef} />
+          </label>
+          <label>
+            <input type="password" placeholder="비밀번호" ref={passwordRef} />
+          </label>
+          <label>
+            <input
               type="password"
               placeholder="비밀번호 확인"
               ref={retrypasswordRef}
             />
-          </SignUpInputLabel>
-          <SignUpInputLabel>
-            <SignUpInput type="text" placeholder="닉네임" ref={nameRef} />
-          </SignUpInputLabel>
-          <SignUpInputLabel>
-            <SignUpInput type="email" placeholder="이메일" ref={emailRef} />
-          </SignUpInputLabel>
+          </label>
+          <label>
+            <input type="text" placeholder="닉네임" ref={nameRef} />
+          </label>
+          <label>
+            <input type="email" placeholder="이메일" ref={emailRef} />
+          </label>
         </SignUpForm>
         <SignUpBtnContainer>
-          <SignUpBtn>회원 가입</SignUpBtn>
+          <button>회원 가입</button>
         </SignUpBtnContainer>
       </SignUpWrap>
     </SignUpContainer>
