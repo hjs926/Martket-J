@@ -8,6 +8,7 @@ import GnbRight from "./components/gnbRight";
 import GlobalStyle from "./GlobalStyle";
 import { getClient } from "./queryClient";
 import { routes } from "./router";
+import { UploadProductPage } from "./pages/upload/UploadProductPage";
 
 const Wrap = styled.div`
   height: auto;
@@ -26,6 +27,7 @@ const App = () => {
         <Gnb />
         <GnbRight />
         {elem}
+
         <Footer />
         <ReactQueryDevtools initialIsOpen={false} />
       </Wrap>

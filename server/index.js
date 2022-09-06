@@ -20,7 +20,7 @@ const connect = mongoose
   .catch((err) => console.log(err));
 
 app.use(cors());
-
+// cors: 브라우저에서 포트 다르면 통신 막음
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());

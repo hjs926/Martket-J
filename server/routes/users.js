@@ -7,10 +7,6 @@ const { Payment } = require("../models/Payment");
 const { auth } = require("../middleware/auth");
 const async = require("async");
 
-//=================================
-//             User
-//=================================
-
 router.get("/auth", auth, (req, res) => {
   res.status(200).json({
     _id: req.user._id,
@@ -45,10 +41,12 @@ router.post("/login", (req, res) => {
         message: "Auth failed, email not found",
       });
 
+    // 비밀번호 동일한지 확인
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (!isMatch)
         return res.json({ loginSuccess: false, message: "Wrong password" });
 
+      // 랜덤 토큰 생성
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
         res.cookie("w_authExp", user.tokenExp);
