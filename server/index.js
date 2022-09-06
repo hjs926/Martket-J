@@ -34,7 +34,19 @@ app.post("/api/users/register", (req, res) => {
 
 app.post("/login", (req, res) => {
   //요청된 이메일을 데이터베이스에서 있는지 찾는다.
-  //
+  //만약 유저콜렉션안에 이 이메일을 가진 유저가 한명도 없다면
+  //유저 인포가 없으므로 리턴을 json데이터로 전달
+  User.findOne({ email: req.body.email }, (err, userInfo));
+  if (!userInfo) {
+    return res.json({
+      loginSuccess: false,
+      message: "제공된 이메일에 해당하는 유저가 없습니다.",
+    });
+  }
+
+  user.comparePassword(req.body.password, (err, isMatch));
+  //메일이 데이터베이스 있다면 비밀번호가 맞는 비밀번호 인지 확인.
+  // 비밀번호 까지 맞다면 토큰을 생성하기.
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
