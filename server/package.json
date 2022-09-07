@@ -10,7 +10,7 @@
     "backend": "nodemon server/index.js",
     "frontend": "npm run start --prefix client"
   },
-  "author": "John ahn",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "async": "^3.2.0",
