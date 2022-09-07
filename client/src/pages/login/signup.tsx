@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import axios from "axios";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const SignUpContainer = styled.div`
   margin: 50px 120px 0 100px;
@@ -64,34 +64,55 @@ const SignUpBtnContainer = styled.div`
   }
 `;
 
+const PORT_URL = "http://localhost:5000";
+axios.defaults.withCredentials = true; //쿠키 가져오는 설정
+
 const SignUpPage = () => {
   console.log("회원가입페이지입니다.");
 
-  const SIGNUP_URL = "회원가입 api호출 주소 넣어야함";
-  axios.defaults.withCredentials = true; //쿠키 가져오는 설정
+  const SIGNUP_URL = "http://localhost:4000/register";
 
-  const idRef = useRef<HTMLInputElement>(null); // 제너릭으로 antd의 Input 컴포넌트를 넣음
+  // const idRef = useRef<HTMLInputElement>(null); // 제너릭으로 antd의 Input 컴포넌트를 넣음
   const passwordRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
-  const retrypasswordRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
+  const comparepasswordRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    //페이지 이동시 아이디 input칸에 focus
+    emailRef.current?.focus();
+  }, []);
 
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const user_id = idRef.current!.value; // idRef.current 까지 하면 null 혹은 Input이 나옴 Non-null assertion을 사용해서 null일 가능성을 없애줌. 타입이 Input으로 고정됨
+    // const user_id = idRef.current!.value; // idRef.current 까지 하면 null 혹은 Input이 나옴 Non-null assertion을 사용해서 null일 가능성을 없애줌. 타입이 Input으로 고정됨
     const user_password = passwordRef.current!.value;
-    const user_Retrypassword = retrypasswordRef.current!.value;
+    const user_comparepassword = comparepasswordRef.current!.value;
     const user_name = nameRef.current!.value;
     const email = emailRef.current!.value;
+    console.log("email: " + email);
+    console.log(
+      "password: " +
+        user_password +
+        ", user_comparepassword: " +
+        user_comparepassword
+    );
+    console.log("user_name: " + user_name);
 
-    await axios.post(SIGNUP_URL, {
-      id: user_id,
-      password: user_password,
-      retrypassword: user_Retrypassword,
-      name: user_name,
-      email,
-    });
+    await axios.post(
+      SIGNUP_URL,
+      {
+        // id: user_id,
+        email,
+        name: user_name,
+        password: user_password,
+        comparePassword: user_comparepassword,
+      },
+      {
+        withCredentials: true, // 쿠키 cors 통신 설정
+      }
+    );
   };
 
   return (
@@ -99,8 +120,14 @@ const SignUpPage = () => {
       <SignUpWrap>
         <SignUpForm onSubmit={onSubmitHandler}>
           <span>회원계정 만들기</span>
-          <label>
+          {/* <label>
             <input type="text" placeholder="아이디" ref={idRef} />
+          </label> */}
+          <label>
+            <input type="email" placeholder="이메일" ref={emailRef} />
+          </label>
+          <label>
+            <input type="text" placeholder="닉네임" ref={nameRef} />
           </label>
           <label>
             <input type="password" placeholder="비밀번호" ref={passwordRef} />
@@ -109,19 +136,13 @@ const SignUpPage = () => {
             <input
               type="password"
               placeholder="비밀번호 확인"
-              ref={retrypasswordRef}
+              ref={comparepasswordRef}
             />
           </label>
-          <label>
-            <input type="text" placeholder="닉네임" ref={nameRef} />
-          </label>
-          <label>
-            <input type="email" placeholder="이메일" ref={emailRef} />
-          </label>
+          <SignUpBtnContainer>
+            <button>회원 가입</button>
+          </SignUpBtnContainer>
         </SignUpForm>
-        <SignUpBtnContainer>
-          <button>회원 가입</button>
-        </SignUpBtnContainer>
       </SignUpWrap>
     </SignUpContainer>
   );

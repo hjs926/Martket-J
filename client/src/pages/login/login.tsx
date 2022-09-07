@@ -84,6 +84,7 @@ const LoginPage = () => {
   const passwordRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
 
   useEffect(() => {
+    //페이지 이동시 아이디 input칸에 focus
     idRef.current?.focus();
   }, []);
 
@@ -98,7 +99,7 @@ const LoginPage = () => {
         email: user_id,
         password: user_password,
       })
-      .then((response) => console.log(response));
+      .then((response) => console.log(response)); //TODO: 메인페이지로 이동
     const data = await axios.get(AUTH_URL);
     console.log(data);
   };
