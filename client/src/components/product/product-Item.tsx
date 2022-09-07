@@ -4,7 +4,7 @@ import { Product } from "../../type";
 
 const Item = styled.li`
   padding: 10px;
-  width: 25%;
+  width: 200px;
   img {
     width: 100%;
     height: 150px;

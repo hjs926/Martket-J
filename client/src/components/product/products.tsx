@@ -34,7 +34,7 @@ const ProductList = () => {
 
   return (
     <ProductContainer>
-      {data.slice(0, 5)?.map((product) => (
+      {data.slice(0, 6)?.map((product) => (
         <ProductItem {...product} key={product.id} />
       ))}
     </ProductContainer>
