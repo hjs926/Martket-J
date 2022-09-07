@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Slick from "../../slider/Slick";
+import Slick from "../community/slider/Slick";
 
 interface itemsProps {
   item: string;
