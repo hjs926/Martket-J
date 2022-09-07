@@ -81,8 +81,8 @@ const LoginDiv = styled.div`
 
 const LoginPage = () => {
   console.log("로그인페이지입니다.");
-  const LOGIN_URL = "로그인 api호출 주소 넣어야함";
-  const AUTH_URL = "인증 api호출 주소 넣어야함";
+  const LOGIN_URL = "/login";
+  const AUTH_URL = "/auth";
 
   const idRef = useRef<HTMLInputElement>(null); // 제너릭으로 antd의 Input 컴포넌트를 넣음
   const passwordRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택

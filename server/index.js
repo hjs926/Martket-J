@@ -22,8 +22,11 @@ const connect = mongoose
 app.use(cors());
 // cors: 브라우저에서 포트 다르면 통신 막음
 app.use(bodyParser.urlencoded({ extended: true }));
-
+// application/x-www-form-urlencoded
 app.use(bodyParser.json());
+// application/json - json 타입 분석
+// bodyParser가 client로부터 오는 정보를 서버에서 분서갷서 가져올 수 있게 해준다.
+
 app.use(cookieParser());
 
 app.use("/api/users", require("./routes/users"));

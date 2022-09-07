@@ -4,6 +4,8 @@ const saltRounds = 10;
 const jwt = require("jsonwebtoken");
 const moment = require("moment");
 
+// 스키마는 데이터의 구조, 표현변, 자료 가느이 관계를 정의 한 것
+
 const userSchema = mongoose.Schema({
   name: {
     type: String,
@@ -11,8 +13,8 @@ const userSchema = mongoose.Schema({
   },
   email: {
     type: String,
-    trim: true,
-    unique: 1,
+    trim: true, // a b cdef@naver.co 이런 값이 들어왔을때 trim은 공백을 없애 준다.
+    unique: 1, // 중복된 값, 똑같은 이메일을 쓰지 못하도록
   },
   password: {
     type: String,
@@ -23,8 +25,9 @@ const userSchema = mongoose.Schema({
     maxlength: 50,
   },
   role: {
+    // 관리자, 일반 유저 등 나눌수 있게
     type: Number,
-    default: 0,
+    default: 0, // 임의로 값을 준게 아니면 0값을 준다
   },
   cart: {
     type: Array,
@@ -36,9 +39,11 @@ const userSchema = mongoose.Schema({
   },
   image: String,
   token: {
+    //분류 요소, 권한
     type: String,
   },
   tokenExp: {
+    //토큰 유효기간
     type: Number,
   },
 });
