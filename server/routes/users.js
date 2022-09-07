@@ -78,7 +78,6 @@ router.post("/addToCart", auth, (req, res) => {
     { _id: req.user._id }, //해당유저가 한명
     (err, userInfo) => {
       // 에러, 유저정보
-
       // 가져온 정보에서 카트에다 넣으려 하는 상품이 이미 들어 있는지 확인
       let duplicate = false;
       userInfo.cart.forEach((item) => {
