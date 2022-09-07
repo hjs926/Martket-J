@@ -3,11 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const { Product } = require("../models/Product");
 
-//=================================
-//             Product
-//=================================
-
-var storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/");
   },
@@ -16,7 +12,8 @@ var storage = multer.diskStorage({
   },
 });
 
-var upload = multer({ storage: storage }).single("file");
+const upload = multer({ storage: storage }).single("file");
+//multer - 이미지, 동영상 등 멀티파트 형식으로 업로드 할 떄 사용되는 미들웨어
 
 router.post("/image", (req, res) => {
   //가져온 이미지를 저장을 해주면 된다.

@@ -7,10 +7,6 @@ const { Payment } = require("../models/Payment");
 const { auth } = require("../middleware/auth");
 const async = require("async");
 
-//=================================
-//             User
-//=================================
-
 router.get("/auth", auth, (req, res) => {
   res.status(200).json({
     _id: req.user._id,
@@ -38,17 +34,19 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  User.findOne({ email: req.body.email }, (err, user) => {
+  User.findOne({ id: req.body.id }, (err, user) => {
     if (!user)
       return res.json({
         loginSuccess: false,
         message: "Auth failed, email not found",
       });
 
+    // 비밀번호 동일한지 확인
     user.comparePassword(req.body.password, (err, isMatch) => {
       if (!isMatch)
         return res.json({ loginSuccess: false, message: "Wrong password" });
 
+      // 랜덤 토큰 생성
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
         res.cookie("w_authExp", user.tokenExp);
@@ -80,7 +78,6 @@ router.post("/addToCart", auth, (req, res) => {
     { _id: req.user._id }, //해당유저가 한명
     (err, userInfo) => {
       // 에러, 유저정보
-
       // 가져온 정보에서 카트에다 넣으려 하는 상품이 이미 들어 있는지 확인
       let duplicate = false;
       userInfo.cart.forEach((item) => {

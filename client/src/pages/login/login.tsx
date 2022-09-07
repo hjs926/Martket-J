@@ -13,18 +13,6 @@ const LoginWrap = styled.div`
   overflow: hidden;
   vertical-align: top;
   text-align: left;
-  div {
-    display: flex;
-    margin: 0 auto 20px;
-    padding: 0 20px;
-    width: 100px;
-    height: 38px;
-    line-height: 38px;
-    background: #1f1f1f;
-    color: #fff;
-    font-size: 14px;
-    justify-content: center;
-  }
 `;
 
 const LoginForm = styled.form`
@@ -32,55 +20,71 @@ const LoginForm = styled.form`
   flex-direction: column;
   width: 300px;
   margin: 0 auto;
-  label {
-    overflow: hidden;
-    display: block;
-    margin-bottom: 12px;
-    /* border: 1px solid #bfbfbf; */
-    border-bottom: 1px solid #bfbfbf;
-    border-radius: 0;
-    color: #555;
-    input {
-      width: 100%;
-      height: 48px;
-      line-height: 48px;
-      padding: 0 0 0 3px;
-      border: 0 none;
-      color: #353535;
-      font-size: 12px;
-      &:focus {
-        outline: none;
-      }
-    }
-  }
-  p {
-    font-size: 11px;
-    margin: 0 0 0 -4px;
-    color: #353535;
-  }
-  button {
-    margin-top: 10px;
-    width: 100%;
-    text-align: center;
-    color: #fff;
-    height: 48px;
-    background-color: #1f1f1f;
-    cursor: pointer;
+`;
+
+const LoginInputLabel = styled.label`
+  overflow: hidden;
+  display: block;
+  margin-bottom: 12px;
+  /* border: 1px solid #bfbfbf; */
+  border-bottom: 1px solid #bfbfbf;
+  border-radius: 0;
+  color: #555;
+`;
+
+const LoginInput = styled.input`
+  width: 100%;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 0 0 3px;
+  border: 0 none;
+  color: #353535;
+  font-size: 12px;
+  &:focus {
+    outline: none;
   }
 `;
 
-const LoginSignUp = styled(LoginForm)`
+const LoginIdSaveCheckBox = styled.p`
+  font-size: 11px;
+  margin: 0 0 0 -4px;
+  color: #353535;
+`;
+
+const LoginButton = styled.button`
   margin-top: 10px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  height: 48px;
+  background-color: #1f1f1f;
+  cursor: pointer;
+`;
+
+const LoginSignUp = styled.p`
   color: #353535;
   font-size: 15px;
 `;
 
+const LoginDiv = styled.div`
+  display: flex;
+  margin: 0 auto 20px;
+  padding: 0 20px;
+  width: 100px;
+  height: 38px;
+  line-height: 38px;
+  background: #1f1f1f;
+  color: #fff;
+  font-size: 14px;
+  justify-content: center;
+`;
+
 const LoginPage = () => {
   console.log("로그인페이지입니다.");
-  const LOGIN_URL = "로그인 api호출 주소 넣어야함";
-  const AUTH_URL = "인증 api호출 주소 넣어야함";
+  const LOGIN_URL = "/api/users/login";
+  const AUTH_URL = "/auth";
 
-  const idRef = useRef<HTMLInputElement>(null); // 제너릭으로 Input 컴포넌트를 넣음
+  const idRef = useRef<HTMLInputElement>(null); // 제너릭으로 antd의 Input 컴포넌트를 넣음
   const passwordRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
 
   useEffect(() => {
@@ -106,28 +110,33 @@ const LoginPage = () => {
   return (
     <LoginPageContainer>
       <LoginWrap>
-        <div>회원 로그인</div>
+        <LoginDiv>회원 로그인</LoginDiv>
         <LoginForm onSubmit={onSubmitHandler}>
-          <label>
-            <input id="login" type="text" placeholder="아이디" ref={idRef} />
-          </label>
-          <label>
-            <input
+          <LoginInputLabel>
+            <LoginInput
+              id="login"
+              type="text"
+              placeholder="아이디"
+              ref={idRef}
+            />
+          </LoginInputLabel>
+          <LoginInputLabel>
+            <LoginInput
               id="password"
               type="password"
               placeholder="비밀번호"
               ref={passwordRef}
             />
-          </label>
-          <p className="login-Checkbox_Container">
+          </LoginInputLabel>
+          <LoginIdSaveCheckBox>
             <input type="checkbox" />
             <span>아이디 저장</span>
-          </p>
-          <button>로그인</button>
+          </LoginIdSaveCheckBox>
+          <LoginButton>로그인</LoginButton>
+          <LoginSignUp>
+            <Link to="/signup">회원가입</Link>
+          </LoginSignUp>
         </LoginForm>
-        <LoginSignUp>
-          <Link to="/signup">회원가입</Link>
-        </LoginSignUp>
       </LoginWrap>
     </LoginPageContainer>
   );
