@@ -7,6 +7,9 @@ import ProductItem from "./product-Item";
 const ProductContainer = styled.ul`
   display: flex;
   margin-top: 20px;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 100%;
 `;
 
 // category: "men's clothing"

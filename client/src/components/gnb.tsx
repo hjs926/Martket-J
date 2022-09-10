@@ -6,6 +6,7 @@ const SideMenuBar = styled.nav`
   top: 0;
   left: 0;
   z-index: 90;
+
   img {
     width: 200px;
   }
