@@ -5,9 +5,9 @@ import styled from "styled-components";
 import ProductList from "../components/product/products";
 
 const MainSection2 = styled.section`
-  width: 1440px;
-  margin-left: 200px;
-  margin-right: 100px;
+  max-width: 100%;
+  padding-left: 200px;
+  padding-right: 100px;
   margin-top: 80px;
 `;
 

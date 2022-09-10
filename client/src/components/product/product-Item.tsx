@@ -1,5 +1,7 @@
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { addToCart } from "../../redux/cartSlice";
 import { Product } from "../../type";
 
 const Item = styled.li`
@@ -20,6 +22,11 @@ const Item = styled.li`
 `;
 
 const ProductItem = (product: Product) => {
+  const dispatch = useDispatch();
+  const handlAddToCart = (product: Product) => {
+    dispatch(addToCart(product));
+  };
+
   return (
     <Item>
       <img src={product.image} />
@@ -28,6 +35,7 @@ const ProductItem = (product: Product) => {
         <p>{product.title}</p>
       </Link>
       <p className="red">{product.price * 1200} 원</p>
+      <button onClick={() => handlAddToCart(product)}>담기</button>
     </Item>
   );
 };

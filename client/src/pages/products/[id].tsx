@@ -20,7 +20,7 @@ const ProductDetailPage = () => {
   return (
     <div>
       <br />
-      <ProductDetail item={data} />
+      <ProductDetail {...data} />
     </div>
   );
 };
