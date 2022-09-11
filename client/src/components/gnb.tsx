@@ -19,6 +19,13 @@ const SideMenuBar = styled.nav`
     margin-left: 30px;
     font-weight: bold;
     font-size: 17px;
+    li {
+      .category {
+        margin-left: 20px;
+        font-size: 14px;
+        font-family: 500;
+      }
+    }
   }
 `;
 
@@ -29,16 +36,35 @@ const Gnb = () => (
     </Link>
     <ul>
       <li>
-        <Link to="/">홈</Link>
+        <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="/products">상품목록</Link>
+        <Link to="/products">Shopping</Link>
       </li>
       <li>
-        <Link to="/cart">장바구니</Link>
+        <Link to="/products" className="category">
+          men's clothing
+        </Link>
       </li>
       <li>
-        <Link to="/login">로그인</Link>
+        <Link to="/products" className="category">
+          jewelery
+        </Link>
+      </li>
+      <li>
+        <Link to="/products" className="category">
+          electronics
+        </Link>
+      </li>
+      <li>
+        <Link to="/products" className="category">
+          women's clothing
+        </Link>
+      </li>
+      <li>
+        <Link to="/products" className="category">
+          women's clothing
+        </Link>
       </li>
       <li>
         <br />
