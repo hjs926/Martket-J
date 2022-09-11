@@ -15,7 +15,6 @@ import { routes } from "./router";
 const Wrap = styled.div`
   height: auto;
   min-height: 100%;
-  position: relative;
 `;
 
 const App = () => {

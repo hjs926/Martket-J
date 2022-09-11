@@ -74,7 +74,7 @@ const SignUpPage = () => {
 
   // const idRef = useRef<HTMLInputElement>(null); // 제너릭으로 antd의 Input 컴포넌트를 넣음
   const passwordRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
-  const comparepasswordRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
+  const confirmPasswordRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
   const nameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
 
@@ -88,15 +88,20 @@ const SignUpPage = () => {
 
     // const user_id = idRef.current!.value; // idRef.current 까지 하면 null 혹은 Input이 나옴 Non-null assertion을 사용해서 null일 가능성을 없애줌. 타입이 Input으로 고정됨
     const user_password = passwordRef.current!.value;
-    const user_comparepassword = comparepasswordRef.current!.value;
+    const user_confirmPassword = confirmPasswordRef.current!.value;
     const user_name = nameRef.current!.value;
     const email = emailRef.current!.value;
+
+    // 비밀번호와 비밀번호 확인이 같지 않을경우 처리
+    if (user_password !== user_confirmPassword)
+      return alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
+
     console.log("email: " + email);
     console.log(
       "password: " +
         user_password +
-        ", user_comparepassword: " +
-        user_comparepassword
+        ", confirmPasswordRef: " +
+        user_confirmPassword
     );
     console.log("user_name: " + user_name);
 
@@ -107,7 +112,6 @@ const SignUpPage = () => {
         email,
         name: user_name,
         password: user_password,
-        comparePassword: user_comparepassword,
       },
       {
         withCredentials: true, // 쿠키 cors 통신 설정
@@ -136,7 +140,7 @@ const SignUpPage = () => {
             <input
               type="password"
               placeholder="비밀번호 확인"
-              ref={comparepasswordRef}
+              ref={confirmPasswordRef}
             />
           </label>
           <SignUpBtnContainer>

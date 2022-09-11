@@ -21,8 +21,8 @@ export interface UploadProduct {
   updatedate: string;
 }
 
-export type CartPage = {
+export interface CartPage {
   cartItems: Product[];
   cartTotalQuantity: number;
   cartTotalAmount: number;
-};
+}

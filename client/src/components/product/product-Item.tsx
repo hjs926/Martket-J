@@ -5,18 +5,28 @@ import { addToCart } from "../../redux/cartSlice";
 import { Product } from "../../type";
 
 const Item = styled.li`
-  padding: 10px;
-  width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+  width: 23%;
+  margin: 0 0 2.5%;
+  padding: 0 0.75%;
   img {
-    width: 100%;
-    height: 150px;
-    object-fit: contain;
+    max-width: 100%;
+    height: 100%;
+    box-sizing: border-box;
   }
-  p {
-    font-size: 14px;
-    font-weight: bold;
-    &.red {
-      color: #fd3e18;
+  div {
+    p {
+      overflow: hidden; // 을 사용해 영역을 감출 것
+      text-overflow: ellipsis; // 로 ... 을 만들기
+      white-space: nowrap; // 아래줄로 내려가는 것을 막기위해
+      font-size: 14px;
+      font-weight: bold;
+      &.red {
+        color: #fd3e18;
+      }
     }
   }
 `;
@@ -30,12 +40,14 @@ const ProductItem = (product: Product) => {
   return (
     <Item>
       <img src={product.image} />
-      <p className="red">{product.category}</p>
-      <Link to={`/products/${product.id}`}>
-        <p>{product.title}</p>
-      </Link>
-      <p className="red">{product.price * 1200} 원</p>
-      <button onClick={() => handlAddToCart(product)}>담기</button>
+      <div>
+        <p className="red">{product.category}</p>
+        <Link to={`/products/${product.id}`}>
+          <p>{product.title}</p>
+        </Link>
+        <p className="red">{product.price * 1200} 원</p>
+        <button onClick={() => handlAddToCart(product)}>담기</button>
+      </div>
     </Item>
   );
 };

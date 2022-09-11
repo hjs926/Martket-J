@@ -5,12 +5,10 @@ import { QueryKeys, restFetcher } from "../../queryClient";
 import { Product } from "../../type";
 
 const ProducListController = styled.div`
-  width: 1400px;
-  min-width: 500px;
-  /* border: 1px solid #666666; */
-  padding: 0 0 0 70px;
+  width: 75%;
+  min-width: 850px;
   border-radius: 1em;
-  box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  /* box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2); */
   margin: 100px 150px 0 250px;
   ul {
     width: 100%;
@@ -32,7 +30,7 @@ const ProducList = () => {
   return (
     <ProducListController>
       <br />
-      상품목록 페이지 입니다.
+      Total : <b>20</b> items
       <ul>
         {data?.map((product) => (
           <ProductItem {...product} key={product.id} />
