@@ -22,8 +22,8 @@ const SideMenuBar = styled.nav`
     li {
       .category {
         margin-left: 20px;
-        color: #666666;
         font-size: 14px;
+        font-family: 500;
       }
     }
   }

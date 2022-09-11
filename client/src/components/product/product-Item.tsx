@@ -9,13 +9,14 @@ const Item = styled.li`
   flex-direction: column;
   justify-content: center;
   text-align: left;
-  width: 23%;
+  width: 25%;
   margin: 0 0 2.5%;
   padding: 0 0.75%;
+  box-sizing: border-box;
+
   img {
     max-width: 100%;
     height: 100%;
-    box-sizing: border-box;
   }
   div {
     p {
