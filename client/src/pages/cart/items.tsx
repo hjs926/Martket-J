@@ -11,15 +11,50 @@ import { Product } from "../../type";
 
 const CartItemContainer = styled.div`
   display: flex;
-  margin-bottom: 10px;
+  min-width: 800px;
+  width: 1000px;
+  /* max-width: 60%; */
+  margin: 10px 0;
   align-items: center;
+  /* border: 1px solid gray; */
+  padding: 10px;
+  border-radius: 1.5em;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  .title {
+    margin: 10px;
+    min-width: 300px;
+    p {
+      width: 100%;
+      overflow: hidden; // 을 사용해 영역을 감출 것
+      text-overflow: ellipsis; // 로 ... 을 만들기
+      white-space: nowrap; // 아래줄로 내려가는 것을 막기위해
+      max-width: 300px;
+    }
+  }
+  .price {
+    min-width: 110px;
+  }
+  .quantity {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100px;
+    div {
+      margin: 0 10px;
+    }
+  }
+  .totalQuantity {
+    width: 120px;
+    margin: 0 70px;
+  }
 `;
 
 const CartItemImage_Container = styled.div`
   margin-right: 20px;
   max-width: 50px;
   img {
-    width: 100%;
+    width: 50px;
     height: 70px;
     object-fit: contain;
   }
@@ -42,14 +77,19 @@ const CartItem = (cartItem: Product) => {
       <CartItemImage_Container>
         <img src={cartItem.image} />
       </CartItemImage_Container>
-      <p>id: {cartItem.id}</p>
-      <p>상품명: {cartItem.title}</p>
+      <div className="title">
+        <p>상품명: {cartItem.title}</p>
+      </div>
+      <p className="price">가격: ${cartItem.price}</p>
+      <div className="quantity">
+        <button onClick={() => handleDecreaseCart(cartItem)}>-</button>
+        <div>수량: {cartItem.quantity}</div>
+        <button onClick={() => handleIncreaseCart(cartItem)}>+</button>
+      </div>
+      <div className="totalQuantity">
+        총가격: ${(cartItem.price * cartItem.quantity).toFixed(2)}
+      </div>
       <button onClick={() => handleRemoveFromCart(cartItem)}>Remove</button>
-      <p>가격: ${cartItem.price}</p>
-      <button onClick={() => handleDecreaseCart(cartItem)}>-</button>
-      <div>수량: {cartItem.quantity}</div>
-      <button onClick={() => handleIncreaseCart(cartItem)}>+</button>
-      <div>총가격: ${(cartItem.price * cartItem.quantity).toFixed(2)}</div>
     </CartItemContainer>
   );
 };

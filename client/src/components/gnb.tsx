@@ -61,11 +61,7 @@ const Gnb = () => (
           women's clothing
         </Link>
       </li>
-      <li>
-        <Link to="/products" className="category">
-          women's clothing
-        </Link>
-      </li>
+
       <li>
         <br />
         <Link to="/community">COMMUNITY</Link>
