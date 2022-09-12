@@ -53,6 +53,7 @@ const LoginForm = styled.form`
       }
     }
   }
+
   p {
     font-size: 11px;
     margin: 0 0 0 -4px;
@@ -66,6 +67,14 @@ const LoginForm = styled.form`
     height: 48px;
     background-color: #1f1f1f;
     cursor: pointer;
+  }
+  .login-Checkbox_Container {
+    display: flex;
+    margin: 0;
+    label {
+      margin: 0;
+      border: none;
+    }
   }
 `;
 
@@ -121,8 +130,10 @@ const LoginPage = () => {
             />
           </label>
           <p className="login-Checkbox_Container">
-            <input type="checkbox" />
-            <span>아이디 저장</span>
+            <input type="checkbox" id="id_checkbox" />
+            <label htmlFor="id_checkbox">
+              <span>아이디 저장</span>
+            </label>
           </p>
           <button>로그인</button>
         </LoginForm>
