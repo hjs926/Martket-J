@@ -4,8 +4,9 @@ import CartIndex from "./pages/cart/index";
 import ProductsIndex from "./pages/products/index";
 import Id from "./pages/products/[id]";
 import LoginIndex from "./pages/login/login";
-import CommunityPage from "./components/community";
+import CommunityPage from "./pages/community";
 import SignUpPage from "./pages/login/signup";
+import AdminIndex from "./pages/admin/index";
 
 export const routes = [
   {
@@ -19,6 +20,7 @@ export const routes = [
       { path: "/login", element: <LoginIndex /> },
       { path: "/community", element: <CommunityPage /> },
       { path: "/signup", element: <SignUpPage /> },
+      { path: "/admin", element: <AdminIndex />, index: true },
     ],
   },
 ];

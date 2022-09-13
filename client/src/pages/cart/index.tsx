@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../../redux";
 import { clearCart, getTotals } from "../../redux/cartSlice";
-import CartItem from "./items";
+import CartItem from "../../components/cart/items";
 
 const CartQuantity = styled.div`
   margin: 100px 0 0 250px;
@@ -48,8 +48,8 @@ const CartContainer = styled.div`
 
 const Cart = () => {
   console.log("장바구니페이지입니다.");
-  const cartData = useSelector((state: RootState) => state.cart);
   //const { cartTotalQuantity } = useSelector((state: RootState) => state.cart);
+  const cartData = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {

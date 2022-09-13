@@ -66,6 +66,10 @@ const Gnb = () => (
         <br />
         <Link to="/community">COMMUNITY</Link>
       </li>
+
+      <li>
+        <Link to="/admin">admin</Link>
+      </li>
     </ul>
   </SideMenuBar>
 );
