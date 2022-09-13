@@ -30,7 +30,7 @@ const ProducList = () => {
   return (
     <ProducListController>
       <br />
-      Total : <b>20</b> items
+      Total : <b>{data.length}</b> items
       <ul>
         {data?.map((product) => (
           <ProductItem {...product} key={product.id} />
