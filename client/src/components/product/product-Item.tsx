@@ -46,7 +46,7 @@ const ProductItem = (product: Product) => {
         <Link to={`/products/${product.id}`}>
           <p>{product.title}</p>
         </Link>
-        <p className="red">{product.price * 1200} 원</p>
+        <p className="red">${product.price}</p>
         <button onClick={() => handlAddToCart(product)}>담기</button>
       </div>
     </Item>

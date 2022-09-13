@@ -1,5 +1,9 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { RootState } from "../redux";
+import { getTotals } from "../redux/cartSlice";
 
 const HeaderRight = styled.div`
   position: fixed;
@@ -19,6 +23,13 @@ const HeaderRight = styled.div`
  * 헤더 오른쪽에서 로그인, 카트를 담고있습니다.
  */
 const GnbRight = () => {
+  console.log("GnbRight");
+  const cartData = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTotals(cartData));
+  }, [cartData]);
   return (
     <HeaderRight>
       <div>
@@ -26,7 +37,9 @@ const GnbRight = () => {
           <span>LOIN/JOIN</span>
         </Link>
         <Link to="/cart">
-          <span>CART () </span>
+          <span>
+            CART (<b>{cartData.cartTotalQuantity}</b>){" "}
+          </span>
         </Link>
       </div>
     </HeaderRight>

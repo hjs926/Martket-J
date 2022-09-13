@@ -6,24 +6,36 @@ import { Product } from "../../type";
 
 const DetailContainer = styled.div`
   display: flex;
-  margin-top: 100px;
+  justify-content: space-between;
+  margin: 100px 150px 0 250px;
 `;
 
 const ProductInfo = styled.div`
   border: 1px solid #000;
-  margin-left: 80px;
   margin-right: 30px;
   width: 600px;
   min-width: 450px;
   text-align: center;
-  padding: 10px;
+  padding: 30px;
+
   span {
     font-size: 20px;
   }
+  p {
+    margin-top: 100px;
+  }
+  .price {
+    font-size: 30px;
+  }
   button {
+    margin-top: 90px;
     width: 200px;
     font-size: 16px;
-    margin-top: 20px;
+    width: 300px;
+    height: 45px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
   }
 `;
 
@@ -32,7 +44,6 @@ const ProductImage = styled.div`
   padding: 10px;
   max-width: 600px;
   height: auto;
-  margin: 0 0 0 250px;
   img {
     max-width: 100%;
     min-width: 400px;
@@ -56,9 +67,11 @@ const ProductDetail = (product: Product) => {
         <img src={product.image} />
       </ProductImage>
       <ProductInfo>
-        <span>{product.title}</span>
+        <span>
+          <b>{product.title}</b>
+        </span>
         <p>{product.description}</p>
-        <p>{(product.price * 1380).toFixed(0)}원</p>
+        <p className="price">${product.price.toFixed(2)}</p>
 
         <button onClick={() => handlAddToCart(product)}>담기</button>
       </ProductInfo>
