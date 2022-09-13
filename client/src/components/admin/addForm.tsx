@@ -5,7 +5,7 @@ import { getClient, QueryKeys } from "../../queryClient";
 import { Product } from "../../type";
 
 const AddForm = () => {
-  const PRODUCT_UPROAD_URL = "/";
+  const PRODUCT_UPROAD_URL = " ";
 
   const queryClient = getClient();
   const { mutate: addProduct } = useMutation(
@@ -33,8 +33,7 @@ const AddForm = () => {
       res[key] = val;
       return res;
     }, {});
-    formData.price = Number(formData.price);
-    addProduct(formData as Product);
+    console.log(formData);
   };
 
   return (

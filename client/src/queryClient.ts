@@ -9,10 +9,16 @@ export const getClient = (() => {
       client = new QueryClient({
         defaultOptions: {
           queries: {
+            //staleTime과 cacheTime의 defaultValue는 0분과 5분
+            //inactive 상태인 캐시 데이터가 메모리에 남아있는 시간
             cacheTime: Infinity,
+            //데이터 구조가 자주자주 변하는 어플리케이션이라면 지정하지 않는 편이 좋고 정적이라면 staletime을 지정해주고 요청하는 것이 서버의 부담을 경감시켜준다
             staleTime: Infinity,
+            //refetchOnMount 는 데이터가 stale 상태일 경우 마운트 시 마다 refetch를 실행하는 옵션
             refetchOnMount: false,
+            //refetchOnReconnect 는 데이터가 stale 상태일 경우 재 연결 될 때 refetch를 실행하는 옵션
             refetchOnReconnect: false,
+            //refetchOnWindowFocus 는 데이터가 stale 상태일 경우 윈도우 포커싱 될 때 마다 refetch를 실행하는 옵션
             refetchOnWindowFocus: false,
           },
         },

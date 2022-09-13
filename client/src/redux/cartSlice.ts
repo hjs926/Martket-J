@@ -25,6 +25,7 @@ export const cartSlice = createSlice({
         state.cartItems.push(tempProduct);
       }
     },
+
     reamoveFromCart: (state, action) => {
       const nextCartItems = state.cartItems.filter(
         (cartItem) => cartItem.id !== action.payload.id
@@ -32,6 +33,7 @@ export const cartSlice = createSlice({
 
       state.cartItems = nextCartItems;
     },
+
     decreaseCart: (state, action) => {
       const itemIndex = state.cartItems.findIndex(
         (cartItem: Product) => cartItem.id === action.payload.id
@@ -46,9 +48,11 @@ export const cartSlice = createSlice({
         state.cartItems = nextCartItems;
       }
     },
+
     clearCart: (state, action) => {
       state.cartItems = [];
     },
+
     getTotals: (state, action) => {
       let { total, quantity } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
