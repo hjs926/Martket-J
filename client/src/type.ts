@@ -26,3 +26,8 @@ export interface CartPage {
   cartTotalQuantity: number;
   cartTotalAmount: number;
 }
+
+export interface SubmitLogin {
+  userId: string;
+  userPassword: string;
+}

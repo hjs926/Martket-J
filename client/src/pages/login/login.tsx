@@ -1,7 +1,16 @@
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { useEffect, useRef } from "react";
+import {
+  SyntheticEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { getClient } from "../../queryClient";
+import { SubmitLogin } from "../../type";
 
 const LoginPageContainer = styled.div`
   margin: 50px 120px 0 100px;
@@ -86,47 +95,62 @@ const LoginSignUp = styled(LoginForm)`
 
 const LoginPage = () => {
   console.log("로그인페이지입니다.");
+  // URL 저장
   const LOGIN_URL = "/api/users/login";
   const AUTH_URL = "/auth";
 
-  const idRef = useRef<HTMLInputElement>(null); // 제너릭으로 antd의 Input 컴포넌트를 넣음
-  const passwordRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
+  //state 초기 설정, focus를 위한 Ref 사용
+  const idRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
+  const [userId, setUserId] = useState("");
+  const [userPassword, setUserPassword] = useState("");
 
+  const { mutate: submitLogin } = useMutation(
+    ({ userId, userPassword }: SubmitLogin) =>
+      axios.post(LOGIN_URL, {
+        email: userId,
+        password: userPassword,
+      })
+  );
+
+  //페이지 이동시 아이디 input칸에 focus
   useEffect(() => {
-    //페이지 이동시 아이디 input칸에 focus
     idRef.current?.focus();
   }, []);
 
-  const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  //handle 함수들
+  const handleChangeId = useCallback((e: SyntheticEvent) => {
+    setUserId((e.target as HTMLInputElement).value);
+  }, []);
+
+  const handleChangePassWord = useCallback((e: SyntheticEvent) => {
+    setUserPassword((e.target as HTMLInputElement).value);
+  }, []);
+
+  const handleSubmitLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    const user_id = idRef.current!.value; // idRef.current 까지 하면 null 혹은 Input이 나옴 Non-null assertion을 사용해서 null일 가능성을 없애줌. 타입이 Input으로 고정됨
-    const user_password = passwordRef.current!.value;
-
-    await axios
-      .post(LOGIN_URL, {
-        email: user_id,
-        password: user_password,
-      })
-      .then((response) => console.log(response)); //TODO: 메인페이지로 이동
-    const data = await axios.get(AUTH_URL);
-    console.log(data);
+    submitLogin({ userId, userPassword });
   };
 
   return (
     <LoginPageContainer>
       <LoginWrap>
         <div>회원 로그인</div>
-        <LoginForm onSubmit={onSubmitHandler}>
+        <LoginForm onSubmit={handleSubmitLogin}>
           <label>
-            <input id="login" type="text" placeholder="아이디" ref={idRef} />
+            <input
+              id="login"
+              type="text"
+              placeholder="아이디"
+              ref={idRef}
+              onChange={handleChangeId}
+            />
           </label>
           <label>
             <input
               id="password"
               type="password"
               placeholder="비밀번호"
-              ref={passwordRef}
+              onChange={handleChangePassWord}
             />
           </label>
           <p className="login-Checkbox_Container">
