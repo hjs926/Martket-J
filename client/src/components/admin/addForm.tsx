@@ -34,6 +34,8 @@ const AddForm = () => {
       return res;
     }, {});
     console.log(formData);
+    formData.price = Number(formData.price);
+    addProduct(formData as Product);
   };
 
   return (

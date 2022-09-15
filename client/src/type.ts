@@ -31,3 +31,8 @@ export interface SubmitLogin {
   userId: string;
   userPassword: string;
 }
+export interface SubmitSignup {
+  userId: string;
+  userPassword: string;
+  userName: string;
+}
