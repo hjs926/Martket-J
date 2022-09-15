@@ -9,7 +9,6 @@ import {
 } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { getClient } from "../../queryClient";
 import { SubmitLogin } from "../../type";
 
 const LoginPageContainer = styled.div`
@@ -93,6 +92,8 @@ const LoginSignUp = styled(LoginForm)`
   font-size: 15px;
 `;
 
+axios.defaults.withCredentials = true; //쿠키 가져오는 설정
+
 const LoginPage = () => {
   console.log("로그인페이지입니다.");
   // URL 저장
@@ -101,8 +102,7 @@ const LoginPage = () => {
 
   //state 초기 설정, focus를 위한 Ref 사용
   const idRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
-  const [userId, setUserId] = useState("");
-  const [userPassword, setUserPassword] = useState("");
+  const passwordRef = useRef<HTMLInputElement>(null);
 
   const { mutate: submitLogin } = useMutation(
     ({ userId, userPassword }: SubmitLogin) =>
@@ -117,17 +117,11 @@ const LoginPage = () => {
     idRef.current?.focus();
   }, []);
 
-  //handle 함수들
-  const handleChangeId = useCallback((e: SyntheticEvent) => {
-    setUserId((e.target as HTMLInputElement).value);
-  }, []);
-
-  const handleChangePassWord = useCallback((e: SyntheticEvent) => {
-    setUserPassword((e.target as HTMLInputElement).value);
-  }, []);
-
+  //handle 함수
   const handleSubmitLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const userId = idRef.current!.value;
+    const userPassword = passwordRef.current!.value;
     submitLogin({ userId, userPassword });
   };
 
@@ -137,20 +131,14 @@ const LoginPage = () => {
         <div>회원 로그인</div>
         <LoginForm onSubmit={handleSubmitLogin}>
           <label>
-            <input
-              id="login"
-              type="text"
-              placeholder="아이디"
-              ref={idRef}
-              onChange={handleChangeId}
-            />
+            <input id="login" type="text" placeholder="아이디" ref={idRef} />
           </label>
           <label>
             <input
               id="password"
               type="password"
               placeholder="비밀번호"
-              onChange={handleChangePassWord}
+              ref={passwordRef}
             />
           </label>
           <p className="login-Checkbox_Container">
