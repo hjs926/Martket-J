@@ -1,4 +1,4 @@
-const { User } = require("../models/User");
+import { User } from "../models/User.js";
 
 let auth = (req, res, next) => {
   //인증 처리
@@ -20,4 +20,4 @@ let auth = (req, res, next) => {
   });
 };
 
-module.exports = { auth }; // 다른데에서 사용 가능하게 만듬
+export { auth };

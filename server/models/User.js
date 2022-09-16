@@ -1,11 +1,10 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 const saltRounds = 10;
-const jwt = require("jsonwebtoken");
-const moment = require("moment");
+import jwt from "jsonwebtoken";
+import moment from "moment";
 
-// 스키마는 데이터의 구조, 표현변, 자료 가느이 관계를 정의 한 것
-
+// 스키마는 데이터의 구조, 표현법, 자료 간의 관계를 정의 한 것
 const userSchema = mongoose.Schema({
   name: {
     type: String,
@@ -24,8 +23,8 @@ const userSchema = mongoose.Schema({
     type: String,
     maxlength: 50,
   },
+  // 관리자, 일반 유저 등 나눌수 있게
   role: {
-    // 관리자, 일반 유저 등 나눌수 있게
     type: Number,
     default: 0, // 임의로 값을 준게 아니면 0값을 준다
   },
@@ -38,12 +37,12 @@ const userSchema = mongoose.Schema({
     default: [],
   },
   image: String,
+  //분류 요소, 권한
   token: {
-    //분류 요소, 권한
     type: String,
   },
+  //토큰 유효기간
   tokenExp: {
-    //토큰 유효기간
     type: Number,
   },
 });
@@ -100,4 +99,4 @@ userSchema.statics.findByToken = function (token, cb) {
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = { User };
+export { User };

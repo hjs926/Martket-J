@@ -97,7 +97,7 @@ axios.defaults.withCredentials = true; //쿠키 가져오는 설정
 const LoginPage = () => {
   console.log("로그인페이지입니다.");
   // URL 저장
-  const LOGIN_URL = "/api/users/login";
+  const LOGIN_URL = "http://localhost:4000/api/users/login";
   const AUTH_URL = "/auth";
 
   //state 초기 설정, focus를 위한 Ref 사용

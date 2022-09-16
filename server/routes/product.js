@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const multer = require("multer");
-const { Product } = require("../models/Product");
+import multer from "multer";
+import { Product } from "../models/Product.js";
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -103,8 +103,7 @@ router.get("/products_by_id", (req, res) => {
   let productIds = req.query.id;
 
   if (type === "array") {
-    //id=123123123,324234234,324234234 이거를
-    //productIds = ['123123123', '324234234', '324234234'] 이런식으로 바꿔주기
+    // id = 123123123, 324234234, 324234234 이거를 productIds = ['123123123', '324234234', '324234234'] 이런식으로 바꿔주기
     let ids = req.query.id.split(",");
     productIds = ids.map((item) => {
       return item;
@@ -112,7 +111,6 @@ router.get("/products_by_id", (req, res) => {
   }
 
   //productId를 이용해서 DB에서  productId와 같은 상품의 정보를 가져온다.
-
   Product.find({ _id: { $in: productIds } })
     .populate("writer")
     .exec((err, product) => {
@@ -121,4 +119,4 @@ router.get("/products_by_id", (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;
