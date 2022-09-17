@@ -3,7 +3,7 @@ import axios from "axios";
 import { SyntheticEvent } from "react";
 import { getClient, QueryKeys } from "../../queryClient";
 import { Product } from "../../type";
-import FileUpload from "../admin/FileUpload";
+import FileUpload from "../uploads/FileUpload";
 
 const AddForm = () => {
   const PRODUCT_UPROAD_URL = "http://localhost:4000/api/product";

@@ -9,6 +9,18 @@ export interface Product {
   amount: number;
 }
 
+export interface Product2 {
+  category: string;
+  description: string;
+  id: number;
+  image: string;
+  price: number;
+  title: string;
+  quantity: number;
+  amount: number;
+}
+
+
 export interface UploadProduct {
   id: string;
   images: string[];

@@ -17,7 +17,7 @@ function FileUpload() {
       .then((response: AxiosResponse<any, any>) => {
         if (response.data.success) {
           setImages([...Images, response.data.filePath]);
-          console.log(Images);
+          console.log(response.data);
         } else {
           alert("파일 저장 실패.");
         }
@@ -59,11 +59,11 @@ function FileUpload() {
           overflowX: "scroll",
         }}
       >
-        {Images.map((image: any, index: string) => (
+        {Images.map((image: any, index: any) => (
           <div key={index}>
             <img
               style={{ minWidth: "300px", width: "300px", height: "240px" }}
-              src={image}
+              src={`http://localhost:4000/${image}`}
             />
           </div>
         ))}
