@@ -3,6 +3,7 @@ import axios from "axios";
 import { SyntheticEvent } from "react";
 import { getClient, QueryKeys } from "../../queryClient";
 import { Product } from "../../type";
+import FileUpload from "../admin/FileUpload";
 
 const AddForm = () => {
   const PRODUCT_UPROAD_URL = "http://localhost:4000/api/product";
@@ -40,6 +41,7 @@ const AddForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      <FileUpload />
       <label>
         상품명: <input name="title" type="text" required />
       </label>
