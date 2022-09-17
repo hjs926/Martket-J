@@ -17,6 +17,7 @@ function FileUpload() {
       .then((response: AxiosResponse<any, any>) => {
         if (response.data.success) {
           setImages([...Images, response.data.filePath]);
+          console.log(Images);
         } else {
           alert("파일 저장 실패.");
         }
@@ -49,6 +50,24 @@ function FileUpload() {
           </div>
         )}
       </Dropzone>
+
+      <div
+        style={{
+          display: "flex",
+          width: "350px",
+          height: "240px",
+          overflowX: "scroll",
+        }}
+      >
+        {Images.map((image: any, index: string) => (
+          <div key={index}>
+            <img
+              style={{ minWidth: "300px", width: "300px", height: "240px" }}
+              src={image}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
