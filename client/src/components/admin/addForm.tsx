@@ -5,7 +5,7 @@ import { getClient, QueryKeys } from "../../queryClient";
 import { Product } from "../../type";
 
 const AddForm = () => {
-  const PRODUCT_UPROAD_URL = " ";
+  const PRODUCT_UPROAD_URL = "http://localhost:4000/api/product";
 
   const queryClient = getClient();
   const { mutate: addProduct } = useMutation(
