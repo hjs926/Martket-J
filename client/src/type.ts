@@ -20,7 +20,6 @@ export interface Product2 {
   amount: number;
 }
 
-
 export interface UploadProduct {
   id: string;
   images: string[];

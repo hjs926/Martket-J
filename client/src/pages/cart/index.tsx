@@ -42,6 +42,7 @@ const CartContainer = styled.div`
       font-size: 30px;
       font-weight: bold;
       height: 150px;
+      text-align: center;
     }
   }
 `;
