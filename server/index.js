@@ -1,14 +1,15 @@
 import express from "express";
-const app = express();
 import path from "path";
 import mongoose from "mongoose";
-
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import config from "./config/key.js";
 import cors from "cors";
+//미들 웨어를 등록해주는 메서드
+import userApi from "./routes/users.js";
+import productApi from "./routes/product.js";
 
-app.use(cookieParser());
+const app = express();
 
 //몽고 DB 설정
 const connect = mongoose
@@ -38,18 +39,17 @@ app.use(
 // bodyParser가 client로부터 오는 정보를 서버에서 분석해서 가져올 수 있게 해준다.
 app.use(bodyParser.urlencoded({ extended: true })); // application/x-www-form-urlencoded
 app.use(bodyParser.json()); // application/json - json 타입 분석
+app.use(cookieParser());
+
+app.use("/api/users", userApi);
+app.use("/api/product", productApi);
+
+app.use("/uploads", express.static("uploads"));
 
 const port = 4000;
 
 app.listen(port, () => {
   console.log(`Server Listening on ${port}`);
 });
-
-//미들 웨어를 등록해주는 메서드
-import userApi from "./routes/users.js";
-import productApi from "./routes/product.js";
-
-app.use("/api/users", userApi);
-app.use("/api/product", productApi);
 
 export default app;
