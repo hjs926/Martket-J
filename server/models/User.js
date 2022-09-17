@@ -1,11 +1,10 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 const saltRounds = 10;
-const jwt = require("jsonwebtoken");
-const moment = require("moment");
+import jwt from "jsonwebtoken";
+import moment from "moment";
 
-// 스키마는 데이터의 구조, 표현변, 자료 가느이 관계를 정의 한 것
-
+// 스키마는 데이터의 구조, 표현법, 자료 간의 관계를 정의 한 것
 const userSchema = mongoose.Schema({
   name: {
     type: String,
@@ -24,8 +23,8 @@ const userSchema = mongoose.Schema({
     type: String,
     maxlength: 50,
   },
+  // 관리자, 일반 유저 등 나눌수 있게
   role: {
-    // 관리자, 일반 유저 등 나눌수 있게
     type: Number,
     default: 0, // 임의로 값을 준게 아니면 0값을 준다
   },
@@ -38,25 +37,27 @@ const userSchema = mongoose.Schema({
     default: [],
   },
   image: String,
+  //분류 요소, 권한
   token: {
-    //분류 요소, 권한
     type: String,
   },
+  //토큰 유효기간
   tokenExp: {
-    //토큰 유효기간
     type: Number,
   },
 });
 
+//user정보를 저장하기 전에 password 암호화
 userSchema.pre("save", function (next) {
   var user = this;
-
+  //password가 변할때만
   if (user.isModified("password")) {
-    // console.log('password changed')
+    //Salt를 이용해서 hash password(암호화된 비밀번호) 만들기
     bcrypt.genSalt(saltRounds, function (err, salt) {
       if (err) return next(err);
 
       bcrypt.hash(user.password, salt, function (err, hash) {
+        //hash = 암호화된 password
         if (err) return next(err);
         user.password = hash;
         next();
@@ -68,6 +69,7 @@ userSchema.pre("save", function (next) {
 });
 
 userSchema.methods.comparePassword = function (plainPassword, cb) {
+  //plainPassword 1234567, 암호화된 비밀번호 $2b$10$6Sypy7cLx2yrUM1YW1NRjexpiWnWUjlgj.mskvboxmcpJZanUCAKa
   bcrypt.compare(plainPassword, this.password, function (err, isMatch) {
     if (err) return cb(err);
     cb(null, isMatch);
@@ -100,4 +102,4 @@ userSchema.statics.findByToken = function (token, cb) {
 
 const User = mongoose.model("User", userSchema);
 
-module.exports = { User };
+export { User };

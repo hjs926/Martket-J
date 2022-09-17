@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const productSchema = mongoose.Schema(
@@ -28,10 +28,10 @@ const productSchema = mongoose.Schema(
       default: 0,
     },
 
-    continents: {
-      type: Number,
-      default: 1,
-    },
+    // continents: {
+    //   type: Number,
+    //   default: 1,
+    // },
 
     views: {
       type: Number,
@@ -56,4 +56,4 @@ productSchema.index(
 
 const Product = mongoose.model("Product", productSchema);
 
-module.exports = { Product };
+export { Product };

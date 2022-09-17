@@ -66,13 +66,12 @@ const SignUpBtnContainer = styled.div`
   }
 `;
 
-const PORT_URL = "http://localhost:5000";
 axios.defaults.withCredentials = true; //쿠키 가져오는 설정
 
 const SignUpPage = () => {
   console.log("회원가입페이지입니다.");
 
-  const SIGNUP_URL = "http://localhost:4000/register";
+  const SIGNUP_URL = "http://localhost:4000/api/users/signup";
 
   // const idRef = useRef<HTMLInputElement>(null); // 제너릭으로 antd의 Input 컴포넌트를 넣음
   const idRef = useRef<HTMLInputElement>(null);

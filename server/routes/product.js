@@ -1,7 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const multer = require("multer");
-const { Product } = require("../models/Product");
+import multer from "multer";
+import { Product } from "../models/Product.js";
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -12,8 +12,8 @@ const storage = multer.diskStorage({
   },
 });
 
-const upload = multer({ storage: storage }).single("file");
 //multer - 이미지, 동영상 등 멀티파트 형식으로 업로드 할 떄 사용되는 미들웨어
+const upload = multer({ storage: storage }).single("file");
 
 router.post("/image", (req, res) => {
   //가져온 이미지를 저장을 해주면 된다.
@@ -40,9 +40,9 @@ router.post("/", (req, res) => {
 });
 
 router.post("/products", (req, res) => {
+  // product collection에 들어 있는 모든 상품 정보를 가져오기
   let order = req.body.order ? req.body.order : "desc";
   let sortBy = req.body.sortBy ? req.body.sortBy : "_id";
-  // product collection에 들어 있는 모든 상품 정보를 가져오기
   let limit = req.body.limit ? parseInt(req.body.limit) : 20;
   let skip = req.body.skip ? parseInt(req.body.skip) : 0;
   let term = req.body.searchTerm; // 찾는 데이터 문장 조건
@@ -54,10 +54,8 @@ router.post("/products", (req, res) => {
     if (req.body.filters[key].length > 0) {
       if (key === "price") {
         findArgs[key] = {
-          //Greater than equal, 이것보다 크거나 같은
-          $gte: req.body.filters[key][0],
-          //Less than equal, 이것보다 작거타 같은
-          $lte: req.body.filters[key][1],
+          $gte: req.body.filters[key][0], //Greater than equal, 이것보다 크거나 같은
+          $lte: req.body.filters[key][1], //Less than equal, 이것보다 작거나 같은
         };
       } else {
         findArgs[key] = req.body.filters[key];
@@ -103,8 +101,7 @@ router.get("/products_by_id", (req, res) => {
   let productIds = req.query.id;
 
   if (type === "array") {
-    //id=123123123,324234234,324234234 이거를
-    //productIds = ['123123123', '324234234', '324234234'] 이런식으로 바꿔주기
+    // id = 123123123, 324234234, 324234234 이거를 productIds = ['123123123', '324234234', '324234234'] 이런식으로 바꿔주기
     let ids = req.query.id.split(",");
     productIds = ids.map((item) => {
       return item;
@@ -112,7 +109,6 @@ router.get("/products_by_id", (req, res) => {
   }
 
   //productId를 이용해서 DB에서  productId와 같은 상품의 정보를 가져온다.
-
   Product.find({ _id: { $in: productIds } })
     .populate("writer")
     .exec((err, product) => {
@@ -121,4 +117,4 @@ router.get("/products_by_id", (req, res) => {
     });
 });
 
-module.exports = router;
+export default router;
