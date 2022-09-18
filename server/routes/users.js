@@ -34,7 +34,7 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  User.findOne({ id: req.body.email }, (err, user) => {
+  User.findOne({ email: req.body.email }, (err, user) => {
     if (!user)
       return res.json({
         loginSuccess: false,
@@ -49,8 +49,10 @@ router.post("/login", (req, res) => {
       // 랜덤 토큰 생성
       user.generateToken((err, user) => {
         if (err) return res.status(400).send(err);
-        res.cookie("w_authExp", user.tokenExp);
-        res.cookie("w_auth", user.token).status(200).json({
+        res.cookie("w_authExp", user.tokenExp, {
+          httpOnly: true,
+        });
+        res.status(200).cookie("w_auth", user.token, { httpOnly: true }).json({
           loginSuccess: true,
           userId: user._id,
         });

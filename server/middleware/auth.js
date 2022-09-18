@@ -1,9 +1,9 @@
 import { User } from "../models/User.js";
 
-let auth = (req, res, next) => {
+const auth = (req, res, next) => {
   //인증 처리
   // 클라이언트 쿠키에서 token을 가져온다.
-  let token = req.cookies.w_auth;
+  const token = req.cookies.w_auth;
   // 토큰을 복호화한 후 유저를 찾는다.
   User.findByToken(token, (err, user) => {
     if (err) throw err;

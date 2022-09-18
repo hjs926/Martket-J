@@ -1,11 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import axios from "../../axios/axios";
 import {
   SyntheticEvent,
   useCallback,
   useEffect,
   useRef,
   useState,
+  useContext,
 } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -97,19 +98,33 @@ axios.defaults.withCredentials = true; //쿠키 가져오는 설정
 const LoginPage = () => {
   console.log("로그인페이지입니다.");
   // URL 저장
-  const LOGIN_URL = "http://localhost:4000/api/users/login";
-  const AUTH_URL = "/auth";
+  const LOGIN_URL = "/api/users/login";
+  const AUTH_URL = "/api/users/auth";
+
+  // const { setAuth } = useContext<any>(AuthContext);
 
   //state 초기 설정, focus를 위한 Ref 사용
   const idRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
-  const passwordRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
 
   const { mutate: submitLogin } = useMutation(
     ({ userId, userPassword }: SubmitLogin) =>
-      axios.post(LOGIN_URL, {
-        email: userId,
-        password: userPassword,
-      })
+      axios
+        .post(LOGIN_URL, {
+          email: userId,
+          password: userPassword,
+        })
+        .then((response) => {
+          if (response.data.userId) {
+            const { accessToken } = response.data.userId;
+            axios.defaults.headers.common[
+              "Authorization"
+            ] = `Bearer ${accessToken}`;
+          } else {
+            alert("아이디 또는 패스워드를 확인해주세요!");
+            passwordRef.current?.focus();
+          }
+        })
   );
 
   //페이지 이동시 아이디 input칸에 focus
