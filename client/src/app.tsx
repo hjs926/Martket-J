@@ -10,7 +10,6 @@ import GlobalStyle from "./GlobalStyle";
 import { getClient } from "./queryClient";
 import store from "./redux";
 import { routes } from "./router";
-// import { UploadProductPage } from "./pages/upload/UploadProductPage";
 
 const Wrap = styled.div`
   height: auto;

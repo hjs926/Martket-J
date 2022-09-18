@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import axios from "axios";
+import axios from "../../axios/axios";
 import { useEffect, useRef } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { SubmitSignup } from "../../type";
 import { useNavigate } from "react-router";
+import Auth from "../../components/auth/auth";
 
 const SignUpContainer = styled.div`
   margin: 50px 120px 0 100px;
@@ -71,9 +72,10 @@ axios.defaults.withCredentials = true; //쿠키 가져오는 설정
 
 const SignUpPage = () => {
   console.log("회원가입페이지입니다.");
-
   const navigate = useNavigate();
-  const SIGNUP_URL = "http://localhost:4000/api/users/signup";
+  const SIGNUP_URL = "/api/users/signup";
+
+  Auth();
 
   // const idRef = useRef<HTMLInputElement>(null); // 제너릭으로 antd의 Input 컴포넌트를 넣음
   const idRef = useRef<HTMLInputElement>(null);
