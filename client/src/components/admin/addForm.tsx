@@ -1,13 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { SyntheticEvent } from "react";
+import { SyntheticEvent, useState } from "react";
 import { getClient, QueryKeys } from "../../queryClient";
 import { Product } from "../../type";
 import FileUpload from "./FileUpload";
 
 const AddForm = () => {
   const PRODUCT_UPROAD_URL = "http://localhost:4000/api/product";
-
   const queryClient = getClient();
   const { mutate: addProduct } = useMutation(
     ({ title, image, price, description }: Product) =>
@@ -38,10 +37,16 @@ const AddForm = () => {
     formData.price = Number(formData.price);
     addProduct(formData as Product);
   };
+  const [Images, setImages] = useState([]);
+  const updateImages = (newImages: any) => {
+    //이미지 지정 함수 생성
+    setImages(newImages);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
-      <FileUpload />
+      <FileUpload movefunction={updateImages} />{" "}
+      {/*생성한걸 props에 넘겨준다 */}
       <label>
         상품명: <input name="title" type="text" required />
       </label>
