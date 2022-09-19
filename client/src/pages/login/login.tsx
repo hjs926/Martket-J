@@ -8,7 +8,7 @@ import {
   useState,
   useContext,
 } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { SubmitLogin } from "../../type";
 
@@ -96,12 +96,12 @@ const LoginSignUp = styled(LoginForm)`
 axios.defaults.withCredentials = true; //쿠키 가져오는 설정
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   console.log("로그인페이지입니다.");
   // URL 저장
   const LOGIN_URL = "/api/users/login";
   const AUTH_URL = "/api/users/auth";
-
-  // const { setAuth } = useContext<any>(AuthContext);
 
   //state 초기 설정, focus를 위한 Ref 사용
   const idRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
@@ -120,6 +120,7 @@ const LoginPage = () => {
             axios.defaults.headers.common[
               "Authorization"
             ] = `Bearer ${accessToken}`;
+            navigate(-1);
           } else {
             alert("아이디 또는 패스워드를 확인해주세요!");
             passwordRef.current?.focus();
