@@ -30,6 +30,8 @@ const SideMenuBar = styled.nav`
 `;
 
 const LeftForm = () => {
+  console.log("LeftForm");
+
   return (
     <SideMenuBar className="gnb">
       <Link to="/">
