@@ -5,7 +5,6 @@ import { useRoutes } from "react-router";
 import styled from "styled-components";
 import Footer from "./components/footer";
 import Gnb from "./components/gnb";
-import GnbRight from "./components/gnbRight";
 import GlobalStyle from "./GlobalStyle";
 import { getClient } from "./queryClient";
 import store from "./redux";
@@ -26,7 +25,6 @@ const App = () => {
         <GlobalStyle />
         <Wrap className="wrap">
           <Gnb />
-          <GnbRight />
           {elem}
           <Footer />
         </Wrap>

@@ -47,3 +47,11 @@ export interface SubmitSignup {
   userPassword: string;
   userName: string;
 }
+export interface userInfo {
+  email: string;
+  isAdmin: boolean;
+  isAuth: boolean;
+  name: string;
+  role: number;
+  _id: string;
+}
