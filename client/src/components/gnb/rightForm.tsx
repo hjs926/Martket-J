@@ -6,6 +6,7 @@ import { RootState } from "../../redux";
 import { getTotals } from "../../redux/cartSlice";
 import { userInfo } from "../../type";
 import Auth from "../auth/auth";
+import { LogOut } from "../login/logout";
 
 const HeaderRight = styled.div`
   position: fixed;
@@ -14,7 +15,7 @@ const HeaderRight = styled.div`
   z-index: 99;
   span {
     line-height: 30px;
-    margin-left: 15px;
+    margin-left: 55px;
     font-size: 14px;
     color: black;
     font-weight: 600;
@@ -25,14 +26,14 @@ const HeaderRight = styled.div`
  * 헤더 오른쪽에서 로그인, 카트를 담고있습니다.
  */
 const RightForm = () => {
-  console.log("GnbRight");
+  console.log("RightForm");
   const cartData = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
   const [user, setUser] = useState<userInfo>();
 
   useEffect(() => {
     Auth().then((data) => setUser(data));
-  }, [user?.isAuth]);
+  }, []);
 
   useEffect(() => {
     dispatch(getTotals(cartData));
@@ -42,12 +43,14 @@ const RightForm = () => {
       {user?.isAuth ? (
         <HeaderRight>
           <div>
-            <span>{user.name}님</span>
-            <Link to="/cart">
-              <span>
-                CART (<b>{cartData.cartTotalQuantity}</b>){" "}
-              </span>
-            </Link>
+            <span>
+              {user.name}님 <LogOut />
+            </span>
+            <span>
+              <Link to="/cart">
+                CART (<b>{cartData.cartTotalQuantity}</b>)
+              </Link>
+            </span>
           </div>
         </HeaderRight>
       ) : (

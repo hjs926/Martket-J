@@ -18,6 +18,7 @@ const Wrap = styled.div`
 const App = () => {
   const elem = useRoutes(routes);
   const queryClient = getClient();
+  console.log("app.");
 
   return (
     <QueryClientProvider client={queryClient}>
