@@ -3,6 +3,8 @@ import "slick-carousel/slick/slick-theme.css";
 import Item from "../components/slide/slideItem";
 import styled from "styled-components";
 import ProductList from "../components/product/products";
+import { useEffect } from "react";
+import axios from "../axios/axios";
 
 const MainSection2 = styled.section`
   max-width: 100%;
@@ -32,7 +34,16 @@ const MainSection2 = styled.section`
 `;
 
 const MainPage = () => {
-  console.log("메인페이지");
+  useEffect(() => {
+    axios.post("/api/product/products").then((res) => {
+      if (res.data.success) {
+        console.log(res.data);
+      } else {
+        alert("상품 불러오기 실패");
+      }
+    });
+  }, []);
+
   return (
     <>
       <section className="main-section-1">

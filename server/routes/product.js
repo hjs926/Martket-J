@@ -28,6 +28,15 @@ router.post("/image", (req, res) => {
   });
 });
 
+router.post("/products", (req, res) => {
+  Product.find()
+    .populate("_id")
+    .exec((err, productInfo) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).json({ success: true, productInfo });
+    });
+});
+
 router.post("/", (req, res) => {
   //body에서 받은 정보를 DB에 저장
   const product = new Product(req.body);
