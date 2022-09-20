@@ -50,6 +50,7 @@ function FileUpload(props) {
               display: "flex",
               alignSelf: "center",
               justifyContent: "center",
+              cursor: "pointer",
             }}
             {...getRootProps()}
           >
