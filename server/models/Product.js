@@ -18,6 +18,10 @@ const productSchema = mongoose.Schema(
       type: Number,
       default: 0,
     },
+    categorys: {
+      type: Number,
+      default: 1,
+    },
     images: {
       type: Array,
       default: [],
@@ -33,7 +37,8 @@ const productSchema = mongoose.Schema(
     },
   },
   { timestamps: true }
-); // 자동적으로 업데이트 등록
+);
+// 자동적으로 업데이트 등록
 
 productSchema.index(
   {
