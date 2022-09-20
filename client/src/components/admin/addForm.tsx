@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+import axios from "../../axios/axios";
 import FileUpload from "./FileUpload";
+
+const FILEUPLOAD_URL = "/api/product";
 
 const Categorys = [
   { key: 1, value: "TOP" },
@@ -13,60 +15,74 @@ const Categorys = [
 ];
 
 function addForm(props: any) {
-  const [Title, setTitle] = useState("");
-  const [Description, setDescription] = useState("");
-  const [Price, setPrice] = useState(0);
-  const [Category, setCategory] = useState(1);
-  const [Images, setImages] = useState([] as any);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState(0);
+  const [category, setCategory] = useState(1);
+  const [images, setImages] = useState([] as any);
 
   const handleChangeTitle = (e: any) => {
     setTitle(e.currentTarget.value);
+    console.log("title", title);
   };
 
   const handleChangeDescription = (e: any) => {
     setDescription(e.currentTarget.value);
+    console.log("description", description);
   };
 
   const handleChangePrice = (e: any) => {
     setPrice(e.currentTarget.value);
+    console.log("price", price);
   };
 
   const handleChangeCategory = (e: any) => {
     setCategory(e.currentTarget.vale);
+    console.log("category", category);
   };
 
-  const updateImages = (newImages: any) => {
+  const handleupdateImages = (newImages: any) => {
     setImages(newImages);
+    console.log("newImages", newImages);
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    // if (!Title || !Description || !Price || !Category || !Images) {
-    //   return alert("모든 칸을 채워주세요");
-    // } //유효성 체크 -> 모든 칸이 채워지도록
+    if (!title || !description || !price || !images) {
+      console.log("title", title);
+
+      console.log("description", description);
+
+      console.log("price", price);
+
+      console.log("Images", images);
+
+      console.log("category", category);
+      return alert("모든 칸을 채워주세요");
+    } //유효성 체크 -> 모든 칸이 채워지도록
 
     //서버에 채운 값들을 req로 보낸다
 
     const body = {
       //로그인 된 사람의 ID
       // writer: props.user.userData_id,
-      title: Title,
-      description: Description,
-      price: Price,
-      categorys: Category,
-      images: Images,
+      title,
+      description,
+      price: Number(price),
+      images,
     };
 
-    axios.post("http://localhost:4000/api/product", body).then((res) => {
-      if (res.data.success) {
-        console.log("res.data", res.data);
-        alert("상품 업로드 성공");
-        props.history.push("/");
-      } else {
-        alert("상품 업로드 실패");
-      }
-    });
+    axios.post(FILEUPLOAD_URL, body);
+    // .then((res) => {
+    //   if (res.data.success) {
+    //     // console.log("res.data", res.data);
+    //     alert("상품 업로드 성공");
+    //     // props.history.push("/");
+    //   } else {
+    //     alert("상품 업로드 실패");
+    //   }
+    // });
   };
 
   return (
@@ -76,23 +92,23 @@ function addForm(props: any) {
       </div>
 
       <form onSubmit={handleSubmit}>
-        <FileUpload moveFunction={updateImages} />
+        <FileUpload moveFunction={handleupdateImages} />
 
         <br />
         <br />
         <label>이름</label>
-        <input onChange={handleChangeTitle} value={Title} />
+        <input onChange={handleChangeTitle} value={title} />
         <br />
         <br />
         <label>설명</label>
-        <textarea onChange={handleChangeDescription} value={Description} />
+        <textarea onChange={handleChangeDescription} value={description} />
         <br />
         <br />
         <label>가격</label>
-        <input onChange={handleChangePrice} value={Price} />
+        <input onChange={handleChangePrice} value={price} />
         <br />
         <br />
-        <select onChange={handleChangeCategory} value={Category}>
+        <select onChange={handleChangeCategory} value={category}>
           {Categorys.map((item) => (
             <option key={item.key} value={item.key}>
               {item.value}

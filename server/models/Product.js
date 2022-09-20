@@ -40,18 +40,18 @@ const productSchema = mongoose.Schema(
 );
 // 자동적으로 업데이트 등록
 
-productSchema.index(
-  {
-    title: "text",
-    description: "text",
-  },
-  {
-    weights: {
-      title: 5,
-      description: 1,
-    },
-  }
-);
+// productSchema.index(
+//   {
+//     title: "text",
+//     description: "text",
+//   },
+//   {
+//     weights: {
+//       title: 5,
+//       description: 1,
+//     },
+//   }
+// );
 
 const Product = mongoose.model("Product", productSchema);
 
