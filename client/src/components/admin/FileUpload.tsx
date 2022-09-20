@@ -2,22 +2,24 @@ import React, { useState } from "react";
 import Dropzone from "react-dropzone";
 import axios, { AxiosResponse } from "axios";
 
-function FileUpload(props) {
+function FileUpload(props: any) {
   const [Images, setImages] = useState([] as any);
 
   const handleDropImage = (files: any) => {
     let formData = new FormData();
 
-    const config: any = {
-      header: { "content-type": "multipart/form-data" },
+    const config = {
+      headers: { "content-type": "multipart/form-data" },
     };
     formData.append("file", files[0]);
     axios
       .post("http://localhost:4000/api/product/image", formData, config)
-      .then((response: AxiosResponse<any, any>) => {
+      .then((response) => {
         if (response.data.success) {
+          console.log(response.data);
           setImages([...Images, response.data.filePath]);
-          props.movefunction([...Images, response.data.filePath]);
+          props.moveFunction();
+          // props.movefunction([...Images, response.data.filePath]);
         } else {
           alert("파일 저장 실패.");
         }
@@ -29,13 +31,13 @@ function FileUpload(props) {
 
   const handleDeleteImage = (image: any) => {
     const currentIndex = Images.indexOf(image);
+    console.log("currentIndex", currentIndex);
     let newImages = [...Images];
     newImages.splice(currentIndex, 1);
     setImages(newImages);
-    props.movefunction(newImages);
     // 내가 클릭한 이미지의 index 번호~1까지 지워주겠다는 의미
-    // ex) index 번호 0을 클릭했다면 0부터1까지 지우는거나 하나만 지움
-    // ex) index 번호 2를 클릭했다면 2부터3까지 지우는거나 하나만 지움
+    // ex) newImages.splice(0,2) -> [0,1,2] 중 0부터 1까지 [0,1] 2개 삭제
+    props.moveFunction(newImages);
   };
 
   return (
@@ -48,7 +50,7 @@ function FileUpload(props) {
               height: 240,
               border: "1px solid lightgray",
               display: "flex",
-              alignSelf: "center",
+              alignItems: "center",
               justifyContent: "center",
             }}
             {...getRootProps()}
