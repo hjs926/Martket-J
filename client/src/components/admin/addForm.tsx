@@ -1,66 +1,110 @@
-import { useMutation } from "@tanstack/react-query";
+import React, { useState } from "react";
 import axios from "axios";
-import { SyntheticEvent, useState } from "react";
-import { getClient, QueryKeys } from "../../queryClient";
-import { Product } from "../../type";
 import FileUpload from "./FileUpload";
 
-const AddForm = () => {
-  const PRODUCT_UPROAD_URL = "http://localhost:4000/api/product";
-  const queryClient = getClient();
-  const { mutate: addProduct } = useMutation(
-    ({ title, image, price, description }: Product) =>
-      axios.post(PRODUCT_UPROAD_URL, {
-        title,
-        image,
-        price,
-        description,
-      }),
-    {
-      onSuccess: ({ addProduct }: any) => {
-        queryClient.invalidateQueries([QueryKeys.PRODUCTS], {
-          exact: false,
-        });
-      },
-    }
-  );
+const Categorys = [
+  { key: 1, value: "TOP" },
+  { key: 2, value: "OUTER" },
+  { key: 3, value: "PANTS" },
+  { key: 4, value: "DRESS" },
+  { key: 5, value: "SHOES" },
+  { key: 6, value: "BAG" },
+  { key: 7, value: "ETC" },
+];
 
-  const handleSubmit = (e: SyntheticEvent) => {
-    e.preventDefault();
-    const formData = [...new FormData(e.target as HTMLFormElement)].reduce<{
-      [key: string]: any;
-    }>((res, [key, val]) => {
-      res[key] = val;
-      return res;
-    }, {});
-    console.log(formData);
-    formData.price = Number(formData.price);
-    addProduct(formData as Product);
+function addForm(props: any) {
+  const [Title, setTitle] = useState("");
+  const [Description, setDescription] = useState("");
+  const [Price, setPrice] = useState(0);
+  const [Category, setCategory] = useState(1);
+  const [Images, setImages] = useState([] as any);
+
+  const handleChangeTitle = (e: any) => {
+    setTitle(e.currentTarget.value);
   };
-  const [Images, setImages] = useState([]);
+
+  const handleChangeDescription = (e: any) => {
+    setDescription(e.currentTarget.value);
+  };
+
+  const handleChangePrice = (e: any) => {
+    setPrice(e.currentTarget.value);
+  };
+
+  const handleChangeCategory = (e: any) => {
+    setCategory(e.currentTarget.vale);
+  };
+
   const updateImages = (newImages: any) => {
-    //이미지 지정 함수 생성
     setImages(newImages);
   };
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    // if (!Title || !Description || !Price || !Category || !Images) {
+    //   return alert("모든 칸을 채워주세요");
+    // } //유효성 체크 -> 모든 칸이 채워지도록
+
+    //서버에 채운 값들을 req로 보낸다
+
+    const body = {
+      //로그인 된 사람의 ID
+      // writer: props.user.userData_id,
+      title: Title,
+      description: Description,
+      price: Price,
+      categorys: Category,
+      images: Images,
+    };
+
+    axios.post("http://localhost:4000/api/product", body).then((res) => {
+      if (res.data.success) {
+        console.log("res.data", res.data);
+        alert("상품 업로드 성공");
+        props.history.push("/");
+      } else {
+        alert("상품 업로드 실패");
+      }
+    });
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <FileUpload movefunction={updateImages} />{" "}
-      {/*생성한걸 props에 넘겨준다 */}
-      <label>
-        상품명: <input name="title" type="text" required />
-      </label>
-      <label>
-        이미지URL: <input name="image" type="text" required />
-      </label>
-      <label>
-        상품가격: <input name="price" type="number" required min="1000" />
-      </label>
-      <label>
-        상세: <textarea name="description" />
-      </label>
-      <button type="submit">등록</button>
-    </form>
+    <div style={{ maxWidth: "700px", margin: "2rem auto" }}>
+      <div style={{ textAlign: "center", marginBottom: "2rem" }}>
+        <h2>상품 업로드</h2>
+      </div>
+
+      <form onSubmit={handleSubmit}>
+        <FileUpload moveFunction={updateImages} />
+
+        <br />
+        <br />
+        <label>이름</label>
+        <input onChange={handleChangeTitle} value={Title} />
+        <br />
+        <br />
+        <label>설명</label>
+        <textarea onChange={handleChangeDescription} value={Description} />
+        <br />
+        <br />
+        <label>가격</label>
+        <input onChange={handleChangePrice} value={Price} />
+        <br />
+        <br />
+        <select onChange={handleChangeCategory} value={Category}>
+          {Categorys.map((item) => (
+            <option key={item.key} value={item.key}>
+              {item.value}
+            </option>
+          ))}
+        </select>
+        <br />
+        <br />
+        <button onClick={handleSubmit}>확인</button>
+      </form>
+    </div>
   );
-};
-export default AddForm;
+}
+
+export default addForm;
