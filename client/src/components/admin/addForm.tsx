@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import axios from "../../axios/axios";
 import FileUpload from "./FileUpload";
 
@@ -15,6 +16,7 @@ const Categorys = [
 ];
 
 function addForm(props: any) {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
@@ -66,23 +68,23 @@ function addForm(props: any) {
 
     const body = {
       //로그인 된 사람의 ID
-      // writer: props.user.userData_id,
+      // writer: props.user.userData._id,
       title,
       description,
       price: Number(price),
       images,
+      categorys: category,
     };
 
-    axios.post(FILEUPLOAD_URL, body);
-    // .then((res) => {
-    //   if (res.data.success) {
-    //     // console.log("res.data", res.data);
-    //     alert("상품 업로드 성공");
-    //     // props.history.push("/");
-    //   } else {
-    //     alert("상품 업로드 실패");
-    //   }
-    // });
+    axios.post(FILEUPLOAD_URL, body).then((res) => {
+      if (res.data.success) {
+        console.log("res.data", res.data);
+        alert("상품 업로드 성공");
+        navigate("/");
+      } else {
+        alert("상품 업로드 실패");
+      }
+    });
   };
 
   return (
