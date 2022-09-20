@@ -1,9 +1,9 @@
 import express from "express";
 import multer from "multer";
-const Product = "../models/Product";
+import { Product } from "../models/Product.js";
 const router = express.Router();
 
-let storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "uploads/");
   },
@@ -12,7 +12,7 @@ let storage = multer.diskStorage({
   },
 });
 
-let upload = multer({ storage: storage }).single("file");
+const upload = multer({ storage: storage }).single("file");
 
 router.post("/image", (req, res) => {
   //가져온 이미지를 저장을 해주면 된다.
@@ -28,7 +28,7 @@ router.post("/image", (req, res) => {
   });
 });
 
-router.post("/product", (req, res) => {
+router.post("/", (req, res) => {
   //body에서 받은 정보를 DB에 저장
   const product = new Product(req.body);
   product.save((err) => {

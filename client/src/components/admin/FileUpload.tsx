@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import Dropzone from "react-dropzone";
-import axios, { AxiosResponse } from "axios";
+import axios from "../../axios/axios";
+
+const IMAGEUPLOAD_URL = "/api/product/image";
 
 function FileUpload(props: any) {
   const [Images, setImages] = useState([] as any);
+  console.log(props);
 
   const handleDropImage = (files: any) => {
     let formData = new FormData();
@@ -12,18 +15,15 @@ function FileUpload(props: any) {
       headers: { "content-type": "multipart/form-data" },
     };
     formData.append("file", files[0]);
-    axios
-      .post("http://localhost:4000/api/product/image", formData, config)
-      .then((response) => {
-        if (response.data.success) {
-          console.log(response.data);
-          setImages([...Images, response.data.filePath]);
-          props.moveFunction();
-          // props.movefunction([...Images, response.data.filePath]);
-        } else {
-          alert("파일 저장 실패.");
-        }
-      });
+    axios.post(IMAGEUPLOAD_URL, formData, config).then((response) => {
+      if (response.data.success) {
+        console.log(response.data);
+        setImages([...Images, response.data.filePath]);
+        props.moveFunction([...Images, response.data.filePath]);
+      } else {
+        alert("파일 저장 실패.");
+      }
+    });
   };
   //서버로 데이터를 보낼 때는 header를 따로 설정을 해줘야한다.
   //사진을 FormData에 담기 위해서는 formData의 append를 사용해서
@@ -52,6 +52,7 @@ function FileUpload(props: any) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              cursor: "pointer",
             }}
             {...getRootProps()}
           >
