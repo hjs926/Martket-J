@@ -28,13 +28,11 @@ router.post("/image", (req, res) => {
   });
 });
 
-router.post("/products", (req, res) => {
-  Product.find()
-    .populate("_id")
-    .exec((err, productInfo) => {
-      if (err) return res.status(400).json({ success: false, err });
-      return res.status(200).json({ success: true, productInfo });
-    });
+router.get("/products", (req, res) => {
+  Product.find().exec((err, productInfo) => {
+    if (err) return res.status(400).json({ success: false, err });
+    return res.status(200).json({ success: true, productInfo });
+  });
 });
 
 router.post("/", (req, res) => {

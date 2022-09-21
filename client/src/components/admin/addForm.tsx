@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "../../axios/axios";
 import FileUpload from "./FileUpload";
 
 const FILEUPLOAD_URL = "/api/product";
-
 const Categorys = [
   { key: 1, value: "TOP" },
   { key: 2, value: "OUTER" },
@@ -15,7 +14,7 @@ const Categorys = [
   { key: 7, value: "ETC" },
 ];
 
-function addForm(props: any) {
+function addForm() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -39,8 +38,9 @@ function addForm(props: any) {
   };
 
   const handleChangeCategory = (e: any) => {
-    setCategory(e.currentTarget.vale);
+    setCategory(e.currentTarget.value);
     console.log("category", category);
+    console.log("e.currentTarget.value", e.currentTarget.value);
   };
 
   const handleupdateImages = (newImages: any) => {
@@ -51,16 +51,17 @@ function addForm(props: any) {
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
-    if (!title || !description || !price || !images) {
+    if (!images || !title || !description || !price || !category) {
+      console.log("Images", images);
+
       console.log("title", title);
 
       console.log("description", description);
 
       console.log("price", price);
 
-      console.log("Images", images);
-
       console.log("category", category);
+
       return alert("모든 칸을 채워주세요");
     } //유효성 체크 -> 모든 칸이 채워지도록
 
@@ -68,7 +69,6 @@ function addForm(props: any) {
 
     const body = {
       //로그인 된 사람의 ID
-      // writer: props.user.userData._id,
       title,
       description,
       price: Number(price),
