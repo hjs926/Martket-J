@@ -32,12 +32,38 @@ const MainSection2 = styled.section`
     }
   }
 `;
-
+/*
+categorys: 1
+createdAt: "2022-09-20T16:29:16.251Z"
+description: "123"
+images: Array(1){
+  0: "uploads\\1663691352513_2021_07_ver1_1.png"
+  length: 1
+}
+price: 333
+sold: 0
+title: "123"
+updatedAt: "2022-09-20T16:29:16.251Z"
+views: 0
+__v: 0
+_id: {
+  categorys: 1
+  createdAt: "2022-09-20T16:29:16.251Z"
+  description: "123"
+  images: ['uploads\\1663691352513_2021_07_ver1_1.png']
+  price: 333
+  sold: 0
+  title: "123"
+  updatedAt: "2022-09-20T16:29:16.251Z"
+  views: 0
+  __v: 0
+  _id: "6329ea5cded32e2ff8b739f1"}
+*/
 const MainPage = () => {
   useEffect(() => {
-    axios.post("/api/product/products").then((res) => {
+    axios.get("/api/product/products").then((res) => {
       if (res.data.success) {
-        console.log(res.data);
+        console.log("상품목록: ", res.data);
       } else {
         alert("상품 불러오기 실패");
       }

@@ -7,8 +7,8 @@
     "npm": "6.9.0"
   },
   "scripts": {
-    "start": "node index.js",
-    "backend": "nodemon server/index.js",
+    "start": "nodemon server/index.js",
+    "dev": "nodemon server/index.js",
     "frontend": "npm run start --prefix client"
   },
   "author": "",

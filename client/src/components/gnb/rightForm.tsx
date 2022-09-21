@@ -15,7 +15,7 @@ const HeaderRight = styled.div`
   z-index: 99;
   span {
     line-height: 30px;
-    margin-left: 55px;
+    margin-left: 35px;
     font-size: 14px;
     color: black;
     font-weight: 600;
@@ -44,25 +44,25 @@ const RightForm = () => {
         <HeaderRight>
           <div>
             <span>
-              {user.name}님 <LogOut />
-            </span>
-            <span>
               <Link to="/cart">
                 CART (<b>{cartData.cartTotalQuantity}</b>)
               </Link>
+            </span>
+            <span>
+              {user.name}님 <LogOut />
             </span>
           </div>
         </HeaderRight>
       ) : (
         <HeaderRight>
           <div>
-            <Link to="/login">
-              <span>LOIN/JOIN</span>
-            </Link>
             <Link to="/cart">
               <span>
                 CART (<b>{cartData.cartTotalQuantity}</b>){" "}
               </span>
+            </Link>
+            <Link to="/login">
+              <span>LOIN/JOIN</span>
             </Link>
           </div>
         </HeaderRight>
