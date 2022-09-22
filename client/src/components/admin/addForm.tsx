@@ -40,7 +40,6 @@ function addForm() {
   const handleChangeCategory = (e: any) => {
     setCategory(e.currentTarget.value);
     console.log("category", category);
-    console.log("e.currentTarget.value", e.currentTarget.value);
   };
 
   const handleupdateImages = (newImages: any) => {

@@ -8,6 +8,7 @@ import cors from "cors";
 //미들 웨어를 등록해주는 메서드
 import userApi from "./routes/users.js";
 import productApi from "./routes/product.js";
+import board from "./routes/board.js";
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use(cookieParser());
 
 app.use("/api/users", userApi);
 app.use("/api/product", productApi);
+app.use("/api/board", board);
 
 app.use("/uploads", express.static("uploads"));
 

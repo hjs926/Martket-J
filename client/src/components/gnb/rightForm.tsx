@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -8,7 +8,7 @@ import { userInfo } from "../../type";
 import Auth from "../auth/auth";
 import { LogOut } from "../login/logout";
 
-const HeaderRight = styled.div`
+const HeaderRight = styled.nav`
   position: fixed;
   right: 90px;
   top: 42px;
@@ -25,22 +25,17 @@ const HeaderRight = styled.div`
 /**
  * 헤더 오른쪽에서 로그인, 카트를 담고있습니다.
  */
-const RightForm = () => {
+const RightForm = ({ user }: any) => {
   console.log("RightForm");
   const cartData = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
-  const [user, setUser] = useState<userInfo>();
-
-  useEffect(() => {
-    Auth().then((data) => setUser(data));
-  }, []);
 
   useEffect(() => {
     dispatch(getTotals(cartData));
   }, [cartData]);
   return (
     <>
-      {user?.isAuth ? (
+      {user.isAuth ? (
         <HeaderRight>
           <div>
             <span>

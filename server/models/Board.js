@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const BoardSchema = mongoose.Schema(
   {
-    wrieter: {
+    writer: {
       type: Schema.Types.ObjectId,
       required: true,
       ref: "User",
@@ -19,6 +19,9 @@ const BoardSchema = mongoose.Schema(
     content: {
       type: String,
       required: true,
+    },
+    imgPath: {
+      type: String,
     },
     createdAt: {
       // 글을 생성한 날짜

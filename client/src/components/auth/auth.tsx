@@ -16,6 +16,7 @@ _id: "6325386216b3189cfdce47d8"
 export const Auth = async () => {
   const response = await axios.get(AUTH_URL);
   const data = response.data;
+  console.log("통신했습니다");
 
   return data;
 };
