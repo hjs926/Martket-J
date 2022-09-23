@@ -1,9 +1,10 @@
-import TextArea from "antd/lib/input/TextArea";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import axios from "../../axios/axios";
 import { userInfo } from "../../type";
 import Auth from "../auth/auth";
+import uuid from "react-uuid";
+import { useNavigate } from "react-router";
 
 const WriteFormWrap = styled.div`
   margin: 50px 120px 50px 200px;
@@ -35,8 +36,12 @@ const WriteFormWrap = styled.div`
   }
 `;
 
-export const WriteBorad = () => {
+const BOARDCREATE_URL = "/api/board/create";
+
+export const WriteBoard = () => {
   const [user, setUser] = useState<userInfo>();
+  const titleRef = useRef<HTMLInputElement>(null);
+  const contentsRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
     Auth().then((data) => setUser(data));
@@ -47,19 +52,37 @@ export const WriteBorad = () => {
 
   console.log(user);
 
-  const handleWriteBorad = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleWriteBoard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const title = titleRef.current!.value;
+    const content = contentsRef.current!.value;
+    console.log("tiele", title, "content", content);
+    if (!title) {
+      return alert("제목을 입력해주세요.");
+    } else if (!content) {
+      return alert("내용을 입력해주세요.");
+    }
+    axios.post(BOARDCREATE_URL, {
+      title,
+      content,
+      name: user.name,
+    });
   };
 
   return (
     <WriteFormWrap>
-      <form onSubmit={handleWriteBorad}>
-        <input className="title" type="text" placeholder="제목" />
-        <TextArea></TextArea>
+      <form onSubmit={handleWriteBoard}>
+        <input
+          className="title"
+          type="text"
+          placeholder="제목"
+          ref={titleRef}
+        />
+        <textarea placeholder="내용을 입력해주세요." ref={contentsRef} />
         <button>글작성</button>
       </form>
     </WriteFormWrap>
   );
 };
 
-export default WriteBorad;
+export default WriteBoard;
