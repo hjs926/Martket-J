@@ -55,3 +55,13 @@ export interface userInfo {
   role: number;
   _id: string;
 }
+
+export interface boardItem {
+  name: string;
+  content: string;
+  createdAt: string;
+  postId: string;
+  title: string;
+  updatedAt: string;
+  _id: string;
+}
