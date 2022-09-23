@@ -1741,6 +1741,11 @@
     "semver" "^5.3.0"
     "tar" "^4.4.2"
 
+"nodemo@^1.0.0":
+  "integrity" "sha512-INtNzVJ7JDuxYO6uGchMXRVDFKVKsGDeY16X/Izu77biLeE0+Nt1qW4zS8XRLU6en8DbSWZKxDcj2z9rNIclfw=="
+  "resolved" "https://registry.npmjs.org/nodemo/-/nodemo-1.0.0.tgz"
+  "version" "1.0.0"
+
 "nodemon@^1.19.1":
   "integrity" "sha512-VGPaqQBNk193lrJFotBU8nvWZPqEZY2eIzymy2jjY0fJ9qIsxA0sxQ8ATPl0gZC645gijYEc1jtZvpS8QWzJGQ=="
   "resolved" "https://registry.npmjs.org/nodemon/-/nodemon-1.19.4.tgz"
