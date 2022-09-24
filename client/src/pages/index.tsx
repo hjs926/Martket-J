@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "../axios/axios";
 import { Card, Col, Row } from "antd";
 import "antd/dist/antd.css";
+import { Product2 } from "../type";
 
 const { Meta } = Card;
 
@@ -39,11 +40,8 @@ const MainSection2 = styled.section`
 `;
 
 const StyledCard = styled(Card)`
-  box-sizing: border-box;
-  img {
-    max-width: 100%;
-    height: 100%;
-  }
+  display: flex;
+  flex-direction: column;
 `;
 
 // const CardContainer = styled.div`
@@ -58,7 +56,7 @@ const StyledCard = styled(Card)`
 
 const StyledButton = styled.button`
   display: flex;
-  justifycontent: center;
+  justify-content: center;
   color: red;
   background-color: #0000;
   border: 0.5px solid grey;
@@ -86,23 +84,12 @@ title: "123"
 updatedAt: "2022-09-20T16:29:16.251Z"
 views: 0
 __v: 0
-_id: {
-  categorys: 1
-  createdAt: "2022-09-20T16:29:16.251Z"
-  description: "123"
-  images: ['uploads\\1663691352513_2021_07_ver1_1.png']
-  price: 333
-  sold: 0
-  title: "123"
-  updatedAt: "2022-09-20T16:29:16.251Z"
-  views: 0
-  __v: 0
-  _id: "6329ea5cded32e2ff8b739f1"}
+ _id: "6329ea5cded32e2ff8b739f1"
   
 */
 
 const MainPage = () => {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<Product2[]>([]);
 
   useEffect(() => {
     axios.get("/api/product/products").then((response) => {
@@ -121,6 +108,7 @@ const MainPage = () => {
     return (
       <Col lg={6} md={8} xs={24}>
         <StyledCard
+          className="img-box"
           key={index}
           cover={<img src={`http://localhost:4000/${product.images[0]}`} />}
         >

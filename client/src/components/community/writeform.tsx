@@ -1,44 +1,38 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import axios from "../../axios/axios";
 import { userInfo } from "../../type";
 import Auth from "../auth/auth";
-import uuid from "react-uuid";
-import { useNavigate } from "react-router";
 
-const WriteFormWrap = styled.div`
-  margin: 50px 120px 50px 200px;
-  form {
-    padding: 50px 0;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    max-width: 800px;
+const Form = styled.form`
+  padding: 50px 0;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
 
-    .title {
-      padding: 0;
+  .title {
+    padding: 0;
 
-      height: 30px;
-      border: 1px solid black;
-    }
-    textarea {
-      padding: 0;
-      max-width: 798px;
-      resize: none;
-      margin-top: 30px;
-      height: 300px;
-    }
+    height: 30px;
+    border: 1px solid black;
+  }
+  textarea {
+    padding: 0;
+    max-width: 798px;
+    resize: none;
+    margin-top: 30px;
+    height: 300px;
+  }
 
-    button {
-      max-width: 150px;
-      margin-top: 30px;
-    }
+  button {
+    max-width: 150px;
+    margin-top: 30px;
   }
 `;
-
 const BOARDCREATE_URL = "/api/board/create";
 
-export const WriteBoard = () => {
+export const WriteForm = () => {
   const [user, setUser] = useState<userInfo>();
   const titleRef = useRef<HTMLInputElement>(null);
   const contentsRef = useRef<HTMLTextAreaElement>(null);
@@ -67,22 +61,15 @@ export const WriteBoard = () => {
       content,
       name: user.name,
     });
+    window.location.replace("/community");
   };
-
   return (
-    <WriteFormWrap>
-      <form onSubmit={handleWriteBoard}>
-        <input
-          className="title"
-          type="text"
-          placeholder="제목"
-          ref={titleRef}
-        />
-        <textarea placeholder="내용을 입력해주세요." ref={contentsRef} />
-        <button>글작성</button>
-      </form>
-    </WriteFormWrap>
+    <Form onSubmit={handleWriteBoard}>
+      <input className="title" type="text" placeholder="제목" ref={titleRef} />
+      <textarea placeholder="내용을 입력해주세요." ref={contentsRef} />
+      <button>글작성</button>
+    </Form>
   );
 };
 
-export default WriteBoard;
+export default WriteForm;

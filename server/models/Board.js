@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { Counter } from "./Counter.js";
-
 const Schema = mongoose.Schema;
 
 /*
@@ -51,6 +50,8 @@ BoardSchema.pre("save", async function (next) {
     counter.count++;
     counter.save();
     post.postId = counter.count;
+    const time = new Date();
+    post.createdAt = time.getTime() + 3600000 * 9;
   }
   return next();
 });

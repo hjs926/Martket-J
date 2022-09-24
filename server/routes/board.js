@@ -56,10 +56,13 @@ router.post("/getBoardDetail", (req, res) => {
 
 // 전체 게시글 내용 불러오기 요청
 router.get("/getBoardList", (req, res) => {
-  Board.find().exec((err, boards) => {
-    if (err) return res.status(400).send({ success: false, err });
-    return res.status(200).json({ success: true, boards });
-  });
+  Board.find()
+    .sort({ _id: -1 })
+    .limit(10)
+    .exec((err, boards) => {
+      if (err) return res.status(400).send({ success: false, err });
+      return res.status(200).json({ success: true, boards });
+    });
 });
 
 export default router;

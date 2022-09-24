@@ -10,14 +10,16 @@ export interface Product {
 }
 
 export interface Product2 {
-  category: string;
+  categorys: number;
+  createdAt: string;
   description: string;
-  id: number;
-  image: string;
+  images: string[];
   price: number;
+  sold: number;
   title: string;
-  quantity: number;
-  amount: number;
+  updatedAt: string;
+  views: number;
+  _id: string;
 }
 
 export interface UploadProduct {
