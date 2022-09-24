@@ -1,23 +1,28 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { boardItem } from "../../type";
 
 const Item = styled.li`
   display: flex;
   border: 1px solid black;
+  height: 50px;
+  align-items: center;
   div {
-    margin-left: 30px;
+    text-align: left;
+    padding-left: 20px;
+    width: 20%;
   }
 `;
 
 export const BoardItem = (board: boardItem) => {
   return (
     <Item>
-      <div>작성자: {board.name} </div>
-      <div>제목: {board.title}</div>
-      <div>내용: {board.content}</div>
       <div>게시글 번호: {board.postId}</div>
-      <div>작성시간: {board.createdAt}</div>
-      <div>업데이트 시간: {board.updatedAt}</div>
+      <div>
+        <Link to={`/community/${board.postId}`}>제목: {board.title}</Link>
+      </div>
+      <div>작성자: {board.name} </div>
+      <div>작성시간: {board.createdAt.slice(0, 16).replace("T", " ")}</div>
     </Item>
   );
 };
