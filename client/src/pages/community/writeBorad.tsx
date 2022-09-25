@@ -2,12 +2,12 @@ import styled from "styled-components";
 import WriteForm from "../../components/community/writeform";
 
 const WriteFormWrap = styled.div`
-  margin: 50px 120px 50px 200px;
+  margin: 0 200px 0 250px;
 `;
 
 export const WriteBoard = () => {
   return (
-    <WriteFormWrap>
+    <WriteFormWrap className="112323">
       <WriteForm />
     </WriteFormWrap>
   );

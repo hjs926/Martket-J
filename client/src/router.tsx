@@ -9,6 +9,7 @@ import SignUpPage from "./pages/login/signup";
 import AdminIndex from "./pages/admin/index";
 import CreateBorad from "./components/community/writeform";
 import BoardDetailPage from "./pages/community/[id]";
+import WriteBoard from "./pages/community/writeBorad";
 
 export const routes = [
   {
@@ -21,7 +22,7 @@ export const routes = [
       { path: "/products/:id", element: <Id /> },
       { path: "/login", element: <LoginIndex /> },
       { path: "/community", element: <CommunityPage /> },
-      { path: "/community/write", element: <CreateBorad /> },
+      { path: "/community/write", element: <WriteBoard /> },
       { path: "/community/:postId", element: <BoardDetailPage /> },
       { path: "/signup", element: <SignUpPage /> },
       { path: "/admin", element: <AdminIndex />, index: true },

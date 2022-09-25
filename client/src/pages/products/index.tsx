@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 import ProductItem from "../../components/product/product-Item";
 import { QueryKeys, restFetcher } from "../../queryClient";
-import { Product } from "../../type";
+import { GetProduct } from "../../type";
 
 const ProducListController = styled.div`
   width: 75%;
@@ -18,10 +18,10 @@ const ProducListController = styled.div`
 `;
 
 const ProducList = () => {
-  const { data, isLoading } = useQuery<Product[]>([QueryKeys.PRODUCTS], () =>
+  const { data, isLoading } = useQuery<GetProduct>([QueryKeys.PRODUCTS], () =>
     restFetcher({
-      method: "GET",
-      path: "/products",
+      method: "POST",
+      path: "/api/product/products",
     })
   );
   if (isLoading) return <p>Loading...</p>;
@@ -30,10 +30,10 @@ const ProducList = () => {
   return (
     <ProducListController>
       <br />
-      Total : <b>{data.length}</b> items
+      Total : <b>{data.postSize}</b> items
       <ul>
-        {data?.map((product) => (
-          <ProductItem {...product} key={product.id} />
+        {data?.productInfo.map((product) => (
+          <ProductItem {...product} key={product._id} />
         ))}
       </ul>
     </ProducListController>

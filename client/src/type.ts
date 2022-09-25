@@ -1,15 +1,4 @@
 export interface Product {
-  category: string;
-  description: string;
-  id: number;
-  image: string;
-  price: number;
-  title: string;
-  quantity: number;
-  amount: number;
-}
-
-export interface Product2 {
   categorys: number;
   createdAt: string;
   description: string;
@@ -20,6 +9,11 @@ export interface Product2 {
   updatedAt: string;
   views: number;
   _id: string;
+}
+export interface GetProduct {
+  postSize: number;
+  productInfo: Product[];
+  success: boolean;
 }
 
 export interface UploadProduct {

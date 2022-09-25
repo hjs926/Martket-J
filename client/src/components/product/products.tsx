@@ -24,22 +24,22 @@ const ProductContainer = styled.ul`
 // }
 
 const ProductList = () => {
-  const { data, isLoading } = useQuery<Product[]>([QueryKeys.PRODUCTS], () =>
-    restFetcher({
-      method: "GET",
-      path: "/products",
-    })
-  );
-  if (isLoading) return <h2>Loding...</h2>;
-  if (!data) return null;
+  // const { data, isLoading } = useQuery<Product2[]>([QueryKeys.PRODUCTS], () =>
+  //   restFetcher({
+  //     method: "GET",
+  //     path: "/api/product",
+  //   })
+  // );
+  // if (isLoading) return <h2>Loding...</h2>;
+  // if (!data) return null;
 
-  console.log(data);
+  // console.log(data);
 
   return (
     <ProductContainer>
-      {data.slice(0, 7)?.map((product) => (
-        <ProductItem {...product} key={product.id} />
-      ))}
+      {/* {data.slice(0, 7)?.map((product) => (
+        <ProductItem {...product} key={product._id} />
+      ))} */}
     </ProductContainer>
   );
 };

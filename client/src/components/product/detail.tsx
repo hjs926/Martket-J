@@ -64,7 +64,7 @@ const ProductDetail = (product: Product) => {
   return (
     <DetailContainer>
       <ProductImage>
-        <img src={product.image} />
+        <img src={product.images[0]} />
       </ProductImage>
       <ProductInfo>
         <span>

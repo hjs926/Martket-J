@@ -27,8 +27,8 @@ export const getClient = (() => {
   };
 })();
 
-const BASE_URL = "https://fakestoreapi.com";
-// const BASE_URL = "http://localhost:4000";
+// const BASE_URL = "https://fakestoreapi.com";
+const BASE_URL = "http://localhost:4000";
 
 export const restFetcher = async ({
   method,
