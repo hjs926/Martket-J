@@ -40,14 +40,14 @@ const ProductItem = (product: Product) => {
 
   return (
     <Item>
-      <img src={product.image} />
+      <img src={product.images[0]} />
       <div>
-        <p className="red">{product.category}</p>
-        <Link to={`/products/${product.id}`}>
+        <p className="red">{product.categorys}</p>
+        <Link to={`/products/${product._id}`}>
           <p>{product.title}</p>
         </Link>
         <p className="red">${product.price}</p>
-        <button onClick={() => handlAddToCart(product)}>담기</button>
+        {/* <button onClick={() => handlAddToCart(product)}>담기</button> */}
       </div>
     </Item>
   );

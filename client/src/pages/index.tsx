@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import axios from "../axios/axios";
 import { Card, Col, Row } from "antd";
 import "antd/dist/antd.css";
-import { Product2 } from "../type";
+import { Product } from "../type";
 
 const { Meta } = Card;
 
@@ -46,7 +46,7 @@ const StyledCard = styled(Card)`
 `;
 
 const MainPage = () => {
-  const [products, setProducts] = useState<Product2[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
   const [Skip, setSkip] = useState(0);
   const [Limit, setLimit] = useState(8);
   const [postSize, setPostSize] = useState(0);

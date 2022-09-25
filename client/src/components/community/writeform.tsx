@@ -7,27 +7,70 @@ import Auth from "../auth/auth";
 const Form = styled.form`
   padding: 50px 0;
   margin: 0 auto;
+  margin-top: 150px;
   display: flex;
   flex-direction: column;
   max-width: 800px;
 
   .title {
     padding: 0;
-
     height: 30px;
-    border: 1px solid black;
+    border: 1px solid #d9d9d9;
+    &:focus {
+      border-color: #565e64;
+      box-shadow: 0 0 0 2px rgba(130, 138, 145);
+      border-right-width: 1px;
+      outline: 0;
+    }
+    &:hover {
+      border-color: #565e64;
+      border-right-width: 1px;
+    }
   }
   textarea {
     padding: 0;
-    max-width: 798px;
+    max-width: 800px;
     resize: none;
     margin-top: 30px;
     height: 300px;
-  }
+    border: 1px solid #d9d9d9;
 
-  button {
-    max-width: 150px;
-    margin-top: 30px;
+    &:focus {
+      border-color: #565e64;
+      box-shadow: 0 0 0 2px rgba(130, 138, 145);
+      border-right-width: 1px;
+      outline: 0;
+    }
+    &:hover {
+      border-color: #565e64;
+      border-right-width: 1px;
+    }
+  }
+  .BtnArea {
+    margin-top: 100px;
+    display: flex;
+    justify-content: end;
+    button {
+      width: 150px;
+      color: #fff;
+      background: #6c757d;
+      border-color: #6c757d;
+      cursor: pointer;
+      &:hover {
+        color: #fff;
+        background: #5c636a;
+        border-color: #565e64;
+      }
+      &:focus {
+        box-shadow: 0 0 0 2px rgba(130, 138, 145);
+      }
+      &:active {
+        color: #fff;
+        background-color: #565e64;
+        border-color: #51585e;
+        box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+      }
+    }
   }
 `;
 const BOARDCREATE_URL = "/api/board/create";
@@ -67,7 +110,9 @@ export const WriteForm = () => {
     <Form onSubmit={handleWriteBoard}>
       <input className="title" type="text" placeholder="제목" ref={titleRef} />
       <textarea placeholder="내용을 입력해주세요." ref={contentsRef} />
-      <button>글작성</button>
+      <div className="BtnArea">
+        <button>글작성</button>
+      </div>
     </Form>
   );
 };

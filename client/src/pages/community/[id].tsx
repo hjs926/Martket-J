@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "../../axios/axios";
 import BoardDetail from "../../components/community/detail";
@@ -9,6 +10,17 @@ const GET_BOARDDETAIL = "/api/board/getBoardDetail";
 
 const BoardWrap = styled.div`
   margin: 50px 120px 0 200px;
+  .Btn-area {
+    display: flex;
+    justify-content: end;
+    margin: 0 auto;
+    max-width: 1000px;
+    min-width: 830px;
+    button {
+      width: 80px;
+      margin-right: 50px;
+    }
+  }
 `;
 
 const BoardinContainer = styled.div`
@@ -46,9 +58,13 @@ export const BoardDetailPage = () => {
   return (
     <BoardWrap>
       <BoardinContainer>
-        글 상세 페이지입니다.
         <BoardDetail {...boardData} />
       </BoardinContainer>
+      <div className="Btn-area">
+        <Link to="/community">
+          <button>목록</button>
+        </Link>
+      </div>
     </BoardWrap>
   );
 };

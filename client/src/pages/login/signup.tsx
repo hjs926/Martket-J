@@ -75,7 +75,7 @@ const SignUpPage = () => {
   const navigate = useNavigate();
   const SIGNUP_URL = "/api/users/signup";
 
-  // const idRef = useRef<HTMLInputElement>(null); // 제너릭으로 antd의 Input 컴포넌트를 넣음
+  // const idRef = useRef<HTMLInputElement>(null); //  Input 컴포넌트를 넣음
   const idRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택

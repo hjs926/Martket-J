@@ -4,9 +4,19 @@ import { boardItem } from "../../type";
 
 const Item = styled.li`
   display: flex;
-  border: 1px solid black;
-  height: 50px;
+  height: 80px;
   align-items: center;
+
+  padding: 14px 0 13px;
+  border-bottom: 1px solid #e9e9e9;
+  color: #999;
+  vertical-align: middle;
+  font-weight: normal;
+  background: #fff;
+  .title {
+    width: 60%;
+  }
+
   div {
     text-align: left;
     padding-left: 20px;
@@ -17,12 +27,12 @@ const Item = styled.li`
 export const BoardItem = (board: boardItem) => {
   return (
     <Item>
-      <div>게시글 번호: {board.postId}</div>
-      <div>
-        <Link to={`/community/${board.postId}`}>제목: {board.title}</Link>
+      <div>{board.postId}</div>
+      <div className="title">
+        <Link to={`/community/${board.postId}`}>{board.title}</Link>
       </div>
-      <div>작성자: {board.name} </div>
-      <div>작성시간: {board.createdAt.slice(0, 16).replace("T", " ")}</div>
+      <div>{board.name} </div>
+      <div>{board.createdAt.slice(0, 16).replace("T", " ")}</div>
     </Item>
   );
 };
