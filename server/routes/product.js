@@ -28,11 +28,20 @@ router.post("/image", (req, res) => {
   });
 });
 
-router.get("/products", (req, res) => {
-  Product.find().exec((err, productInfo) => {
-    if (err) return res.status(400).json({ success: false, err });
-    return res.status(200).json({ success: true, productInfo });
-  });
+router.post("/products", (req, res) => {
+  let skip = req.body.skip ? parseInt(req.body.skip) : 0;
+  let limit = req.body.limit ? parseInt(req.body.limit) : 20;
+  //req.body.limit이 있으면 지정한거로 limit하고 없다면 20(아무거나)으로 설정
+  //parseInt -> string일 경우 숫자로 변경
+  Product.find()
+    .skip(skip)
+    .limit(limit)
+    .exec((err, productInfo) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res
+        .status(200)
+        .json({ success: true, productInfo, postSize: productInfo.length });
+    });
 });
 
 router.post("/", (req, res) => {
