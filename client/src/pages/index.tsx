@@ -2,7 +2,6 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Item from "../components/slide/slideItem";
 import styled from "styled-components";
-import ProductList from "../components/product/products";
 import { useEffect, useState } from "react";
 import axios from "../axios/axios";
 import { Card, Col, Row } from "antd";
@@ -10,6 +9,8 @@ import "antd/dist/antd.css";
 import { Product2 } from "../type";
 
 const { Meta } = Card;
+
+const PRODUCTMORE_URL = "/api/product/products";
 
 const MainSection2 = styled.section`
   max-width: 100%;
@@ -44,63 +45,47 @@ const StyledCard = styled(Card)`
   flex-direction: column;
 `;
 
-// const CardContainer = styled.div`
-//   width: 20vw;
-//   height: 30vh;
-//   float: left;
-//   margin: 3px;
-//   background: #0000;
-//   overflow: hidden;
-//   border: 0.5px solid grey;
-// `;
-
-const StyledButton = styled.button`
-  display: flex;
-  justify-content: center;
-  color: red;
-  background-color: #0000;
-  border: 0.5px solid grey;
-  margin-left: 500px;
-  margin-top: 100px;
-`;
-
-// const Meta = styled.div`
-//   background: white;
-//   overflow: hidden;
-//   border: 1px solid red;
-// `;
-
-/*
-categorys: 1
-createdAt: "2022-09-20T16:29:16.251Z"
-description: "123"
-images: Array(1){
-  0: "uploads\\1663691352513_2021_07_ver1_1.png"
-  length: 1
-}
-price: 333
-sold: 0
-title: "123"
-updatedAt: "2022-09-20T16:29:16.251Z"
-views: 0
-__v: 0
- _id: "6329ea5cded32e2ff8b739f1"
-  
-*/
-
 const MainPage = () => {
   const [products, setProducts] = useState<Product2[]>([]);
+  const [Skip, setSkip] = useState(0);
+  const [Limit, setLimit] = useState(8);
+  const [postSize, setPostSize] = useState(0);
 
   useEffect(() => {
-    axios.get("/api/product/products").then((response) => {
+    let body = {
+      skip: Skip,
+      limit: Limit,
+    };
+    getProducts(body);
+  }, []);
+
+  const getProducts = (body: any) => {
+    axios.post(PRODUCTMORE_URL, body).then((response) => {
       if (response.data.success) {
-        console.log("상품목록: ", response.data);
-        setProducts(response.data.productInfo);
+        if (body.loadMore) {
+          console.log("상품목록: ", response.data);
+          setProducts([...products, ...response.data.productInfo]);
+        } else {
+          setProducts(response.data.productInfo);
+        }
+        setPostSize(response.data.postSize);
       } else {
         alert("상품 불러오기 실패");
       }
     });
-  }, []);
+  };
+
+  const handleProductMore = () => {
+    let skip = Skip + Limit;
+
+    let body = {
+      skip: skip,
+      limit: Limit,
+      loadMore: true,
+    };
+    getProducts(body);
+    setSkip(skip);
+  };
 
   const renderCards = products.map((product, index) => {
     console.log("product 정보", product);
@@ -130,7 +115,11 @@ const MainPage = () => {
         <Row gutter={[16, 16]}>{renderCards}</Row>
       </MainSection2>
 
-      <StyledButton>더보기</StyledButton>
+      {postSize >= Limit && (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button onClick={handleProductMore}>더보기</button>
+        </div>
+      )}
     </>
   );
 };
