@@ -1,14 +1,18 @@
-import { useEffect, useState } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { SyntheticEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "../../axios/axios";
-import { boardItem } from "../../type";
+import { QueryKeys, restFetcher } from "../../queryClient";
+import { GetBoardItem, userInfo } from "../../type";
+import Auth from "../auth/auth";
 import BoardItem from "./boarditem";
 
 const BoardContainer = styled.div`
   width: auto;
   height: auto;
   min-width: 830px;
+
   .writeBtnContainer {
     display: flex;
     justify-content: end;
@@ -62,8 +66,33 @@ const CommunityBoard_List = styled.ul`
   width: 100%;
   max-width: 100%;
 `;
+const PaginationContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  .current {
+    color: #1890ff;
+    border: 1px solid #1890ff;
+    font-weight: 500;
+  }
+  button {
+    margin: 0 15px;
+    cursor: pointer;
+    line-height: 30px;
+    text-align: center;
+    vertical-align: middle;
+    min-width: 32px;
+    height: 32px;
+    background-color: #fff;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    &:hover {
+      color: #40a9ff;
+      border: 1px solid #40a9ff;
+    }
+  }
+`;
 
-const GETBOARDLIST = "/api/board/getBoardList";
+const GETBOARDLIST_URL = "/api/board/getBoardList";
 
 /*
 content: "내용입니다."
@@ -76,15 +105,63 @@ _id: "632d90658ddd2d67dcac7957"
 */
 
 export const CommunityBoard = () => {
-  const [boardList, setBoardList] = useState<boardItem[]>();
+  const [data, setData] = useState<GetBoardItem>();
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(5);
+
+  const { mutate: GetBoardList } = useMutation(
+    ({ page, limit }: { page: number; limit: number }) =>
+      restFetcher({
+        method: "GET",
+        path: "/api/board/getBoardList",
+        params: {
+          page,
+          limit,
+        },
+      }),
+    {
+      onSuccess: (response) => {
+        setData(response);
+      },
+    }
+  );
 
   useEffect(() => {
-    axios
-      .get(GETBOARDLIST)
-      .then((response) => setBoardList(response.data.boards));
-  }, []);
-  if (!boardList) return null;
-  console.log(boardList);
+    GetBoardList({ page, limit });
+  }, [page, limit]);
+
+  if (!data?.results) return null;
+  console.log("boardList", data);
+
+  //핸들링 함수
+  const handleActivePage = (e: SyntheticEvent) => {
+    e.preventDefault();
+    // e.currentTarget.classList.add("current");
+
+    const count = parseInt((e.target as HTMLInputElement).value);
+    setPage(1 * count);
+    console.log(count);
+  };
+
+  const handleNextPage = (e: SyntheticEvent) => {
+    e.preventDefault();
+    GetBoardList(data.next);
+  };
+  const handlePreviousPage = (e: SyntheticEvent) => {
+    e.preventDefault();
+    GetBoardList(data.previous);
+  };
+
+  // 최대 페이지 구해서 그만큼 버튼 생성
+  const maxPage = Math.ceil(data.totalIndex / limit);
+  const result = [];
+  for (let i = 1; i <= maxPage; i++) {
+    result.push(
+      <button key={i} value={i} onClick={handleActivePage}>
+        {i}
+      </button>
+    );
+  }
 
   return (
     <BoardContainer>
@@ -95,15 +172,16 @@ export const CommunityBoard = () => {
         <div>작성일</div>
       </div>
       <CommunityBoard_List>
-        {boardList?.map((board) => (
+        {data.results.map((board) => (
           <BoardItem {...board} key={board._id} />
         ))}
       </CommunityBoard_List>
-      <Link to="/community/write">
-        <div className="writeBtnContainer ">
+      <div className="writeBtnContainer ">
+        <Link to="/community/write">
           <button>글작성</button>
-        </div>
-      </Link>
+        </Link>
+      </div>
+      <PaginationContainer>{result}</PaginationContainer>
     </BoardContainer>
   );
 };

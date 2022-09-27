@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "../../axios/axios";
 import { userInfo } from "../../type";
 import Auth from "../auth/auth";
+import { useNavigate } from "react-router-dom";
 
 const Form = styled.form`
   padding: 50px 0;
@@ -80,12 +81,17 @@ export const WriteForm = () => {
   const titleRef = useRef<HTMLInputElement>(null);
   const contentsRef = useRef<HTMLTextAreaElement>(null);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     Auth().then((data) => setUser(data));
   }, []);
 
   if (!user) return null;
-  if (!user?.isAuth) alert("로그인 한 사용자만 글쓰기가 가능합니다.");
+  if (!user?.isAuth) {
+    alert("로그인 한 사용자만 글쓰기가 가능합니다.");
+    navigate("/community");
+  }
 
   console.log(user);
 

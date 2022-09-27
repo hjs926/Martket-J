@@ -61,3 +61,15 @@ export interface boardItem {
   updatedAt: string;
   _id: string;
 }
+export interface GetBoardItem {
+  next: {
+    page: number;
+    limit: number;
+  };
+  previous: {
+    page: number;
+    limit: number;
+  };
+  results: boardItem[];
+  totalIndex: number;
+}

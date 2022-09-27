@@ -1,5 +1,9 @@
+import { SyntheticEvent, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { boardItem } from "../../type";
+import axios from "../../axios/axios";
+import { boardItem, userInfo } from "../../type";
+import Auth from "../auth/auth";
 
 const BoardDetailContainer = styled.div`
   max-width: 100%;
@@ -32,24 +36,94 @@ const BoardDetailContainer = styled.div`
   }
 `;
 
+const BtnArea = styled.div`
+  display: flex;
+  justify-content: end;
+  max-width: 1000px;
+  min-width: 830px;
+
+  button {
+    width: 80px;
+    margin-right: 0px;
+    margin-left: 10px;
+    margin-top: 30px;
+  }
+`;
+
+const DELETE_URL = "/api/board/remove";
+
 export const BoardDetail = (data: boardItem) => {
+  const [user, setUser] = useState<userInfo>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    Auth().then((data) => setUser(data));
+  }, []);
+  if (!user) return null;
+  console.log("user", user);
   console.log("Form에 들어오는 데이터", data);
+
+  const handleDeleteBoard = (e: SyntheticEvent) => {
+    e.preventDefault();
+    axios
+      .post(DELETE_URL, {
+        postId: data.postId,
+        _id: data._id,
+      })
+      .then(() => navigate("/community"));
+  };
+
   return (
-    <BoardDetailContainer>
-      <div className="header">
-        <div className="title-area">
-          <div className="title">제목:</div>
-          <div>{data.title}</div>
-        </div>
-        <div className="writer-area">
-          <div className="writer">작성자:</div>
-          <div> {data.name}</div>
-        </div>
-      </div>
-      <div className="content">{data.content}</div>
-      <div>createdAt: {data.createdAt}</div>
-      <div>updatedAt: {data.updatedAt}</div>
-    </BoardDetailContainer>
+    <>
+      {user?.name === data.name ? (
+        <>
+          <BoardDetailContainer>
+            <div className="header">
+              <div className="title-area">
+                <div className="title">제목:</div>
+                <div>{data.title}</div>
+              </div>
+              <div className="writer-area">
+                <div className="writer">작성자:</div>
+                <div> {data.name}</div>
+              </div>
+            </div>
+            <div className="content">{data.content}</div>
+            <div>createdAt: {data.createdAt}</div>
+            <div>updatedAt: {data.updatedAt}</div>
+          </BoardDetailContainer>
+          <BtnArea className="Btn-area">
+            <button onClick={handleDeleteBoard}>삭제</button>
+            <Link to="/community">
+              <button>목록</button>
+            </Link>
+          </BtnArea>
+        </>
+      ) : (
+        <>
+          <BoardDetailContainer>
+            <div className="header">
+              <div className="title-area">
+                <div className="title">제목:</div>
+                <div>{data.title}</div>
+              </div>
+              <div className="writer-area">
+                <div className="writer">작성자:</div>
+                <div> {data.name}</div>
+              </div>
+            </div>
+            <div className="content">{data.content}</div>
+            <div>createdAt: {data.createdAt}</div>
+            <div>updatedAt: {data.updatedAt}</div>
+          </BoardDetailContainer>
+          <BtnArea className="Btn-area">
+            <Link to="/community">
+              <button>목록</button>
+            </Link>
+          </BtnArea>
+        </>
+      )}
+    </>
   );
 };
 
