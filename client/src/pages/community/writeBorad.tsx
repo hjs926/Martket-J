@@ -7,7 +7,7 @@ const WriteFormWrap = styled.div`
 
 export const WriteBoard = () => {
   return (
-    <WriteFormWrap className="112323">
+    <WriteFormWrap>
       <WriteForm />
     </WriteFormWrap>
   );

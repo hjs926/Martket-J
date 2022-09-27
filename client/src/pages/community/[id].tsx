@@ -10,17 +10,6 @@ const GET_BOARDDETAIL = "/api/board/getBoardDetail";
 
 const BoardWrap = styled.div`
   margin: 50px 120px 0 200px;
-  .Btn-area {
-    display: flex;
-    justify-content: end;
-    margin: 0 auto;
-    max-width: 1000px;
-    min-width: 830px;
-    button {
-      width: 80px;
-      margin-right: 50px;
-    }
-  }
 `;
 
 const BoardinContainer = styled.div`
@@ -60,11 +49,6 @@ export const BoardDetailPage = () => {
       <BoardinContainer>
         <BoardDetail {...boardData} />
       </BoardinContainer>
-      <div className="Btn-area">
-        <Link to="/community">
-          <button>목록</button>
-        </Link>
-      </div>
     </BoardWrap>
   );
 };
