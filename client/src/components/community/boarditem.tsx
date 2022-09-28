@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { boardItem } from "../../type";
 
+// ----------------------------css 시작----------------------------
 const Item = styled.li`
   display: flex;
   height: 80px;
@@ -23,6 +24,7 @@ const Item = styled.li`
     width: 20%;
   }
 `;
+// ----------------------------css 끝----------------------------
 
 export const BoardItem = (board: boardItem) => {
   return (
