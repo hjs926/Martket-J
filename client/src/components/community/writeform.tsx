@@ -104,7 +104,7 @@ export const WriteForm = () => {
     }
   }, []);
 
-  //로그인 유저가 아니면 글작성 못 하도록 리다이렉션
+  //로그인 유저가 아니면 글작성 못 하도록 페이지 이동
   if (!user) return null;
   if (!user?.isAuth) {
     alert("로그인 한 사용자만 글쓰기가 가능합니다.");
