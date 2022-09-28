@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
+// ----------------------------css 시작----------------------------
 const FooterBox = styled.div`
   width: 100%;
   margin: 100px auto 0;
   padding: 50px 0 50px;
   background: #1f1f1f;
-  // TODO 메인페이지에서 푸터가 너무 아래로 가있으면 삭제
+  // 아래 2줄 메인페이지에서 푸터가 너무 아래로 가있으면 삭제
   position: relative;
   transform: translateY(100%);
 `;
@@ -48,6 +49,7 @@ const FooterServiceCente = styled.li`
     }
   }
 `;
+// ----------------------------css 끝----------------------------
 
 const Footer = () => {
   return (

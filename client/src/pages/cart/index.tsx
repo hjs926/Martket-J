@@ -6,6 +6,7 @@ import { RootState } from "../../redux";
 import { clearCart, getTotals } from "../../redux/cartSlice";
 import CartItem from "../../components/cart/items";
 
+// ----------------------------css 시작----------------------------
 const CartQuantity = styled.div`
   margin: 100px 0 0 250px;
 `;
@@ -46,6 +47,7 @@ const CartContainer = styled.div`
     }
   }
 `;
+// ----------------------------css 끝----------------------------
 
 const Cart = () => {
   console.log("장바구니페이지입니다.");
@@ -57,6 +59,7 @@ const Cart = () => {
     dispatch(getTotals(cartData));
   }, [cartData]);
 
+  // cart에 있는 상품 모두 삭제하는 핸들링 함수
   const handleClearCart = () => {
     dispatch(clearCart(cartData));
   };

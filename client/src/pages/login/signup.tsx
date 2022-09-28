@@ -6,6 +6,7 @@ import { SubmitSignup } from "../../type";
 import { useNavigate } from "react-router";
 import Auth from "../../components/auth/auth";
 
+// ----------------------------css 시작----------------------------
 const SignUpContainer = styled.div`
   margin: 50px 120px 0 100px;
 `;
@@ -67,6 +68,7 @@ const SignUpBtnContainer = styled.div`
     cursor: pointer;
   }
 `;
+// ----------------------------css 끝----------------------------
 
 axios.defaults.withCredentials = true; //쿠키 가져오는 설정
 
@@ -104,7 +106,7 @@ const SignUpPage = () => {
     const userPassword = passwordRef.current!.value;
     const userConfirmPassword = confirmPasswordRef.current!.value;
 
-    // 비밀번호와 비밀번호 확인이 같지 않을경우 처리
+    // 비밀번호와 비밀번호 확인이 같지 않을경우 에러 처리
     if (userPassword !== userConfirmPassword)
       return alert("비밀번호가 일치하지 않습니다. 비밀번호를 재확인해주세요.");
 

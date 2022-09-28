@@ -8,6 +8,7 @@ import { boardItem } from "../../type";
 
 const GET_BOARDDETAIL = "/api/board/getBoardDetail";
 
+// ----------------------------css 시작----------------------------
 const BoardWrap = styled.div`
   margin: 50px 120px 0 200px;
 `;
@@ -20,6 +21,7 @@ const BoardinContainer = styled.div`
   vertical-align: top;
   text-align: left;
 `;
+// ----------------------------css 끝----------------------------
 
 /*
 content: "test"

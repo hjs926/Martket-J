@@ -8,6 +8,7 @@ import { userInfo } from "../../type";
 import Auth from "../auth/auth";
 import { LogOut } from "../login/logout";
 
+// ----------------------------css 시작----------------------------
 const HeaderRight = styled.nav`
   position: fixed;
   right: 90px;
@@ -21,10 +22,8 @@ const HeaderRight = styled.nav`
     font-weight: 600;
   }
 `;
+// ----------------------------css 끝----------------------------
 
-/**
- * 헤더 오른쪽에서 로그인, 카트를 담고있습니다.
- */
 const RightForm = ({ user }: any) => {
   console.log("RightForm");
   const cartData = useSelector((state: RootState) => state.cart);

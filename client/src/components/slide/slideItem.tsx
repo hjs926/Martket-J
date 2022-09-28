@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Slick from "../slider/Slick";
 
+// ----------------------------css 시작----------------------------
 interface itemsProps {
   item: string;
   name: string;
@@ -15,6 +16,7 @@ const Image = styled.img`
   min-width: 1200px;
   max-height: auto;
 `;
+// ----------------------------css 끝----------------------------
 
 const items: itemsProps[] = [
   {

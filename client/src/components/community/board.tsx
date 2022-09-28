@@ -111,13 +111,13 @@ _id: "632d90658ddd2d67dcac7957"
 export const CommunityBoard = () => {
   const [data, setData] = useState<GetBoardItem>();
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(7);
 
   const { mutate: GetBoardList } = useMutation(
     ({ page, limit }: { page: number; limit: number }) =>
       restFetcher({
         method: "GET",
-        path: "/api/board/getBoardList",
+        path: GETBOARDLIST_URL,
         params: {
           page,
           limit,
@@ -138,11 +138,10 @@ export const CommunityBoard = () => {
   if (!data?.results) return null;
   console.log("boardList", data);
 
-  //핸들링 함수
-  const handleActivePage = (e: SyntheticEvent) => {
+  // 핸들링 함수----------------------------------------------------
+  // 최대 페이지 수를 구하는 함수
+  const handleGetMaxPage = (e: SyntheticEvent) => {
     e.preventDefault();
-    // e.currentTarget.classList.add("current");
-
     const count = parseInt((e.target as HTMLInputElement).value);
     setPage(1 * count);
   };
@@ -161,7 +160,7 @@ export const CommunityBoard = () => {
   const result = [];
   for (let i = 1; i <= maxPage; i++) {
     result.push(
-      <button key={i} value={i} onClick={handleActivePage}>
+      <button key={i} value={i} onClick={handleGetMaxPage}>
         {i}
       </button>
     );

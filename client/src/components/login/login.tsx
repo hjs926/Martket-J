@@ -3,7 +3,6 @@ import axios from "../../axios/axios";
 import { SubmitLogin } from "../../type";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-
 import {
   SyntheticEvent,
   useCallback,
@@ -13,6 +12,7 @@ import {
   useContext,
 } from "react";
 
+// ----------------------------css 시작----------------------------
 const LoginInput = styled.form`
   display: flex;
   flex-direction: column;
@@ -69,6 +69,7 @@ const LoginSignUp = styled(LoginInput)`
   color: #353535;
   font-size: 15px;
 `;
+// ----------------------------css 끝----------------------------
 
 axios.defaults.withCredentials = true; //쿠키 가져오는 설정
 
@@ -93,6 +94,7 @@ export const LoginForm = () => {
           password: userPassword,
         })
         .then((response) => {
+          //데이터가 왔다면 헤더에 쿠키를 저장
           if (response.data.userId) {
             const { accessToken } = response.data.userId;
             axios.defaults.headers.common[
@@ -105,7 +107,7 @@ export const LoginForm = () => {
         })
   );
 
-  //handle 함수
+  // 핸들링 함수----------------------------------------------------
   const handleSubmitLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const userId = idRef.current!.value;
