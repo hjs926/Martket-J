@@ -58,9 +58,11 @@ const BtnArea = styled.div`
 const DELETE_URL = "/api/board/remove";
 
 export const BoardDetail = (data: boardItem) => {
+  // 유저의 데이터를 저장할 user를 선언
   const [user, setUser] = useState<userInfo>();
   const navigate = useNavigate();
 
+  //렌더링시 Auth로 유저의 데이터를 저장
   useEffect(() => {
     Auth().then((data) => setUser(data));
   }, []);
@@ -68,7 +70,8 @@ export const BoardDetail = (data: boardItem) => {
   console.log("user", user);
   console.log("Form에 들어오는 데이터", data);
 
-  //핸들링 함수
+  // 핸들링 함수----------------------------------------------------
+  //게시판을 삭제하는 함수
   const handleDeleteBoard = (e: SyntheticEvent) => {
     e.preventDefault();
     if (window.confirm("게시글을 삭제하시겠습니까?")) {

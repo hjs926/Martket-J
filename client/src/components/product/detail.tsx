@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { addToCart } from "../../redux/cartSlice";
 import { Product } from "../../type";
 
+// ----------------------------css 시작----------------------------
 const DetailContainer = styled.div`
   display: flex;
   justify-content: space-between;
@@ -51,12 +52,14 @@ const ProductImage = styled.div`
     object-fit: contain;
   }
 `;
+// ----------------------------css 끝----------------------------
 
 const ProductDetail = (product: Product) => {
   console.log("product detail");
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
+  // 상품을 카트에 추가하는 핸들링 함수
   const handlAddToCart = (product: Product) => {
     dispatch(addToCart(product));
     navigate("/cart"); //클릭시 cart로 페이지 이동

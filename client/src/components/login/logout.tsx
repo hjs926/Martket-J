@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import axios from "../../axios/axios";
 
+// ----------------------------css 시작----------------------------
 const LogOutbtn = styled.button`
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -14,9 +15,11 @@ const LogOutbtn = styled.button`
     background-color: #666666;
   }
 `;
+// ----------------------------css 끝----------------------------
 
+const LOGOUT_URL = "/api/users/logout";
 export const LogOut = () => {
-  const LOGOUT_URL = "/api/users/logout";
+  //로그아웃하는 핸들링 함수
   const handleSubmitLogout = () => {
     axios.get(LOGOUT_URL);
     window.location.reload();

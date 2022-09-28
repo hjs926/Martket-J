@@ -111,17 +111,17 @@ export const WriteForm = () => {
     navigate("/community");
   }
 
-  // 핸들링 함수
+  // 핸들링 함수----------------------------------------------------
   const handleChangeTitle = (e: SyntheticEvent) => {
     setTitle((e.target as HTMLInputElement).value);
   };
   const handleChangeContent = (e: SyntheticEvent) => {
     setContent((e.target as HTMLInputElement).value);
   };
-
+  //글쓰기 핸들링 함수
   const handleWriteBoard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    //제목이나 내용을 안썼다면 에러
     if (!title) {
       return alert("제목을 입력해주세요.");
     } else if (!content) {

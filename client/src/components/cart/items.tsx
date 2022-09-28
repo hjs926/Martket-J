@@ -9,6 +9,7 @@ import {
 } from "../../redux/cartSlice";
 import { Product } from "../../type";
 
+// ----------------------------css 시작----------------------------
 const CartItemContainer = styled.div`
   display: flex;
   min-width: 800px;
@@ -59,6 +60,7 @@ const CartItemImage_Container = styled.div`
     object-fit: contain;
   }
 `;
+// ----------------------------css 끝----------------------------
 
 const CartItem = (cartItem: Product) => {
   const dispatch = useDispatch();

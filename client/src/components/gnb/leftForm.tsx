@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-
+// ----------------------------css 시작----------------------------
 const SideMenuBar = styled.nav`
   position: fixed;
   top: 0;
@@ -28,6 +28,7 @@ const SideMenuBar = styled.nav`
     }
   }
 `;
+// ----------------------------css 끝----------------------------
 
 const LeftForm = () => {
   console.log("LeftForm");

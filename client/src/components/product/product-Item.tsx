@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { addToCart } from "../../redux/cartSlice";
 import { Product } from "../../type";
 
+// ----------------------------css 시작----------------------------
 const Item = styled.li`
   display: flex;
   flex-direction: column;
@@ -31,6 +32,7 @@ const Item = styled.li`
     }
   }
 `;
+// ----------------------------css 끝----------------------------
 
 const SERVER_URL = "http://localhost:4000/";
 

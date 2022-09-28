@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import LoginForm from "../../components/login/login";
 
+// ----------------------------css 시작----------------------------
 const LoginPageContainer = styled.div`
   margin: 50px 120px 0 100px;
 `;
@@ -24,6 +25,7 @@ const LoginWrap = styled.div`
     justify-content: center;
   }
 `;
+// ----------------------------css 끝----------------------------
 
 const LoginPage = () => {
   console.log("로그인페이지입니다.");
