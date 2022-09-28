@@ -5,6 +5,7 @@ import axios from "../../axios/axios";
 import { boardItem, userInfo } from "../../type";
 import Auth from "../auth/auth";
 
+// ----------------------------css 시작----------------------------
 const BoardDetailContainer = styled.div`
   max-width: 100%;
   min-width: 830px;
@@ -33,6 +34,8 @@ const BoardDetailContainer = styled.div`
   .content {
     margin: 30px 0;
     font-size: 17px;
+    min-height: 100px;
+    margin-bottom: 60px;
   }
 `;
 
@@ -49,6 +52,7 @@ const BtnArea = styled.div`
     margin-top: 30px;
   }
 `;
+// ----------------------------css 끝----------------------------
 
 const DELETE_URL = "/api/board/remove";
 
@@ -63,6 +67,7 @@ export const BoardDetail = (data: boardItem) => {
   console.log("user", user);
   console.log("Form에 들어오는 데이터", data);
 
+  //핸들링 함수
   const handleDeleteBoard = (e: SyntheticEvent) => {
     e.preventDefault();
     axios
@@ -89,11 +94,12 @@ export const BoardDetail = (data: boardItem) => {
               </div>
             </div>
             <div className="content">{data.content}</div>
-            <div>createdAt: {data.createdAt}</div>
-            <div>updatedAt: {data.updatedAt}</div>
           </BoardDetailContainer>
           <BtnArea className="Btn-area">
             <button onClick={handleDeleteBoard}>삭제</button>
+            <Link to="/community/write" state={{ data: data }}>
+              <button>수정</button>
+            </Link>
             <Link to="/community">
               <button>목록</button>
             </Link>
@@ -113,8 +119,6 @@ export const BoardDetail = (data: boardItem) => {
               </div>
             </div>
             <div className="content">{data.content}</div>
-            <div>createdAt: {data.createdAt}</div>
-            <div>updatedAt: {data.updatedAt}</div>
           </BoardDetailContainer>
           <BtnArea className="Btn-area">
             <Link to="/community">

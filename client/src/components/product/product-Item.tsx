@@ -32,6 +32,8 @@ const Item = styled.li`
   }
 `;
 
+const SERVER_URL = "http://localhost:4000/";
+
 const ProductItem = (product: Product) => {
   const dispatch = useDispatch();
   const handlAddToCart = (product: Product) => {
@@ -40,7 +42,7 @@ const ProductItem = (product: Product) => {
 
   return (
     <Item>
-      <img src={product.images[0]} />
+      <img src={`${SERVER_URL}${product.images[0]}`} />
       <div>
         <p className="red">{product.categorys}</p>
         <Link to={`/products/${product._id}`}>

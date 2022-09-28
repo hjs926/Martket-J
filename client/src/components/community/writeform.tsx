@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
+import { SyntheticEvent, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import axios from "../../axios/axios";
 import { userInfo } from "../../type";
 import Auth from "../auth/auth";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
+// ----------------------------css 시작----------------------------
 const Form = styled.form`
   padding: 50px 0;
   margin: 0 auto;
@@ -74,48 +75,95 @@ const Form = styled.form`
     }
   }
 `;
+// ----------------------------css 끝----------------------------
+
 const BOARDCREATE_URL = "/api/board/create";
+const BOARDUPDATE_URL = "/api/board/update";
 
 export const WriteForm = () => {
   const [user, setUser] = useState<userInfo>();
-  const titleRef = useRef<HTMLInputElement>(null);
-  const contentsRef = useRef<HTMLTextAreaElement>(null);
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
 
   const navigate = useNavigate();
 
+  //useLocation 사용해 Link에서 온 데이터를 저장
+  const location: any = useLocation();
+  console.log("location:", location);
+
   useEffect(() => {
-    Auth().then((data) => setUser(data));
+    if (!user) Auth().then((data) => setUser(data));
+    console.log("렌더링이 되었습니다");
+
+    // 수정 버튼을 눌러 데이터가 왔을 경우, updatedata에 이전 글의 데이터를 저장
+    if (location.state) {
+      const updatedata = location.state.data;
+      console.log("updatedata:", updatedata);
+      setTitle(updatedata.title);
+      setContent(updatedata.content);
+    }
   }, []);
 
+  //로그인 유저가 아니면 글작성 못 하도록 리다이렉션
   if (!user) return null;
   if (!user?.isAuth) {
     alert("로그인 한 사용자만 글쓰기가 가능합니다.");
     navigate("/community");
   }
 
-  console.log(user);
+  // 핸들링 함수
+  const handleChangeTitle = (e: SyntheticEvent) => {
+    setTitle((e.target as HTMLInputElement).value);
+  };
+  const handleChangeContent = (e: SyntheticEvent) => {
+    setContent((e.target as HTMLInputElement).value);
+  };
 
   const handleWriteBoard = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const title = titleRef.current!.value;
-    const content = contentsRef.current!.value;
-    console.log("tiele", title, "content", content);
+
     if (!title) {
       return alert("제목을 입력해주세요.");
     } else if (!content) {
       return alert("내용을 입력해주세요.");
     }
-    axios.post(BOARDCREATE_URL, {
-      title,
-      content,
-      name: user.name,
-    });
-    window.location.replace("/community");
+    // 수정버튼을 누른게 아니라면 글 생성
+    if (!location.state) {
+      axios.post(BOARDCREATE_URL, {
+        title,
+        content,
+        name: user.name,
+      });
+      window.location.replace("/community");
+    } // 수정버튼을 눌렀다면 글 수정
+    else {
+      if (location.state) {
+        const updatedata = location.state.data;
+
+        axios.post(BOARDUPDATE_URL, {
+          postId: updatedata.postId,
+          title,
+          content,
+        });
+        window.location.replace(`/community/${updatedata.postId}`);
+      }
+    }
   };
+
   return (
     <Form onSubmit={handleWriteBoard}>
-      <input className="title" type="text" placeholder="제목" ref={titleRef} />
-      <textarea placeholder="내용을 입력해주세요." ref={contentsRef} />
+      <input
+        className="title"
+        type="text"
+        placeholder="제목"
+        value={title}
+        onChange={handleChangeTitle}
+      />
+      <textarea
+        placeholder="내용을 입력해주세요."
+        value={content}
+        onChange={handleChangeContent}
+      />
       <div className="BtnArea">
         <button>글작성</button>
       </div>
