@@ -8,6 +8,8 @@ import { GetBoardItem, userInfo } from "../../type";
 import Auth from "../auth/auth";
 import BoardItem from "./boarditem";
 
+// -----------------css 시작-----------------
+
 const BoardContainer = styled.div`
   width: auto;
   height: auto;
@@ -92,6 +94,8 @@ const PaginationContainer = styled.div`
   }
 `;
 
+// -----------------css 끝-----------------
+
 const GETBOARDLIST_URL = "/api/board/getBoardList";
 
 /*
@@ -126,6 +130,7 @@ export const CommunityBoard = () => {
     }
   );
 
+  // page와 limit가 바뀔때마다 리렌더링
   useEffect(() => {
     GetBoardList({ page, limit });
   }, [page, limit]);
@@ -140,7 +145,6 @@ export const CommunityBoard = () => {
 
     const count = parseInt((e.target as HTMLInputElement).value);
     setPage(1 * count);
-    console.log(count);
   };
 
   const handleNextPage = (e: SyntheticEvent) => {
