@@ -36,6 +36,7 @@ const BoardDetailContainer = styled.div`
     font-size: 17px;
     min-height: 100px;
     margin-bottom: 60px;
+    white-space: pre-wrap;
   }
 `;
 
@@ -70,12 +71,14 @@ export const BoardDetail = (data: boardItem) => {
   //핸들링 함수
   const handleDeleteBoard = (e: SyntheticEvent) => {
     e.preventDefault();
-    axios
-      .post(DELETE_URL, {
-        postId: data.postId,
-        _id: data._id,
-      })
-      .then(() => navigate("/community"));
+    if (window.confirm("게시글을 삭제하시겠습니까?")) {
+      axios
+        .post(DELETE_URL, {
+          postId: data.postId,
+          _id: data._id,
+        })
+        .then(() => navigate("/community"));
+    }
   };
 
   return (
