@@ -4,34 +4,6 @@ import { useEffect, useState } from "react";
 import axios from "../../axios/axios";
 import { Product } from "../../type";
 
-const MainSection2 = styled.section`
-  max-width: 100%;
-  padding-left: 200px;
-  padding-right: 100px;
-  margin-top: 80px;
-  display: flex;
-  flex-direction: column;
-
-  .main-section-2tit {
-    text-align: center;
-  }
-
-  .main-section-2contents {
-    min-width: 1000px;
-    margin-top: 50px;
-
-    ul {
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      li {
-        box-sizing: border-box;
-        max-width: 13%;
-      }
-    }
-  }
-`;
-
 const Products = styled.div`
   display: flex;
   flex-direction: column;
@@ -46,44 +18,27 @@ const Product_Image = styled.div`
 
 const Product_Image2 = styled.img`
   width: 100%;
-  height: 100%;
+  height: 90%;
   border-radius: 10px;
   border: 1px solid #c4c4c4;
 `;
 
-const Store = styled.div`
-  margin-bottom: 10px;
-`;
-
-const Store2 = styled.span`
-  font-size: 16px;
-  line-height: 22px;
-  color: #767676;
-`;
-
 const Product_Name = styled.div`
-  margin-bottom: 10px;
-`;
-
-const Product_Name2 = styled.div`
+  text-align: center;
   font-size: 18px;
-  line-height: 22px;
-  color: #000000;
-`;
-
-const Product_Price = styled.div``;
-
-const Price = styled.span`
-  font-size: 24px;
   font-weight: bold;
-  line-height: 30px;
-  color: #000000;
+  line-height: 0px;
+  color: black;
 `;
 
-const Unit = styled.span`
-  font-size: 16px;
-  line-height: 20px;
-  color: #000000;
+const Sub = styled.div`
+  .price {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 10px;
+    color: #000000;
+  }
 `;
 
 const PRODUCTMORE_URL = "/api/product/products";
@@ -139,26 +94,32 @@ const ProductPage = () => {
             key={index}
             src={`http://localhost:4000/${product.images[0]}`}
           />
+
+          <Product_Name>
+            <p>
+              {product.title} &nbsp; &nbsp; &nbsp; &nbsp;
+              {product.price}원
+            </p>
+          </Product_Name>
+          {/* <Sub>
+            <p className="price">{product.price}원</p>
+          </Sub> */}
         </Product_Image>
-        <Product_Name>
-          <p>{product.description}</p>
-        </Product_Name>
-        <Product_Price>
-          <p>{product.price}원</p>
-        </Product_Price>
       </Products>
     );
   });
 
   return (
     <>
-      <div>{renderCards}</div>
+      <div>
+        {renderCards}
 
-      {postSize >= Limit && (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <button onClick={handleProductMore}>더보기</button>
-        </div>
-      )}
+        {postSize >= Limit && (
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <button onClick={handleProductMore}>더보기</button>
+          </div>
+        )}
+      </div>
     </>
   );
 };
