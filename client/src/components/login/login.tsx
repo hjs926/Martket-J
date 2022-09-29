@@ -72,18 +72,32 @@ const LoginSignUp = styled(LoginInput)`
 // ----------------------------css 끝----------------------------
 
 axios.defaults.withCredentials = true; //쿠키 가져오는 설정
+// URL 저장
+const LOGIN_URL = "/api/users/login";
+const LOGOUT_URL = "/api/users/logout";
+// local storage에 사용할 key를 선언
+const LS_KEY_ID = "LS_KEY_ID";
 
 export const LoginForm = () => {
-  // URL 저장
-  const LOGIN_URL = "/api/users/login";
-  const LOGOUT_URL = "/api/users/logout";
-
   //state 초기 설정, focus를 위한 Ref 사용
   const idRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
   const passwordRef = useRef<HTMLInputElement>(null); // useRef로 DOM 직접 선택
+  const [loginID, setLoginID] = useState("");
+  const [loginPassWord, setLoginPassWord] = useState("");
+  const [saveIDFlag, setSaveIDFlag] = useState(false); //checkbox를 control할 saveIDFlag를 useState로 선언
+
   //페이지 이동시 아이디 input칸에 focus
   useEffect(() => {
     idRef.current?.focus();
+
+    const idData = localStorage.getItem(LS_KEY_ID);
+    // LS_KEY_ID가 false거나 저장된 값이 없을 경우, pass
+    if (!idData) return;
+    else {
+      //LS_KEY_ID에 저장된 값(아이디)이 있을경우, 아이디 보여주기
+      setSaveIDFlag(true);
+      setLoginID(idData);
+    }
   }, []);
 
   const { mutate: submitLogin } = useMutation(
@@ -100,6 +114,11 @@ export const LoginForm = () => {
             axios.defaults.headers.common[
               "Authorization"
             ] = `Bearer ${accessToken}`;
+
+            // 아이디 저장을 체크 했을 경우, 로컬스토리지에 아이디 저장(true)
+            if (saveIDFlag) localStorage.setItem(LS_KEY_ID, userId);
+            // 아이디 저장을 체크 하지않았을 경우, 로컬스토리지에 "" 저장(false)
+            else localStorage.setItem(LS_KEY_ID, "");
             window.location.replace("/");
           } else {
             alert("아이디 또는 패스워드를 확인해주세요!");
@@ -108,11 +127,21 @@ export const LoginForm = () => {
   );
 
   // 핸들링 함수----------------------------------------------------
+  const handleSaveIDFlag = (e: SyntheticEvent) => {
+    setSaveIDFlag(!saveIDFlag);
+  };
+  const handleChangeLoginID = (e: SyntheticEvent) => {
+    setLoginID((e.target as HTMLInputElement).value);
+  };
+  const handleChangeLoginPassWord = (e: SyntheticEvent) => {
+    setLoginPassWord((e.target as HTMLInputElement).value);
+  };
+
   const handleSubmitLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const userId = idRef.current!.value;
-    const userPassword = passwordRef.current!.value;
-    submitLogin({ userId, userPassword });
+    // const userId = idRef.current!.value;
+    // const userPassword = passwordRef.current!.value;
+    submitLogin({ userId: loginID, userPassword: loginPassWord });
 
     passwordRef.current?.focus();
   };
@@ -122,7 +151,14 @@ export const LoginForm = () => {
       <div>회원 로그인</div>
       <LoginInput onSubmit={handleSubmitLogin}>
         <label>
-          <input id="login" type="text" placeholder="아이디" ref={idRef} />
+          <input
+            id="login"
+            type="text"
+            placeholder="아이디"
+            ref={idRef}
+            value={loginID}
+            onChange={handleChangeLoginID}
+          />
         </label>
         <label>
           <input
@@ -130,10 +166,17 @@ export const LoginForm = () => {
             type="password"
             placeholder="비밀번호"
             ref={passwordRef}
+            value={loginPassWord}
+            onChange={handleChangeLoginPassWord}
           />
         </label>
         <p className="login-Checkbox_Container">
-          <input type="checkbox" id="id_checkbox" />
+          <input
+            type="checkbox"
+            id="id_checkbox"
+            checked={saveIDFlag}
+            onChange={handleSaveIDFlag}
+          />
           <label htmlFor="id_checkbox">
             <span>아이디 저장</span>
           </label>
