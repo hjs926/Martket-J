@@ -6,7 +6,7 @@ import { Product } from "../../type";
 
 const Products = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
 `;
 
 const Product_Image = styled.div`
@@ -17,14 +17,14 @@ const Product_Image = styled.div`
 `;
 
 const Product_Image2 = styled.img`
-  width: 100%;
-  height: 90%;
+  width: 80%;
+  height: 80%;
   border-radius: 10px;
   border: 1px solid #c4c4c4;
 `;
 
 const Product_Name = styled.div`
-  text-align: center;
+  text-align: left;
   font-size: 18px;
   font-weight: bold;
   line-height: 0px;
@@ -33,8 +33,7 @@ const Product_Name = styled.div`
 
 const Sub = styled.div`
   .price {
-    text-align: center;
-    font-size: 18px;
+    font-size: 24px;
     font-weight: bold;
     line-height: 10px;
     color: #000000;
@@ -85,25 +84,27 @@ const ProductPage = () => {
     setSkip(skip);
   };
 
+  const convertPrice = (price: any) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   const renderCards = products.map((product: any, index) => {
     console.log("product 정보", product);
     return (
       <Products>
         <Product_Image>
-          <Product_Image2
-            key={index}
-            src={`http://localhost:4000/${product.images[0]}`}
-          />
-
-          <Product_Name>
-            <p>
-              {product.title} &nbsp; &nbsp; &nbsp; &nbsp;
-              {product.price}원
-            </p>
-          </Product_Name>
-          {/* <Sub>
-            <p className="price">{product.price}원</p>
-          </Sub> */}
+          <a href={`http://localhost:5173/product/${product._id}`}>
+            <Product_Image2
+              key={index}
+              src={`http://localhost:4000/${product.images[0]}`}
+            />
+            <Product_Name>
+              <p>{product.title}</p>
+            </Product_Name>
+            <Sub>
+              <p className="price">{convertPrice(product.price)}원</p>
+            </Sub>
+          </a>
         </Product_Image>
       </Products>
     );
@@ -111,15 +112,13 @@ const ProductPage = () => {
 
   return (
     <>
-      <div>
-        {renderCards}
-
-        {postSize >= Limit && (
-          <div style={{ display: "flex", justifyContent: "center" }}>
-            <button onClick={handleProductMore}>더보기</button>
-          </div>
-        )}
-      </div>
+      {" "}
+      {renderCards}
+      {postSize >= Limit && (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <button onClick={handleProductMore}>더보기</button>
+        </div>
+      )}
     </>
   );
 };

@@ -10,14 +10,14 @@ const Filter = styled.div`
 `;
 
 const Filter2 = styled.p`
-  padding: 10px;
+  padding: 2px;
   cursor: pointer;
 `;
 
 const Flex_wrap = styled.div`
-  max-width: 1440px;
+  max-width: 1400px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   place-items: center;
   gap: 70px 0px;
   margin: 0 auto;
@@ -29,9 +29,9 @@ export const Main = () => {
     <>
       <Item />
       <Filter>
-        <Filter2>최신순</Filter2>
+        <Filter2>최신순 |</Filter2>
         <Filter2>낮은 가격</Filter2>
-        <Filter2>높은 가격</Filter2>
+        <Filter2>| 높은 가격</Filter2>
       </Filter>
       <Flex_wrap>
         <ProductPage />
