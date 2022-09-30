@@ -3,6 +3,8 @@ import { useNavigate } from "react-router";
 import styled from "styled-components";
 import { addToCart } from "../../redux/cartSlice";
 import { Product } from "../../type";
+import React, { useEffect } from "react";
+import axios from "../../axios/axios";
 
 // ----------------------------css 시작----------------------------
 const DetailContainer = styled.div`
@@ -64,6 +66,7 @@ const ProductDetail = (product: Product) => {
     dispatch(addToCart(product));
     navigate("/cart"); //클릭시 cart로 페이지 이동
   };
+
   return (
     <DetailContainer>
       <ProductImage>

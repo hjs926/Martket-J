@@ -52,4 +52,18 @@ router.post("/", (req, res) => {
     return res.status(200).json({ success: true });
   }); // 넣은 정보들이 product 안에 다 저장 됨
 });
+
+router.get("/products_by_id", (req, res) => {
+  //productId를 이용해서 DB에서 productId와 같은 상품을 가져온다.
+  let type = req.query.type; //get의 경우 body가 아니라 query
+  let productId = req.query.id;
+
+  Product.find({ _id: productId })
+    .populate("writer")
+    .exec((err, product) => {
+      if (err) return res.status(400).send(err);
+      return res.status(200).send({ success: true, product });
+    });
+});
+
 export default router;
