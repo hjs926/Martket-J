@@ -108,6 +108,8 @@ __v: 0
 _id: "632d90658ddd2d67dcac7957"
 */
 
+//----------------------분리된 함수----------------------
+// 현재 페이지 게시글의 데이터 가져오는 함수
 const useBoardList = ({ page, limit }: { page: number; limit: number }) => {
   const [data, setData] = useState<GetBoardItem>();
 
@@ -137,6 +139,7 @@ const useBoardList = ({ page, limit }: { page: number; limit: number }) => {
   return data;
 };
 
+// 최대 페이지 수를 구해 그 만큼 pageBtn에 버튼 저장하는 함수
 const Pagination = (
   {
     boardList,
@@ -166,6 +169,7 @@ const Pagination = (
   }
   return result;
 };
+//----------------------분리된 함수 끝----------------------
 
 export const CommunityBoard = () => {
   const [page, setPage] = useState(1);
