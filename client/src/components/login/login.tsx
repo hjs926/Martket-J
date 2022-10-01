@@ -86,8 +86,8 @@ export const LoginForm = () => {
   const [loginPassWord, setLoginPassWord] = useState("");
   const [saveIDFlag, setSaveIDFlag] = useState(false); //checkbox를 control할 saveIDFlag를 useState로 선언
 
-  //페이지 이동시 아이디 input칸에 focus
   useEffect(() => {
+    //페이지 이동시 아이디 input칸에 focus
     idRef.current?.focus();
 
     const idData = localStorage.getItem(LS_KEY_ID);
@@ -102,28 +102,29 @@ export const LoginForm = () => {
 
   const { mutate: submitLogin } = useMutation(
     ({ userId, userPassword }: SubmitLogin) =>
-      axios
-        .post(LOGIN_URL, {
-          email: userId,
-          password: userPassword,
-        })
-        .then((response) => {
-          //데이터가 왔다면 헤더에 쿠키를 저장
-          if (response.data.userId) {
-            const { accessToken } = response.data.userId;
-            axios.defaults.headers.common[
-              "Authorization"
-            ] = `Bearer ${accessToken}`;
+      axios.post(LOGIN_URL, {
+        email: userId,
+        password: userPassword,
+      }),
+    {
+      onSuccess: (response) => {
+        //데이터가 왔다면 헤더에 쿠키를 저장
+        if (response.data.userId) {
+          const { accessToken } = response.data.userId;
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${accessToken}`;
 
-            // 아이디 저장을 체크 했을 경우, 로컬스토리지에 아이디 저장(true)
-            if (saveIDFlag) localStorage.setItem(LS_KEY_ID, userId);
-            // 아이디 저장을 체크 하지않았을 경우, 로컬스토리지에 "" 저장(false)
-            else localStorage.setItem(LS_KEY_ID, "");
-            window.location.replace("/");
-          } else {
-            alert("아이디 또는 패스워드를 확인해주세요!");
-          }
-        })
+          // 아이디 저장을 체크 했을 경우, 로컬스토리지에 아이디 저장(true)
+          if (saveIDFlag) localStorage.setItem(LS_KEY_ID, response.data.userId);
+          // 아이디 저장을 체크 하지않았을 경우, 로컬스토리지에 "" 저장(false)
+          else localStorage.setItem(LS_KEY_ID, "");
+          window.location.replace("/");
+        } else {
+          alert("아이디 또는 패스워드를 확인해주세요!");
+        }
+      },
+    }
   );
 
   // 핸들링 함수----------------------------------------------------

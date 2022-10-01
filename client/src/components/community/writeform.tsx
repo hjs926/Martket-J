@@ -77,8 +77,8 @@ const Form = styled.form`
 `;
 // ----------------------------css 끝----------------------------
 
-const BOARDCREATE_URL = "/api/board/create";
-const BOARDUPDATE_URL = "/api/board/update";
+const BOARD_CREATE_URL = "/api/board/create";
+const BOARD_UPDATE_URL = "/api/board/update";
 
 export const WriteForm = () => {
   const [user, setUser] = useState<userInfo>();
@@ -89,11 +89,9 @@ export const WriteForm = () => {
 
   //useLocation 사용해 Link에서 온 데이터를 저장
   const location: any = useLocation();
-  console.log("location:", location);
 
   useEffect(() => {
     if (!user) Auth().then((data) => setUser(data));
-    console.log("렌더링이 되었습니다");
 
     // 수정 버튼을 눌러 데이터가 왔을 경우, updatedata에 이전 글의 데이터를 저장
     if (location.state) {
@@ -129,7 +127,7 @@ export const WriteForm = () => {
     }
     // 수정버튼을 누른게 아니라면 글 생성
     if (!location.state) {
-      axios.post(BOARDCREATE_URL, {
+      axios.post(BOARD_CREATE_URL, {
         title,
         content,
         name: user.name,
@@ -140,7 +138,7 @@ export const WriteForm = () => {
       if (location.state) {
         const updatedata = location.state.data;
 
-        axios.post(BOARDUPDATE_URL, {
+        axios.post(BOARD_UPDATE_URL, {
           postId: updatedata.postId,
           title,
           content,
