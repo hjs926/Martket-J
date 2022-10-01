@@ -108,10 +108,8 @@ __v: 0
 _id: "632d90658ddd2d67dcac7957"
 */
 
-export const CommunityBoard = () => {
+const useBoardList = ({ page, limit }: { page: number; limit: number }) => {
   const [data, setData] = useState<GetBoardItem>();
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(7);
 
   const { mutate: GetBoardList } = useMutation(
     ({ page, limit }: { page: number; limit: number }) =>
@@ -136,7 +134,16 @@ export const CommunityBoard = () => {
   }, [page, limit]);
 
   if (!data?.results) return null;
-  console.log("boardList", data);
+  return data;
+};
+
+const Pagination = () => {};
+
+export const CommunityBoard = () => {
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(7);
+  const boardList = useBoardList({ page, limit });
+  if (!boardList?.results) return null;
 
   // 핸들링 함수----------------------------------------------------
   // 최대 페이지 수를 구하는 함수
@@ -146,17 +153,19 @@ export const CommunityBoard = () => {
     setPage(1 * count);
   };
 
-  const handleNextPage = (e: SyntheticEvent) => {
-    e.preventDefault();
-    GetBoardList(data.next);
-  };
-  const handlePreviousPage = (e: SyntheticEvent) => {
-    e.preventDefault();
-    GetBoardList(data.previous);
-  };
+  // //다음 페이지 이벤트
+  // const handleNextPage = (e: SyntheticEvent) => {
+  //   e.preventDefault();
+  //   GetBoardList(data.next);
+  // };
+  // //이전페이지 이벤트
+  // const handlePreviousPage = (e: SyntheticEvent) => {
+  //   e.preventDefault();
+  //   GetBoardList(data.previous);
+  // };
 
   // 최대 페이지 구해서 그만큼 버튼 생성
-  const maxPage = Math.ceil(data.totalIndex / limit);
+  const maxPage = Math.ceil(boardList.totalIndex / limit);
   const result = [];
   for (let i = 1; i <= maxPage; i++) {
     result.push(
@@ -175,7 +184,7 @@ export const CommunityBoard = () => {
         <div>작성일</div>
       </div>
       <CommunityBoard_List>
-        {data.results.map((board) => (
+        {boardList?.results.map((board) => (
           <BoardItem {...board} key={board._id} />
         ))}
       </CommunityBoard_List>
