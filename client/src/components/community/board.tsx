@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "../../axios/axios";
 import { QueryKeys, restFetcher } from "../../queryClient";
-import { GetBoardItem, userInfo } from "../../type";
+import { boardItem, GetBoardItem, userInfo } from "../../type";
 import Auth from "../auth/auth";
 import BoardItem from "./boarditem";
 
@@ -137,32 +137,22 @@ const useBoardList = ({ page, limit }: { page: number; limit: number }) => {
   return data;
 };
 
-const Pagination = () => {};
-
-export const CommunityBoard = () => {
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(7);
-  const boardList = useBoardList({ page, limit });
-  if (!boardList?.results) return null;
-
-  // 핸들링 함수----------------------------------------------------
+const Pagination = (
+  {
+    boardList,
+    limit,
+  }: {
+    boardList: GetBoardItem;
+    limit: number;
+  },
+  setPage: any
+) => {
   // 최대 페이지 수를 구하는 함수
   const handleGetMaxPage = (e: SyntheticEvent) => {
     e.preventDefault();
     const count = parseInt((e.target as HTMLInputElement).value);
     setPage(1 * count);
   };
-
-  // //다음 페이지 이벤트
-  // const handleNextPage = (e: SyntheticEvent) => {
-  //   e.preventDefault();
-  //   GetBoardList(data.next);
-  // };
-  // //이전페이지 이벤트
-  // const handlePreviousPage = (e: SyntheticEvent) => {
-  //   e.preventDefault();
-  //   GetBoardList(data.previous);
-  // };
 
   // 최대 페이지 구해서 그만큼 버튼 생성
   const maxPage = Math.ceil(boardList.totalIndex / limit);
@@ -174,6 +164,19 @@ export const CommunityBoard = () => {
       </button>
     );
   }
+  return result;
+};
+
+export const CommunityBoard = () => {
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(7);
+
+  // 현재 페이지 게시글의 데이터 가져오기
+  const boardList = useBoardList({ page, limit });
+  if (!boardList?.results) return null;
+
+  // 최대 페이지 수를 구해 그 만큼 pageBtn에 버튼 저장
+  const pageBtn = Pagination({ boardList, limit }, setPage);
 
   return (
     <BoardContainer>
@@ -193,9 +196,22 @@ export const CommunityBoard = () => {
           <button>글작성</button>
         </Link>
       </div>
-      <PaginationContainer>{result}</PaginationContainer>
+      <PaginationContainer>{pageBtn}</PaginationContainer>
     </BoardContainer>
   );
 };
 
 export default CommunityBoard;
+
+// 핸들링 함수----------------------------------------------------
+
+// //다음 페이지 이벤트
+// const handleNextPage = (e: SyntheticEvent) => {
+//   e.preventDefault();
+//   GetBoardList(data.next);
+// };
+// //이전페이지 이벤트
+// const handlePreviousPage = (e: SyntheticEvent) => {
+//   e.preventDefault();
+//   GetBoardList(data.previous);
+// };
