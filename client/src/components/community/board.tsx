@@ -5,12 +5,13 @@ import {
   SyntheticEvent,
   useEffect,
   useState,
+  useMemo,
 } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "../../axios/axios";
-import { QueryKeys, restFetcher } from "../../queryClient";
-import { boardItem, GetBoardItem, userInfo } from "../../type";
+import { restFetcher } from "../../queryClient";
+import { GetBoardItem } from "../../type";
 import Auth from "../auth/auth";
 import BoardItem from "./boarditem";
 
@@ -114,8 +115,6 @@ __v: 0
 _id: "632d90658ddd2d67dcac7957"
 */
 
-//----------------------분리된 함수 끝----------------------
-
 export const CommunityBoard = () => {
   //현재 페이지의 게시글 데이터
   const [boardList, setBoardList] = useState<GetBoardItem>();
@@ -141,7 +140,7 @@ export const CommunityBoard = () => {
     }
   );
 
-  // page와 listSize가 바뀔때마다 리렌더링
+  // page와 listSize가 바뀔때마다 호출
   useEffect(() => {
     GetBoardList({ page, listSize });
   }, [page, listSize]);
@@ -154,7 +153,7 @@ export const CommunityBoard = () => {
   const handleChangePage = (e: SyntheticEvent) => {
     e.preventDefault();
     const count = parseInt((e.target as HTMLInputElement).value);
-    setPage(1 * count);
+    setPage(count);
   };
 
   // 최대 페이지 구해서 그만큼 버튼 생성
