@@ -200,6 +200,10 @@ const Btn = styled.button`
   }
 `;
 
+const convertPrice = (price: any) => {
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
 function Product_Info() {
   const { id } = useParams();
   const { data } = useQuery([QueryKeys.PRODUCTS, id], () =>
@@ -222,7 +226,9 @@ function Product_Info() {
         <Product>
           <Product_Info2>
             <p className="Product_Title">{data.product[0].title}</p>
-            <span className="Product_Price">{data.product[0].price}원</span>
+            <span className="Product_Price">
+              {convertPrice(data.product[0].price)}원
+            </span>
             <span className="Product_Description">
               {data.product[0].description}
             </span>
