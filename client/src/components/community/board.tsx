@@ -1,10 +1,17 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { SyntheticEvent, useEffect, useState } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  SyntheticEvent,
+  useEffect,
+  useState,
+  useMemo,
+} from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import axios from "../../axios/axios";
-import { QueryKeys, restFetcher } from "../../queryClient";
-import { boardItem, GetBoardItem, userInfo } from "../../type";
+import { restFetcher } from "../../queryClient";
+import { GetBoardItem } from "../../type";
 import Auth from "../auth/auth";
 import BoardItem from "./boarditem";
 
@@ -108,79 +115,57 @@ __v: 0
 _id: "632d90658ddd2d67dcac7957"
 */
 
-//----------------------분리된 함수----------------------
-// 현재 페이지 게시글의 데이터 가져오는 함수
-const useBoardList = ({ page, limit }: { page: number; limit: number }) => {
-  const [data, setData] = useState<GetBoardItem>();
+export const CommunityBoard = () => {
+  //현재 페이지의 게시글 데이터
+  const [boardList, setBoardList] = useState<GetBoardItem>();
+  // 현재 페이지
+  const [page, setPage] = useState(1);
+  // 한 페이지에 보여줄 게시글의 갯수
+  const [listSize, setListSize] = useState(7);
 
   const { mutate: GetBoardList } = useMutation(
-    ({ page, limit }: { page: number; limit: number }) =>
+    ({ page, listSize }: { page: number; listSize: number }) =>
       restFetcher({
         method: "GET",
-        path: GETBOARDLIST_URL,
+        path: "/api/board/getBoardList",
         params: {
           page,
-          limit,
+          limit: listSize,
         },
       }),
     {
       onSuccess: (response) => {
-        setData(response);
+        setBoardList(response);
       },
     }
   );
 
-  // page와 limit가 바뀔때마다 리렌더링
+  // page와 listSize가 바뀔때마다 호출
   useEffect(() => {
-    GetBoardList({ page, limit });
-  }, [page, limit]);
+    GetBoardList({ page, listSize });
+  }, [page, listSize]);
 
-  if (!data?.results) return null;
-  return data;
-};
+  if (!boardList?.results) return null;
+  console.log("boardList", boardList);
 
-// 최대 페이지 수를 구해 그 만큼 pageBtn에 버튼 저장하는 함수
-const Pagination = (
-  {
-    boardList,
-    limit,
-  }: {
-    boardList: GetBoardItem;
-    limit: number;
-  },
-  setPage: any
-) => {
-  // 최대 페이지 수를 구하는 함수
-  const handleGetMaxPage = (e: SyntheticEvent) => {
+  //핸들링 함수
+
+  const handleChangePage = (e: SyntheticEvent) => {
     e.preventDefault();
     const count = parseInt((e.target as HTMLInputElement).value);
-    setPage(1 * count);
+    setPage(count);
   };
 
   // 최대 페이지 구해서 그만큼 버튼 생성
-  const maxPage = Math.ceil(boardList.totalIndex / limit);
-  const result = [];
+  const maxPage = Math.ceil(boardList.totalIndex / listSize);
+  const pageBtn = [];
   for (let i = 1; i <= maxPage; i++) {
-    result.push(
-      <button key={i} value={i} onClick={handleGetMaxPage}>
+    pageBtn.push(
+      <button key={i} value={i} onClick={handleChangePage}>
         {i}
       </button>
     );
   }
-  return result;
-};
-//----------------------분리된 함수 끝----------------------
-
-export const CommunityBoard = () => {
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(7);
-
-  // 현재 페이지 게시글의 데이터 가져오기
-  const boardList = useBoardList({ page, limit });
-  if (!boardList?.results) return null;
-
-  // 최대 페이지 수를 구해 그 만큼 pageBtn에 버튼 저장
-  const pageBtn = Pagination({ boardList, limit }, setPage);
 
   return (
     <BoardContainer>
@@ -195,6 +180,7 @@ export const CommunityBoard = () => {
           <BoardItem {...board} key={board._id} />
         ))}
       </CommunityBoard_List>
+
       <div className="writeBtnContainer ">
         <Link to="/community/write">
           <button>글작성</button>
@@ -212,10 +198,10 @@ export default CommunityBoard;
 // //다음 페이지 이벤트
 // const handleNextPage = (e: SyntheticEvent) => {
 //   e.preventDefault();
-//   GetBoardList(data.next);
+//   GetBoardList(boardList.next);
 // };
 // //이전페이지 이벤트
 // const handlePreviousPage = (e: SyntheticEvent) => {
 //   e.preventDefault();
-//   GetBoardList(data.previous);
+//   GetBoardList(boardList.previous);
 // };
