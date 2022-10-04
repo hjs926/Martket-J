@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import axios from "../../axios/axios";
 import { QueryKeys, restFetcher } from "../../queryClient";
 import { Product } from "../../type";
+
+import Product_Info from "./setctions/product_Info";
 
 function Detail_product() {
   /*
@@ -23,6 +25,7 @@ views: 0
 _id: "6330730737b26e2780d46e24"
 */
   const { id } = useParams();
+
   const { data } = useQuery([QueryKeys.PRODUCTS, id], () =>
     restFetcher({
       method: "GET",
@@ -34,8 +37,14 @@ _id: "6330730737b26e2780d46e24"
   );
   if (!data) return null;
   console.log("data: ", data.product[0]);
+  console.log("data 타이틀입니다", data.product[0].title);
+  console.log("data 타이틀입니다", data.product[0].images[0]);
 
-  return <h1>product name asd</h1>;
+  return (
+    <div>
+      <Product_Info />
+    </div>
+  );
 }
 
 export default Detail_product;
