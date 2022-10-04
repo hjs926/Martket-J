@@ -93,7 +93,7 @@ const ProductPage = () => {
     return (
       <Products>
         <Product_Image>
-          <a href={`http://localhost:5173/product/${product._id}`}>
+          <Link to={`/products/${product._id}`}>
             <Product_Image2
               key={index}
               src={`http://localhost:4000/${product.images[0]}`}
@@ -104,7 +104,7 @@ const ProductPage = () => {
             <Sub>
               <p className="price">{convertPrice(product.price)}원</p>
             </Sub>
-          </a>
+          </Link>
         </Product_Image>
       </Products>
     );

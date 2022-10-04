@@ -58,12 +58,10 @@ router.get("/products_by_id", (req, res) => {
   let type = req.query.type; //get의 경우 body가 아니라 query
   let productId = req.query.id;
 
-  Product.find({ _id: productId })
-    .populate("writer")
-    .exec((err, product) => {
-      if (err) return res.status(400).send(err);
-      return res.status(200).send({ success: true, product });
-    });
+  Product.find({ _id: productId }).exec((err, product) => {
+    if (err) return res.status(400).send(err);
+    return res.status(200).send({ success: true, product });
+  });
 });
 
 export default router;
