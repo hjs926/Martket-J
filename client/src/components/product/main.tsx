@@ -28,11 +28,6 @@ export const Main = () => {
   return (
     <>
       <Item />
-      <Filter>
-        <Filter2>최신순 |</Filter2>
-        <Filter2>낮은 가격</Filter2>
-        <Filter2>| 높은 가격</Filter2>
-      </Filter>
       <Flex_wrap>
         <ProductPage />
       </Flex_wrap>

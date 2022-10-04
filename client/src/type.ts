@@ -10,6 +10,7 @@ export interface Product {
   views: number;
   _id: string;
 }
+
 export interface GetProduct {
   postSize: number;
   productInfo: Product[];

@@ -19,7 +19,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.2",
-    "react-image-gallery": "^1.2.9",
+    "react-image-gallery": "^1.2.11",
     "react-redux": "^8.0.2",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
@@ -30,6 +30,7 @@
   "devDependencies": {
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@types/react-image-gallery": "^1.0.5",
     "@types/react-slick": "^0.23.10",
     "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-react": "^2.0.1",
