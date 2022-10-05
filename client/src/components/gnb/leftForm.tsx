@@ -47,30 +47,43 @@ const LeftForm = () => {
         </li>
         <li>
           <Link to="/products" className="category">
-            men's clothing
+            TOP
           </Link>
         </li>
         <li>
           <Link to="/products" className="category">
-            jewelery
+            OUTER
           </Link>
         </li>
         <li>
           <Link to="/products" className="category">
-            electronics
+            PANTS
           </Link>
         </li>
         <li>
           <Link to="/products" className="category">
-            women's clothing
+            DRSSS
           </Link>
         </li>
-
+        <li>
+          <Link to="/products" className="category">
+            SHOES
+          </Link>
+        </li>
+        <li>
+          <Link to="/products" className="category">
+            BAG
+          </Link>
+        </li>
+        <li>
+          <Link to="/products" className="category">
+            ETC
+          </Link>
+        </li>
         <li>
           <br />
           <Link to="/community">COMMUNITY</Link>
         </li>
-
         <li>
           <Link to="/admin">admin</Link>
         </li>
