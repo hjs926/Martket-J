@@ -46,7 +46,7 @@ const Product_Img = styled.div`
   box-sizing: border-box;
   border-radius: 10px;
   img {
-    width: 100%;
+    width: 90%;
   }
 `;
 
@@ -147,20 +147,20 @@ const Sum = styled.div`
 
   .Sum_Total_Count {
     font-size: 18px;
-    line-height: 23px;
+    line-height: 30px;
     color: black;
   }
   .Sum_Total_Count::after {
     content: "|";
     width: 5px;
-    height: 23px;
+    height: 22px;
     color: #c4c4c4;
     padding: 0px 11px;
   }
 
   .Sum_Total_Price {
-    font-size: 36px;
-    line-height: 45px;
+    font-size: 28px;
+    line-height: 18px;
     color: black;
   }
 
@@ -180,7 +180,7 @@ const Btn = styled.div`
     width: 300px;
     height: 60px;
     border-radius: 5px;
-    background: #19ce60;
+    background: black;
     border: none;
     cursor: pointer;
     font-size: 18px;
@@ -302,16 +302,18 @@ function Detail_product() {
 
             <div>
               <span className="Sum_Total">
-                총 수량 <span className="Sum_Total_Price">1개 </span>
+                총 수량 <span className="Sum_Total_Count">{amount * 1}개 </span>
               </span>
               <span className="Sum_Total_Price">
-                {convertPrice(data.product[0].price)}원
+                {convertPrice(data.product[0].price * amount)}원
               </span>
             </div>
           </Sum>
           <Btn>
             {/* <button className="Btn_But">바로 구매</button> */}
-            <button className="Btn_Cart">장바구니</button>
+            <button className="Btn_Cart" onClick={handlAddToCart}>
+              장바구니
+            </button>
           </Btn>
         </section>
       </ProductInfoWrap>
