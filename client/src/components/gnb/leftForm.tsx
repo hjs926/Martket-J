@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
+import TopPage from "../../pages/category/top";
 // ----------------------------css 시작----------------------------
 const SideMenuBar = styled.nav`
   position: fixed;
@@ -46,7 +47,7 @@ const LeftForm = () => {
           <Link to="/products">Shopping</Link>
         </li>
         <li>
-          <Link to="/products" className="category">
+          <Link to="/top" className="category">
             TOP
           </Link>
         </li>
@@ -88,6 +89,10 @@ const LeftForm = () => {
           <Link to="/admin">admin</Link>
         </li>
       </ul>
+
+      <Routes>
+        <Route path="/top" element={<TopPage />}></Route>
+      </Routes>
     </SideMenuBar>
   );
 };
