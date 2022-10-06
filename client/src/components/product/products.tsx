@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "../../axios/axios";
 import { Product } from "../../type";
+import ProductItem from "./product-Item";
 
 const Products = styled.div`
   display: flex;
@@ -88,8 +89,7 @@ const ProductPage = () => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
-  const renderCards = products.map((product: any, index) => {
-    console.log("product 정보", product);
+  const renderCards = products.map((product: Product, index) => {
     return (
       <Products>
         <Product_Image>
@@ -112,7 +112,6 @@ const ProductPage = () => {
 
   return (
     <>
-      {" "}
       {renderCards}
       {postSize >= Limit && (
         <div style={{ display: "flex", justifyContent: "center" }}>

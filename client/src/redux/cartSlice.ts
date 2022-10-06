@@ -16,7 +16,7 @@ export const cartSlice = createSlice({
     addToCart: (state, action) => {
       //장바구니에 상품이 있는지 확인
       const itemIndex = state.cartItems.findIndex(
-        (item: Product) => item.id === action.payload.id
+        (item: Product) => item._id === action.payload._id
       );
       // 장바구니에 같은 상품이 있다면 quantity를 1 증가
       if (itemIndex >= 0) {
@@ -31,7 +31,7 @@ export const cartSlice = createSlice({
 
     reamoveFromCart: (state, action) => {
       const nextCartItems = state.cartItems.filter(
-        (cartItem) => cartItem.id !== action.payload.id
+        (cartItem) => cartItem._id !== action.payload._id
       );
       state.cartItems = nextCartItems;
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
@@ -39,14 +39,14 @@ export const cartSlice = createSlice({
 
     decreaseCart: (state, action) => {
       const itemIndex = state.cartItems.findIndex(
-        (cartItem: Product) => cartItem.id === action.payload.id
+        (cartItem: Product) => cartItem._id === action.payload._id
       );
 
       if (state.cartItems[itemIndex].quantity > 1) {
         state.cartItems[itemIndex].quantity -= 1;
       } else if (state.cartItems[itemIndex].quantity === 1) {
         const nextCartItems = state.cartItems.filter(
-          (cartItem) => cartItem.id !== action.payload.id
+          (cartItem) => cartItem._id !== action.payload._id
         );
         state.cartItems = nextCartItems;
         localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
@@ -74,7 +74,7 @@ export const cartSlice = createSlice({
           quantity: 0,
         }
       );
-      total = parseFloat(total.toFixed(2));
+      total = total;
       state.cartTotalQuantity = quantity;
       state.cartTotalAmount = total;
     },

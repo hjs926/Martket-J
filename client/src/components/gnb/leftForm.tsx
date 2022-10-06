@@ -1,6 +1,6 @@
 import { Link, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
-import TopPage from "../../pages/category/top";
+import CategoryPage from "../../pages/category/category";
 // ----------------------------css 시작----------------------------
 const SideMenuBar = styled.nav`
   position: fixed;
@@ -91,7 +91,7 @@ const LeftForm = () => {
       </ul>
 
       <Routes>
-        <Route path="/top" element={<TopPage />}></Route>
+        <Route path="/top" element={<CategoryPage />}></Route>
       </Routes>
     </SideMenuBar>
   );
