@@ -6,22 +6,25 @@ import { QueryKeys, restFetcher } from "../../queryClient";
 import { Product } from "../../type";
 
 const ProductDetailPage = () => {
-  // const { id } = useParams();
-  // const { data } = useQuery<Product>([QueryKeys.PRODUCTS, id], () =>
-  //   restFetcher({
-  //     method: "GET",
-  //     path: `/products/${id}`,
-  //   })
-  // );
-  // if (!data) return null;
-  // console.log("상세목록페이지입니다.");
-  // console.log("key", [QueryKeys.PRODUCTS, id]);
-  // console.log("data", data);
+  const { id } = useParams();
+  const { data } = useQuery([QueryKeys.PRODUCTS, id], () =>
+    restFetcher({
+      method: "GET",
+      path: `/api/product/products_by_id`,
+      params: {
+        id,
+      },
+    })
+  );
+  if (!data) return null;
+  console.log(data);
+  console.log("호출했습니다ㅣ");
+  console.log(data.product[0]);
 
   return (
     <div>
       <br />
-      <Detail_product />
+      <Detail_product {...data.product[0]} />
     </div>
   );
 };

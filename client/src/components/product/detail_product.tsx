@@ -5,7 +5,9 @@ import axios from "../../axios/axios";
 import { Product } from "../../type";
 import styled from "styled-components";
 import { QueryKeys, restFetcher } from "../../queryClient";
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/cartSlice";
+// ----------------------------css 시작----------------------------
 const ProductInfoWrap = styled.div`
   min-width: 800px;
   margin: 80px 150px 0 200px;
@@ -44,8 +46,8 @@ const ProductInfoWrap = styled.div`
 const Product_Img = styled.div`
   width: 100%;
   box-sizing: border-box;
-  border-radius: 10px;
   img {
+    border-radius: 1.5em;
     width: 90%;
   }
 `;
@@ -202,6 +204,7 @@ const Btn = styled.div`
     color: #ffffff;
   }
 `;
+// ----------------------------css 끝----------------------------
 
 /*
   data.data.product[0]
@@ -220,38 +223,16 @@ views: 0
 _id: "6330730737b26e2780d46e24"
 */
 
-const convertPrice = (price: any) => {
+const convertPrice = (price: number) => {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-function Detail_product() {
-  const { id } = useParams();
-  const [amount, setAmount] = useState(1);
+function Detail_product(product: Product) {
   const navigate = useNavigate();
-
-  const { data } = useQuery([QueryKeys.PRODUCTS, id], () =>
-    restFetcher({
-      method: "GET",
-      path: `/api/product/products_by_id`,
-      params: {
-        id,
-      },
-    })
-  );
-  if (!data) return null;
-  console.log(data);
-
-  const handleIncreaseAmount = () => {
-    setAmount((newState) => newState + 1);
-  };
-
-  const handleDecreaseAmount = () => {
-    if (1 < amount) {
-      setAmount((newState) => newState - 1);
-    }
-  };
+  const dispatch = useDispatch();
 
   const handlAddToCart = () => {
+    dispatch(addToCart(product));
     navigate("/cart"); //클릭시 cart로 페이지 이동
   };
 
@@ -260,40 +241,21 @@ function Detail_product() {
       <ProductInfoWrap>
         <section className="section1">
           <Product_Img>
-            <img src={`http://localhost:4000/${data.product[0].images}`} />
+            <img src={`http://localhost:4000/${product.images}`} />
           </Product_Img>
         </section>
         <section className="section2">
           <Product_Info2>
-            <p className="Product_Title">{data.product[0].title}</p>
+            <p className="Product_Title">{product.title}</p>
             <span className="Product_Price">
-              {convertPrice(data.product[0].price)}원
+              {convertPrice(product.price)}원
             </span>
-            <span className="Product_Description">
-              {data.product[0].description}
-            </span>
+            <span className="Product_Description">{product.description}</span>
           </Product_Info2>
           <Delivery>
             <p className="FreeD">택배배송 / 무료배송</p>
           </Delivery>
-          <Line></Line>
-          <Amount>
-            <img
-              className="Minus"
-              src="/images/icon-minus-line.svg"
-              alt="Minus"
-              onClick={handleDecreaseAmount}
-            />
-            <div className="Count">
-              <span className="Count_Span">{amount}</span>
-            </div>
-            <img
-              className="Plus"
-              src="/images/icon-plus-line.svg"
-              alt="Plus"
-              onClick={handleIncreaseAmount}
-            />
-          </Amount>
+
           <Line></Line>
           <Sum>
             <div>
@@ -302,17 +264,17 @@ function Detail_product() {
 
             <div>
               <span className="Sum_Total">
-                총 수량 <span className="Sum_Total_Count">{amount * 1}개 </span>
+                총 수량 <span className="Sum_Total_Price">1개 </span>
               </span>
               <span className="Sum_Total_Price">
-                {convertPrice(data.product[0].price * amount)}원
+                {convertPrice(product.price)}원
               </span>
             </div>
           </Sum>
           <Btn>
             {/* <button className="Btn_But">바로 구매</button> */}
             <button className="Btn_Cart" onClick={handlAddToCart}>
-              장바구니
+              장바구니 담기
             </button>
           </Btn>
         </section>

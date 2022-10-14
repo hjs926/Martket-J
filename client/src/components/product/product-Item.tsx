@@ -4,6 +4,44 @@ import styled from "styled-components";
 import { addToCart } from "../../redux/cartSlice";
 import { Product } from "../../type";
 
+//
+const Products = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+`;
+
+const Product_Image = styled.div`
+  width: 380px;
+  height: 380px;
+  border-radius: 10px;
+  margin-bottom: 16px;
+`;
+
+const Product_Image2 = styled.img`
+  width: 80%;
+  height: 80%;
+  border-radius: 10px;
+  border: 1px solid #c4c4c4;
+`;
+
+const Product_Name = styled.div`
+  text-align: left;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 0px;
+  color: black;
+`;
+
+const Sub = styled.div`
+  .price {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 10px;
+    color: #000000;
+  }
+`;
+//
+
 // ----------------------------css 시작----------------------------
 const Item = styled.li`
   display: flex;
@@ -27,7 +65,7 @@ const Item = styled.li`
       font-size: 14px;
       font-weight: bold;
       &.red {
-        color: #fd3e18;
+        color: blue;
       }
     }
   }
