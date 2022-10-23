@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
-import ProductItem from "../../components/product/product-Item";
+import CategoryForm from "../../components/category/category";
 import { QueryKeys, restFetcher } from "../../queryClient";
 import { GetProduct } from "../../type";
 
@@ -17,11 +17,11 @@ const ProducListController = styled.div`
   }
 `;
 
-const ProducList = () => {
+const PantsPage = () => {
   const { data, isLoading } = useQuery<GetProduct>([QueryKeys.PRODUCTS], () =>
     restFetcher({
       method: "POST",
-      path: "/api/product/products",
+      path: "/api/product/pants",
     })
   );
   if (isLoading) return <p>Loading...</p>;
@@ -33,11 +33,11 @@ const ProducList = () => {
       Total : <b>{data.postSize}</b> items
       <ul>
         {data?.productInfo.map((product) => (
-          <ProductItem {...product} key={product._id} />
+          <CategoryForm {...product} key={product._id} />
         ))}
       </ul>
     </ProducListController>
   );
 };
 
-export default ProducList;
+export default PantsPage;

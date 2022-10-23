@@ -64,4 +64,79 @@ router.get("/products_by_id", (req, res) => {
   });
 });
 
+//----------------------------- 카테고리 페이지 ------------------------
+
+router.post("/category", (req, res) => {
+  Product.find().exec((err, productInfo) => {
+    if (err) return res.status(400).json({ success: false, err });
+    return res
+      .status(200)
+      .json({ success: true, productInfo, postSize: productInfo.length });
+  });
+});
+
+router.post("/top", (req, res) => {
+  Product.find({ categorys: "1" }).exec((err, productInfo) => {
+    if (err) return res.status(400).json({ success: false, err });
+    return res
+      .status(200)
+      .json({ success: true, productInfo, postSize: productInfo.length });
+  });
+});
+
+router.post("/outer", (req, res) => {
+  Product.find({ categorys: "2" }).exec((err, productInfo) => {
+    if (err) return res.status(400).json({ success: false, err });
+    return res
+      .status(200)
+      .json({ success: true, productInfo, postSize: productInfo.length });
+  });
+});
+
+router.post("/pants", (req, res) => {
+  Product.find({ categorys: "3" }).exec((err, productInfo) => {
+    if (err) return res.status(400).json({ success: false, err });
+    return res
+      .status(200)
+      .json({ success: true, productInfo, postSize: productInfo.length });
+  });
+});
+
+router.post("/dress", (req, res) => {
+  Product.find({ categorys: "4" }).exec((err, productInfo) => {
+    if (err) return res.status(400).json({ success: false, err });
+    return res
+      .status(200)
+      .json({ success: true, productInfo, postSize: productInfo.length });
+  });
+});
+
+router.post("/shoes", (req, res) => {
+  Product.find({ categorys: "5" }).exec((err, productInfo) => {
+    if (err) return res.status(400).json({ success: false, err });
+    return res
+      .status(200)
+      .json({ success: true, productInfo, postSize: productInfo.length });
+  });
+});
+
+router.post("/bag", (req, res) => {
+  Product.find({ categorys: "6" }).exec((err, productInfo) => {
+    if (err) return res.status(400).json({ success: false, err });
+    return res
+      .status(200)
+      .json({ success: true, productInfo, postSize: productInfo.length });
+  });
+});
+
+router.post("/etc", (req, res) => {
+  Product.find({ categorys: "7" }).exec((err, productInfo) => {
+    if (err) return res.status(400).json({ success: false, err });
+    return res
+      .status(200)
+      .json({ success: true, productInfo, postSize: productInfo.length });
+  });
+});
+//----------------------------- 카테고리 페이지 ------------------------
+
 export default router;
