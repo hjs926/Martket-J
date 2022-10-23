@@ -73,23 +73,26 @@ const CartItem = (cartItem: Product) => {
   const handleIncreaseCart = (cartItem: Product) => {
     dispatch(addToCart(cartItem));
   };
+  const convertPrice = (price: any) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
 
   return (
     <CartItemContainer>
       <CartItemImage_Container>
-        <img src={cartItem.image} />
+        <img src={`http://localhost:4000/${cartItem.images}`} />
       </CartItemImage_Container>
       <div className="title">
         <p>상품명: {cartItem.title}</p>
       </div>
-      <p className="price">가격: ${cartItem.price}</p>
+      <p className="price">가격: {convertPrice(cartItem.price)}원</p>
       <div className="quantity">
         <button onClick={() => handleDecreaseCart(cartItem)}>-</button>
         <div>수량: {cartItem.quantity}</div>
         <button onClick={() => handleIncreaseCart(cartItem)}>+</button>
       </div>
       <div className="totalQuantity">
-        총가격: ${(cartItem.price * cartItem.quantity).toFixed(2)}
+        총가격: {`${convertPrice(cartItem.price * cartItem.quantity)}원`}
       </div>
       <button onClick={() => handleRemoveFromCart(cartItem)}>Remove</button>
     </CartItemContainer>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "../../axios/axios";
 import { Product } from "../../type";
 
+//-------------------------------CSS시작------------------------
 const Products = styled.div`
   display: flex;
   flex-direction: row-reverse;
@@ -39,6 +40,27 @@ const Sub = styled.div`
     color: #000000;
   }
 `;
+const Flex_wrap = styled.div`
+  max-width: 1400px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  place-items: center;
+  gap: 70px 0px;
+  margin: 0 auto;
+  margin-top: 35px;
+`;
+
+const Button = styled.button`
+  margin-top: 90px;
+  font-size: 18px;
+  width: 250px;
+  height: 55px;
+  border-radius: 0.4em;
+  background-color: grey;
+  color: white;
+  cursor: pointer;
+`;
+//-------------------------------------CSS끝---------------------------
 
 const PRODUCTMORE_URL = "/api/product/products";
 
@@ -88,8 +110,7 @@ const ProductPage = () => {
     return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
-  const renderCards = products.map((product: any, index) => {
-    console.log("product 정보", product);
+  const renderCards = products.map((product: Product, index) => {
     return (
       <Products>
         <Product_Image>
@@ -112,11 +133,10 @@ const ProductPage = () => {
 
   return (
     <>
-      {" "}
-      {renderCards}
+      <Flex_wrap>{renderCards}</Flex_wrap>
       {postSize >= Limit && (
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <button onClick={handleProductMore}>더보기</button>
+          <Button onClick={handleProductMore}>더보기</Button>
         </div>
       )}
     </>

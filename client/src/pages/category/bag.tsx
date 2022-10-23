@@ -17,11 +17,11 @@ const ProducListController = styled.div`
   }
 `;
 
-const TopPage = () => {
+const BagPage = () => {
   const { data, isLoading } = useQuery<GetProduct>([QueryKeys.PRODUCTS], () =>
     restFetcher({
       method: "POST",
-      path: "/api/product/top",
+      path: "/api/product/bag",
     })
   );
 
@@ -41,4 +41,4 @@ const TopPage = () => {
   );
 };
 
-export default TopPage;
+export default BagPage;

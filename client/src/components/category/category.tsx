@@ -18,16 +18,17 @@ const Item = styled.li`
   img {
     max-width: 100%;
     height: 100%;
+    margin-top: 5px;
   }
   div {
     p {
       overflow: hidden; // 을 사용해 영역을 감출 것
       text-overflow: ellipsis; // 로 ... 을 만들기
       white-space: nowrap; // 아래줄로 내려가는 것을 막기위해
-      font-size: 14px;
+      font-size: 16px;
       font-weight: bold;
-      &.red {
-        color: #fd3e18;
+      &.black {
+        color: black;
       }
     }
   }
@@ -35,26 +36,28 @@ const Item = styled.li`
 // ----------------------------css 끝----------------------------
 
 const SERVER_URL = "http://localhost:4000/";
+const convertPrice = (price: number) => {
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
 
-const ProductItem = (product: Product) => {
-  const dispatch = useDispatch();
-  const handlAddToCart = (product: Product) => {
-    dispatch(addToCart(product));
-  };
-
+const CategoryForm = (product: Product) => {
   return (
     <Item>
-      <img src={`${SERVER_URL}${product.images[0]}`} />
+      <a href={`/products/${product._id}`}>
+        <img
+          style={{ width: "300px", height: "300px" }}
+          src={`${SERVER_URL}${product.images[0]}`}
+        />
+      </a>
       <div>
-        <p className="red">{product.categorys}</p>
         <Link to={`/products/${product._id}`}>
           <p>{product.title}</p>
         </Link>
-        <p className="red">${product.price}</p>
+        <p className="black">{convertPrice(product.price)}원</p>
         {/* <button onClick={() => handlAddToCart(product)}>담기</button> */}
       </div>
     </Item>
   );
 };
 
-export default ProductItem;
+export default CategoryForm;

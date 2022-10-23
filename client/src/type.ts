@@ -9,6 +9,7 @@ export interface Product {
   updatedAt: string;
   views: number;
   _id: string;
+  quantity: number;
 }
 
 export interface GetProduct {

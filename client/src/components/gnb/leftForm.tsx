@@ -1,6 +1,13 @@
 import { Link, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
+import BagPage from "../../pages/category/bag";
+import DressPage from "../../pages/category/dress";
+import EtcPage from "../../pages/category/etc";
+import OuterPage from "../../pages/category/outer";
+import PantsPage from "../../pages/category/pants";
+import ShoesPage from "../../pages/category/shoes";
 import TopPage from "../../pages/category/top";
+import CategoryPage from "../../pages/category/index";
 // ----------------------------css 시작----------------------------
 const SideMenuBar = styled.nav`
   position: fixed;
@@ -35,65 +42,121 @@ const LeftForm = () => {
   console.log("LeftForm");
 
   return (
-    <SideMenuBar className="gnb">
-      <Link to="/">
-        <img id="logo" src="/Market_logo.png" alt="logo" />
-      </Link>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/products">Shopping</Link>
-        </li>
-        <li>
-          <Link to="/top" className="category">
-            TOP
-          </Link>
-        </li>
-        <li>
-          <Link to="/products" className="category">
-            OUTER
-          </Link>
-        </li>
-        <li>
-          <Link to="/products" className="category">
-            PANTS
-          </Link>
-        </li>
-        <li>
-          <Link to="/products" className="category">
-            DRSSS
-          </Link>
-        </li>
-        <li>
-          <Link to="/products" className="category">
-            SHOES
-          </Link>
-        </li>
-        <li>
-          <Link to="/products" className="category">
-            BAG
-          </Link>
-        </li>
-        <li>
-          <Link to="/products" className="category">
-            ETC
-          </Link>
-        </li>
-        <li>
-          <br />
-          <Link to="/community">COMMUNITY</Link>
-        </li>
-        <li>
-          <Link to="/admin">admin</Link>
-        </li>
-      </ul>
-
+    <div>
+      <SideMenuBar className="gnb">
+        <Link to="/">
+          <img id="logo" src="/Market_logo.png" alt="logo" />
+        </Link>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <a
+            onClick={() => {
+              window.location.href = "/category";
+            }}
+            className="category"
+            style={{ cursor: "pointer" }}
+          >
+            Shopping
+          </a>
+          <li>
+            <a
+              onClick={() => {
+                window.location.href = "/top";
+              }}
+              className="category"
+              style={{ cursor: "pointer" }}
+            >
+              TOP
+            </a>
+          </li>
+          <li>
+            <a
+              onClick={() => {
+                window.location.href = "/outer";
+              }}
+              className="category"
+              style={{ cursor: "pointer" }}
+            >
+              OUTER
+            </a>
+          </li>
+          <li>
+            <a
+              onClick={() => {
+                window.location.href = "/pants";
+              }}
+              className="category"
+              style={{ cursor: "pointer" }}
+            >
+              PANTS
+            </a>
+          </li>
+          <li>
+            <a
+              onClick={() => {
+                window.location.href = "/dress";
+              }}
+              className="category"
+              style={{ cursor: "pointer" }}
+            >
+              DRESS
+            </a>
+          </li>
+          <li>
+            <a
+              onClick={() => {
+                window.location.href = "/shoes";
+              }}
+              className="category"
+              style={{ cursor: "pointer" }}
+            >
+              SHOES
+            </a>
+          </li>
+          <li>
+            <a
+              onClick={() => {
+                window.location.href = "/bag";
+              }}
+              className="category"
+              style={{ cursor: "pointer" }}
+            >
+              BAG
+            </a>
+          </li>
+          <li>
+            <a
+              onClick={() => {
+                window.location.href = "/etc";
+              }}
+              className="category"
+              style={{ cursor: "pointer" }}
+            >
+              ETC
+            </a>
+          </li>
+          <li>
+            <br />
+            <Link to="/community">COMMUNITY</Link>
+          </li>
+          <li>
+            <Link to="/admin">Admin</Link>
+          </li>
+        </ul>
+      </SideMenuBar>
       <Routes>
+        <Route path="/category" element={<CategoryPage />}></Route>
         <Route path="/top" element={<TopPage />}></Route>
+        <Route path="/outer" element={<OuterPage />}></Route>
+        <Route path="/pants" element={<PantsPage />}></Route>
+        <Route path="/dress" element={<DressPage />}></Route>
+        <Route path="/shoes" element={<ShoesPage />}></Route>
+        <Route path="/bag" element={<BagPage />}></Route>
+        <Route path="/etc" element={<EtcPage />}></Route>
       </Routes>
-    </SideMenuBar>
+    </div>
   );
 };
 

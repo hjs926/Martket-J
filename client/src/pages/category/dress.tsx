@@ -17,14 +17,13 @@ const ProducListController = styled.div`
   }
 `;
 
-const TopPage = () => {
+const DressPage = () => {
   const { data, isLoading } = useQuery<GetProduct>([QueryKeys.PRODUCTS], () =>
     restFetcher({
       method: "POST",
-      path: "/api/product/top",
+      path: "/api/product/dress",
     })
   );
-
   if (isLoading) return <p>Loading...</p>;
   if (!data) return null;
 
@@ -41,4 +40,4 @@ const TopPage = () => {
   );
 };
 
-export default TopPage;
+export default DressPage;

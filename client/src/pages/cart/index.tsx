@@ -64,6 +64,10 @@ const Cart = () => {
     dispatch(clearCart(cartData));
   };
 
+  const convertPrice = (price: any) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   return (
     <>
       <CartQuantity>
@@ -78,7 +82,7 @@ const Cart = () => {
         <CartContainer>
           <div>
             {cartData.cartItems?.map((cartItem) => (
-              <CartItem {...cartItem} key={cartItem.id} />
+              <CartItem {...cartItem} key={cartItem._id} />
             ))}
             <button className="clear_cart" onClick={() => handleClearCart()}>
               Clear Cart
@@ -87,7 +91,7 @@ const Cart = () => {
           <div className="cart-info">
             <div className="cart-subtotal">
               <span>Subtotal : </span>
-              <span>${cartData.cartTotalAmount.toFixed(2)}</span>
+              <span>{convertPrice(cartData.cartTotalAmount)}원</span>
             </div>
           </div>
         </CartContainer>
