@@ -8,7 +8,6 @@ const AdminWarp = styled.div`
 const AdminPage = () => {
   return (
     <AdminWarp>
-      <h2>어드민</h2>
       <Admin />
     </AdminWarp>
   );
