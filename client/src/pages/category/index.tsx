@@ -1,7 +1,9 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router";
 import styled from "styled-components";
 import CategoryForm from "../../components/category/category";
-import { QueryKeys, restFetcher } from "../../queryClient";
+import { getClient, QueryKeys, restFetcher } from "../../queryClient";
 import { GetProduct } from "../../type";
 
 const ProducListController = styled.div`
@@ -17,22 +19,53 @@ const ProducListController = styled.div`
   }
 `;
 
+type TypeCategory = { category: string };
+
+const useFetcher = (category: any) => {};
+// const useFetcher = (category: string) => {
+//   if (category === "products") category = "category";
+//   console.log("category", category);
+
+//   return useQuery<GetProduct>([QueryKeys.PRODUCTS], () =>
+//     restFetcher({
+//       method: "POST",
+//       path: `/api/product/${category}`,
+//     })
+//   );
+// };
+
 const CategoryPage = () => {
-  const { data, isLoading } = useQuery<GetProduct>([QueryKeys.PRODUCTS], () =>
-    restFetcher({
-      method: "POST",
-      path: "/api/product/category",
-    })
+  const params = useParams<TypeCategory>();
+  const [ProductItem, setProductItem] = useState<GetProduct>();
+  let category = params.category;
+  console.log(category);
+  if (category === undefined) category = "category";
+  console.log(category);
+  const { mutate: GetProduct } = useMutation<GetProduct>(
+    () =>
+      restFetcher({
+        method: "POST",
+        path: `/api/product/${category}`,
+      }),
+    {
+      onSuccess: (response) => {
+        setProductItem(response);
+      },
+    }
   );
-  if (isLoading) return <p>Loading...</p>;
-  if (!data) return null;
+  useEffect(() => {
+    GetProduct();
+  }, []);
+
+  console.log("data", ProductItem);
+  if (!ProductItem) return null;
 
   return (
     <ProducListController>
       <br />
-      Total : <b>{data.postSize}</b> items
+      Total : <b>{ProductItem.postSize}</b> items
       <ul>
-        {data?.productInfo.map((product) => (
+        {ProductItem?.productInfo.map((product) => (
           <CategoryForm {...product} key={product._id} />
         ))}
       </ul>

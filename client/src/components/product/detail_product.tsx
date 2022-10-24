@@ -53,7 +53,7 @@ const Product_Img = styled.div`
 `;
 
 const Product_Info2 = styled.div`
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;

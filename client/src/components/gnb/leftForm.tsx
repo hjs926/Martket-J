@@ -1,4 +1,4 @@
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import BagPage from "../../pages/category/bag";
 import DressPage from "../../pages/category/dress";
@@ -27,6 +27,7 @@ const SideMenuBar = styled.nav`
     margin-left: 30px;
     font-weight: bold;
     font-size: 17px;
+    text-transform: uppercase;
     li {
       .category {
         margin-left: 20px;
@@ -40,6 +41,7 @@ const SideMenuBar = styled.nav`
 
 const LeftForm = () => {
   console.log("LeftForm");
+  const category = ["top", "outer", "pants", "dress", "shoes", "bag", "etc"];
 
   return (
     <div>
@@ -49,94 +51,13 @@ const LeftForm = () => {
         </Link>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <a href="/products">Shopping</a>
           </li>
-          <a
-            onClick={() => {
-              window.location.href = "/category";
-            }}
-            className="category"
-            style={{ cursor: "pointer" }}
-          >
-            Shopping
-          </a>
-          <li>
-            <a
-              onClick={() => {
-                window.location.href = "/top";
-              }}
-              className="category"
-              style={{ cursor: "pointer" }}
-            >
-              TOP
-            </a>
-          </li>
-          <li>
-            <a
-              onClick={() => {
-                window.location.href = "/outer";
-              }}
-              className="category"
-              style={{ cursor: "pointer" }}
-            >
-              OUTER
-            </a>
-          </li>
-          <li>
-            <a
-              onClick={() => {
-                window.location.href = "/pants";
-              }}
-              className="category"
-              style={{ cursor: "pointer" }}
-            >
-              PANTS
-            </a>
-          </li>
-          <li>
-            <a
-              onClick={() => {
-                window.location.href = "/dress";
-              }}
-              className="category"
-              style={{ cursor: "pointer" }}
-            >
-              DRESS
-            </a>
-          </li>
-          <li>
-            <a
-              onClick={() => {
-                window.location.href = "/shoes";
-              }}
-              className="category"
-              style={{ cursor: "pointer" }}
-            >
-              SHOES
-            </a>
-          </li>
-          <li>
-            <a
-              onClick={() => {
-                window.location.href = "/bag";
-              }}
-              className="category"
-              style={{ cursor: "pointer" }}
-            >
-              BAG
-            </a>
-          </li>
-          <li>
-            <a
-              onClick={() => {
-                window.location.href = "/etc";
-              }}
-              className="category"
-              style={{ cursor: "pointer" }}
-            >
-              ETC
-            </a>
-          </li>
+          {category.map((category) => (
+            <li>
+              <a href={`/${category}`}>{category}</a>
+            </li>
+          ))}
           <li>
             <br />
             <Link to="/community">COMMUNITY</Link>
@@ -146,16 +67,6 @@ const LeftForm = () => {
           </li>
         </ul>
       </SideMenuBar>
-      <Routes>
-        <Route path="/category" element={<CategoryPage />}></Route>
-        <Route path="/top" element={<TopPage />}></Route>
-        <Route path="/outer" element={<OuterPage />}></Route>
-        <Route path="/pants" element={<PantsPage />}></Route>
-        <Route path="/dress" element={<DressPage />}></Route>
-        <Route path="/shoes" element={<ShoesPage />}></Route>
-        <Route path="/bag" element={<BagPage />}></Route>
-        <Route path="/etc" element={<EtcPage />}></Route>
-      </Routes>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import SignUpPage from "./pages/login/signup";
 import AdminIndex from "./pages/admin/index";
 import BoardDetailPage from "./pages/community/[id]";
 import WriteBoard from "./pages/community/writeBorad";
+import CategoryPage from "./pages/category";
 
 export const routes = [
   {
@@ -17,6 +18,8 @@ export const routes = [
       { path: "/", element: <Index />, index: true },
       { path: "/cart", element: <CartIndex />, index: true },
       { path: "/products/:id", element: <Id /> },
+      { path: "/products/", element: <CategoryPage /> },
+      { path: "/:category", element: <CategoryPage /> },
       { path: "/login", element: <LoginIndex /> },
       { path: "/signup", element: <SignUpPage /> },
       { path: "/community", element: <CommunityPage /> },
@@ -32,6 +35,7 @@ export const pages = [
   { route: "/cart" },
   { route: "/products" },
   { route: "/products/:id" },
+  { route: "/products:category" },
   { route: "/login" },
   { route: "/signup" },
   { route: "/community" },
