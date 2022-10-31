@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "../../axios/axios";
-import FileUpload from "./FileUpload";
+import FileUpload from "./fileUpload";
 
 const FILEUPLOAD_URL = "/api/product";
 const Categorys = [
@@ -14,7 +14,7 @@ const Categorys = [
   { key: 7, value: "ETC" },
 ];
 
-function addForm() {
+function AddForm() {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -124,4 +124,4 @@ function addForm() {
   );
 }
 
-export default addForm;
+export default AddForm;

@@ -1,7 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { RootState } from "../../redux";
 import {
   addToCart,
   decreaseCart,

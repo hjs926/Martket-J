@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import styled from "styled-components";
-import CategoryForm from "../../components/category/category";
+import ProductItem from "../../components/product";
 import { getClient, QueryKeys, restFetcher } from "../../queryClient";
 import { GetProduct } from "../../type";
 
@@ -34,9 +34,9 @@ const useFetcher = (category: any) => {};
 //   );
 // };
 
-const CategoryPage = () => {
+const ProductList = () => {
   const params = useParams<TypeCategory>();
-  const [ProductItem, setProductItem] = useState<GetProduct>();
+  const [productItem, setProductItem] = useState<GetProduct>();
   let category = params.category;
   console.log(category);
   if (category === undefined) category = "category";
@@ -57,20 +57,20 @@ const CategoryPage = () => {
     GetProduct();
   }, []);
 
-  console.log("data", ProductItem);
-  if (!ProductItem) return null;
+  console.log("data", productItem);
+  if (!productItem) return null;
 
   return (
     <ProducListController>
       <br />
-      Total : <b>{ProductItem.postSize}</b> items
+      Total : <b>{productItem.postSize}</b> items
       <ul>
-        {ProductItem?.productInfo.map((product) => (
-          <CategoryForm {...product} key={product._id} />
+        {productItem?.productInfo.map((product) => (
+          <ProductItem {...product} key={product._id} />
         ))}
       </ul>
     </ProducListController>
   );
 };
 
-export default CategoryPage;
+export default ProductList;

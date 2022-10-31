@@ -1,7 +1,5 @@
-import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { addToCart } from "../../redux/cartSlice";
 import { Product } from "../../type";
 
 // ----------------------------css 시작----------------------------
@@ -19,6 +17,7 @@ const Item = styled.li`
     max-width: 100%;
     height: 100%;
     margin-top: 5px;
+    border-radius: 0.8em;
   }
   div {
     p {
@@ -40,7 +39,7 @@ const convertPrice = (price: number) => {
   return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
-const CategoryForm = (product: Product) => {
+const ProductItem = (product: Product) => {
   return (
     <Item>
       <a href={`/products/${product._id}`}>
@@ -60,4 +59,4 @@ const CategoryForm = (product: Product) => {
   );
 };
 
-export default CategoryForm;
+export default ProductItem;

@@ -56,7 +56,7 @@ const RightForm = ({ user }: any) => {
               </span>
             </Link>
             <Link to="/login">
-              <span>LOIN/JOIN</span>
+              <span>LOGIN/JOIN</span>
             </Link>
           </div>
         </HeaderRight>

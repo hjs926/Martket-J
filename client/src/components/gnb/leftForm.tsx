@@ -1,13 +1,5 @@
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import BagPage from "../../pages/category/bag";
-import DressPage from "../../pages/category/dress";
-import EtcPage from "../../pages/category/etc";
-import OuterPage from "../../pages/category/outer";
-import PantsPage from "../../pages/category/pants";
-import ShoesPage from "../../pages/category/shoes";
-import TopPage from "../../pages/category/top";
-import CategoryPage from "../../pages/category/index";
 // ----------------------------css 시작----------------------------
 const SideMenuBar = styled.nav`
   position: fixed;
@@ -51,11 +43,11 @@ const LeftForm = () => {
         </Link>
         <ul>
           <li>
-            <a href="/products">Shopping</a>
+            <a href="/category">Shopping</a>
           </li>
           {category.map((category) => (
             <li>
-              <a href={`/${category}`}>{category}</a>
+              <a href={`/${category}`}>{`- ${category}`}</a>
             </li>
           ))}
           <li>

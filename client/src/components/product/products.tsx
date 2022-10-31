@@ -51,14 +51,17 @@ const Flex_wrap = styled.div`
 `;
 
 const Button = styled.button`
-  margin-top: 90px;
-  font-size: 18px;
-  width: 250px;
-  height: 55px;
-  border-radius: 0.4em;
-  background-color: grey;
-  color: white;
+  margin-top: 10px;
+  width: 200px;
+  height: 60px;
+  border-radius: 5px;
+  background: #767676;
+  border: none;
   cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 22px;
+  color: #ffffff;
 `;
 //-------------------------------------CSS끝---------------------------
 

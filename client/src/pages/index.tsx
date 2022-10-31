@@ -1,7 +1,12 @@
-import { Main } from "../components/product/main";
-import detail_product from "../components/product/detail_product";
+import ProductPage from "../components/product/products";
+import Item from "../components/slide/slideItem";
 const Home = () => {
-  return <Main />;
+  return (
+    <>
+      <Item />
+      <ProductPage />
+    </>
+  );
 };
 
 export default Home;
