@@ -1,9 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router";
-import ProductDetail from "../../components/product/detail";
 import Detail_product from "../../components/product/detail_product";
 import { QueryKeys, restFetcher } from "../../queryClient";
-import { Product } from "../../type";
 
 const ProductDetailPage = () => {
   const { id } = useParams();

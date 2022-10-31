@@ -71,8 +71,7 @@ const Cart = () => {
   return (
     <>
       <CartQuantity>
-        장바구니 페이지입니다 <b>{cartData.cartTotalQuantity}</b>개의 상품이
-        담겼습니다.
+        <b>{cartData.cartTotalQuantity}</b> 개의 상품이 담겼습니다.
       </CartQuantity>
       {cartData.cartItems.length === 0 ? (
         <CartQuantity_null>

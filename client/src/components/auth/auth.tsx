@@ -1,5 +1,4 @@
 import axios from "../../axios/axios";
-
 const AUTH_URL = "/api/users/auth";
 
 /*

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Admin from "../../components/admin";
+import AddForm from "../../components/admin/addForm";
 
 const AdminWarp = styled.div`
   margin: 200px 150px 0 250px;
@@ -8,7 +8,7 @@ const AdminWarp = styled.div`
 const AdminPage = () => {
   return (
     <AdminWarp>
-      <Admin />
+      <AddForm />
     </AdminWarp>
   );
 };
