@@ -21,51 +21,30 @@ const ProducListController = styled.div`
 
 type TypeCategory = { category: string };
 
-const useFetcher = (category: any) => {};
-// const useFetcher = (category: string) => {
-//   if (category === "products") category = "category";
-//   console.log("category", category);
-
-//   return useQuery<GetProduct>([QueryKeys.PRODUCTS], () =>
-//     restFetcher({
-//       method: "POST",
-//       path: `/api/product/${category}`,
-//     })
-//   );
-// };
+const useFetcher = (category: string) => {
+  return useQuery<GetProduct>([QueryKeys.PRODUCTS, category], () =>
+    restFetcher({
+      method: "POST",
+      path: `/api/product/${category}`,
+    })
+  );
+};
 
 const ProductList = () => {
-  const params = useParams<TypeCategory>();
+  const { category } = useParams<TypeCategory>();
   const [productItem, setProductItem] = useState<GetProduct>();
-  let category = params.category;
-  console.log(category);
-  if (category === undefined) category = "category";
-  console.log(category);
-  const { mutate: GetProduct } = useMutation<GetProduct>(
-    () =>
-      restFetcher({
-        method: "POST",
-        path: `/api/product/${category}`,
-      }),
-    {
-      onSuccess: (response) => {
-        setProductItem(response);
-      },
-    }
-  );
-  useEffect(() => {
-    GetProduct();
-  }, []);
+  if (!category) return null;
+
+  const { data } = useFetcher(category);
 
   console.log("data", productItem);
-  if (!productItem) return null;
 
   return (
     <ProducListController>
       <br />
-      Total : <b>{productItem.postSize}</b> items
+      Total : <b>{data?.postSize}</b> items
       <ul>
-        {productItem?.productInfo.map((product) => (
+        {data?.productInfo.map((product) => (
           <ProductItem {...product} key={product._id} />
         ))}
       </ul>
