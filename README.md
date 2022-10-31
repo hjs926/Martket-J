@@ -71,11 +71,17 @@ npx run dev
 
 ![02](https://user-images.githubusercontent.com/48309309/198954601-51afca54-9141-4100-866b-3a6da8ca4a94.PNG)
 
-**4.  장바구니 페이지**
+**4.  카테고리 페이지**
+
+![cate01](https://user-images.githubusercontent.com/48309309/199021375-d1730700-bdb3-462f-922f-f0a1ec030de5.PNG)
+
+![cate02](https://user-images.githubusercontent.com/48309309/199021380-0d6d5e32-55bc-4560-8532-7b565c91830a.PNG)
+
+**5.  장바구니 페이지**
 
 ![03](https://user-images.githubusercontent.com/71222288/199019929-75046ec3-91a3-4338-826e-0fe48e09b9d3.PNG)
 
-**5. 커뮤니티 페이지**
+**6. 커뮤니티 페이지**
 
 ![commu1](https://user-images.githubusercontent.com/48309309/198956534-4fc646dd-7d87-4133-aef6-65b988473247.PNG)
 
