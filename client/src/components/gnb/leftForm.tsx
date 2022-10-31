@@ -43,11 +43,11 @@ const LeftForm = () => {
         </Link>
         <ul>
           <li>
-            <a href="/category">Shopping</a>
+            <Link to="/products">Shopping</Link>
           </li>
           {category.map((category) => (
             <li>
-              <a href={`/${category}`}>{`- ${category}`}</a>
+              <Link to={`/${category}`}>{`- ${category}`}</Link>
             </li>
           ))}
           <li>

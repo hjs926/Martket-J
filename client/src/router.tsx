@@ -18,7 +18,7 @@ export const routes = [
       { path: "/", element: <Index />, index: true },
       { path: "/cart", element: <CartIndex />, index: true },
       { path: "/products/:id", element: <Id /> },
-      { path: "/products/", element: <ProductList /> },
+      { path: "/product/", element: <ProductList /> },
       { path: "/:category", element: <ProductList /> },
       { path: "/login", element: <LoginIndex /> },
       { path: "/signup", element: <SignUpPage /> },
