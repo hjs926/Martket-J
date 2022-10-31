@@ -2,7 +2,7 @@
 
 ![logo](https://user-images.githubusercontent.com/48309309/198953532-66ccad4c-4aee-4701-bdb3-69fa9f36906d.PNG)
 
-Team JS의 쇼핑몰 Market J 입니다.
+**Team JS의 쇼핑몰 Market J 입니다.**
 
 <br>
 
@@ -42,21 +42,21 @@ npx run dev
 
 ## ✨ 프로젝트 결과물
 
-1.  메인 페이지
+**1.  메인 페이지**
 
 ![01](https://user-images.githubusercontent.com/48309309/198954428-c5fd0200-63a2-4f02-a07d-88540285fd29.PNG)
 
-2.  로그인/회원가입 페이지
+**2.  로그인/회원가입 페이지**
 
 ![sign](https://user-images.githubusercontent.com/48309309/198955254-950ef979-c4e6-4a5c-8a6c-ce45358f9407.PNG)
 
 ![login](https://user-images.githubusercontent.com/48309309/198955261-fa14d3da-a1f3-4877-9f53-b0bea109dc96.PNG)
 
-3.  상세 페이지
+**3.  상세 페이지**
 
 ![02](https://user-images.githubusercontent.com/48309309/198954601-51afca54-9141-4100-866b-3a6da8ca4a94.PNG)
 
-4.  장바구니 페이지
+**4.  장바구니 페이지**
 
 ![03](https://user-images.githubusercontent.com/48309309/198954633-9496c91d-e4c5-4267-b90b-89e09a98c54a.PNG)
 
