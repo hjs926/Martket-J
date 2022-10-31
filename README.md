@@ -73,7 +73,7 @@ npx run dev
 
 **4.  장바구니 페이지**
 
-![03](https://user-images.githubusercontent.com/71222288/199019094-a233e64f-3118-430d-a4d8-9edbac844d44.png)
+![03](https://user-images.githubusercontent.com/71222288/199019430-baf303c2-cd0d-4bef-9e03-7440fa748979.png)
 
 **5. 커뮤니티 페이지**
 
