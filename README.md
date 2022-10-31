@@ -73,7 +73,11 @@ npx run dev
 
 **4.  카테고리 페이지**
 
+**전체 상품**
+
 ![cate01](https://user-images.githubusercontent.com/48309309/199021375-d1730700-bdb3-462f-922f-f0a1ec030de5.PNG)
+
+**etc 상품**
 
 ![cate02](https://user-images.githubusercontent.com/48309309/199021380-0d6d5e32-55bc-4560-8532-7b565c91830a.PNG)
 
