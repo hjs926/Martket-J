@@ -171,5 +171,3 @@ npx run dev
     <td align="center"><b><a href="https://github.com/b-jisoo">방지수</a></b></td>
   </tr>
   </table>
-Footer
-
