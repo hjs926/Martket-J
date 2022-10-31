@@ -50,7 +50,7 @@ npx run dev
 
 ![sign](https://user-images.githubusercontent.com/48309309/198955254-950ef979-c4e6-4a5c-8a6c-ce45358f9407.PNG)
 
-![login](https://user-images.githubusercontent.com/48309309/198955261-fa14d3da-a1f3-4877-9f53-b0bea109dc96.PNG)
+![login](https://user-images.githubusercontent.com/48309309/198956350-df6f7609-f258-4c6f-90bb-67c10885c91c.PNG)
 
 **3.  상세 페이지**
 
@@ -59,6 +59,12 @@ npx run dev
 **4.  장바구니 페이지**
 
 ![03](https://user-images.githubusercontent.com/48309309/198954633-9496c91d-e4c5-4267-b90b-89e09a98c54a.PNG)
+
+**5. 커뮤니티 페이지**
+
+![commu2](https://user-images.githubusercontent.com/48309309/198956528-11f8042c-0b61-4dff-852d-b5095173f5ec.PNG)
+
+![commu1](https://user-images.githubusercontent.com/48309309/198956534-4fc646dd-7d87-4133-aef6-65b988473247.PNG)
 
 ## ⚒️ 기술 스택
 
