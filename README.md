@@ -165,9 +165,13 @@ npx run dev
 ## 🧑‍💻 팀원
 
 <table>
+    
   <tr>
+      
     <td align="center"><b><a href="https://github.com/hjs926">황준선</a></b></td>
-   
+    
     <td align="center"><b><a href="https://github.com/b-jisoo">방지수</a></b></td>
+      
   </tr>
+    
   </table>
