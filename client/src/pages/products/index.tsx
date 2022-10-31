@@ -35,7 +35,7 @@ const ProductList = () => {
   const [productItem, setProductItem] = useState<GetProduct>();
   if (!category) return null;
 
-  const { data } = useFetcher(category);
+  const { data, isLoading } = useFetcher(category);
 
   console.log("data", productItem);
 

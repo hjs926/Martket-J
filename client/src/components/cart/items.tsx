@@ -13,12 +13,14 @@ const CartItemContainer = styled.div`
   min-width: 800px;
   width: 1000px;
   /* max-width: 60%; */
-  margin: 10px 0;
+  margin-top: 10px;
   align-items: center;
   /* border: 1px solid gray; */
+  border-top: 1px solid gray;
   padding: 10px;
-  border-radius: 1.5em;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  /* border-radius: 1.5em; */
+  /* box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2); */
+
   .title {
     margin: 10px;
     min-width: 300px;
@@ -81,12 +83,12 @@ const CartItem = (cartItem: Product) => {
         <img src={`http://localhost:4000/${cartItem.images}`} />
       </CartItemImage_Container>
       <div className="title">
-        <p>상품명: {cartItem.title}</p>
+        <p> {cartItem.title}</p>
       </div>
       <p className="price">가격: {convertPrice(cartItem.price)}원</p>
       <div className="quantity">
         <button onClick={() => handleDecreaseCart(cartItem)}>-</button>
-        <div>수량: {cartItem.quantity}</div>
+        <div>수량 {cartItem.quantity}</div>
         <button onClick={() => handleIncreaseCart(cartItem)}>+</button>
       </div>
       <div className="totalQuantity">

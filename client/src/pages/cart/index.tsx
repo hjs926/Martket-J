@@ -30,15 +30,30 @@ const CartContainer = styled.div`
     width: 150px;
   }
   .cart-info {
+    display: flex;
     margin-left: 30px;
-    border-radius: 1.5em;
+    /* border-radius: 1.5em; */
+
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
     width: 500px;
-    height: 500px;
+    height: 600px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    .cart-paymentBtn {
+      margin-top: 50px;
+      width: 200px;
+      height: 30px;
+      color: #fff;
+      background-color: #e44454;
+      border-color: #c94e5a;
+      cursor: pointer;
+      text-transform: none;
+      text-decoration: none;
+      font-weight: 400;
+      border-radius: 0.25rem;
+    }
     .cart-subtotal {
       font-size: 30px;
       font-weight: bold;
@@ -92,6 +107,7 @@ const Cart = () => {
               <span>Subtotal : </span>
               <span>{convertPrice(cartData.cartTotalAmount)}원</span>
             </div>
+            <button className="cart-paymentBtn">결제하기</button>
           </div>
         </CartContainer>
       )}
