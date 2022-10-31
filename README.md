@@ -6,6 +6,20 @@
 
 <br>
 
+## ⚒️ 기술 스택
+
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
+
+#### 라이브러리
+
+![React](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white)
+![Axios](https://img.shields.io/badge/axios-%23323330.svg?style=for-the-badge)
+![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
+
 ## 📃 실행 환경 및 방법
 
 node.js와 npm이 설치되어있어야 합니다.
@@ -20,7 +34,6 @@ $npm --version
 프로젝트 clone 후 서버를 실행합니다.
 
 ```
-
 npm install
 ```
 
@@ -66,19 +79,6 @@ npx run dev
 
 ![commu2](https://user-images.githubusercontent.com/48309309/198956528-11f8042c-0b61-4dff-852d-b5095173f5ec.PNG)
 
-## ⚒️ 기술 스택
-
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
-
-#### 라이브러리
-
-![React](https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
-![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white)
-![Axios](https://img.shields.io/badge/axios-%23323330.svg?style=for-the-badge)
-![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
 <br>
 ### 📁 디렉토리 구조
@@ -88,61 +88,61 @@ npx run dev
     📦src
     ┣ 📦components
     ┃ ┣ 📂admin
-    ┃ ┃ ┣ addForm.tsx
-    ┃ ┃ ┗ FileUpload.tsx
+    ┃ ┃ ┣ addForm
+    ┃ ┃ ┗ FileUpload
     ┃ ┣ 📂auth
-    ┃ ┃ ┗ auth.tsx
+    ┃ ┃ ┗ auth
     ┃ ┣ 📂cart
-    ┃ ┃ ┗ items.tsx
+    ┃ ┃ ┗ items
     ┃ ┣ 📂community
-    ┃ ┃ ┣ board.tsx
-    ┃ ┃ ┣ boarditem.tsx
-    ┃ ┃ ┣ detail.tsx
-    ┃ ┃ ┗ writeform.tsx
+    ┃ ┃ ┣ board
+    ┃ ┃ ┣ boarditem
+    ┃ ┃ ┣ detail
+    ┃ ┃ ┗ writeform
     ┃ ┣ 📂gnb
-    ┃ ┃ ┣ leftForm.tsx
-    ┃ ┃ ┗ rightForm.tsx
+    ┃ ┃ ┣ leftForm
+    ┃ ┃ ┗ rightForm
     ┃ ┣ 📂login
-    ┃ ┃ ┣ login.tsx
-    ┃ ┃ ┗ logout.tsx
+    ┃ ┃ ┣ login
+    ┃ ┃ ┗ logout
     ┃ ┣ 📂product
-    ┃ ┃ ┣ detail_product.tsx
-    ┃ ┃ ┣ index.tsx
-    ┃ ┃ ┗ products.tsx
+    ┃ ┃ ┣ detail_product
+    ┃ ┃ ┣ index
+    ┃ ┃ ┗ products
     ┃ ┣ 📂slide
-    ┃ ┃ ┗ slideItem.tsx
+    ┃ ┃ ┗ slideItem
     ┃ ┣ 📂slider
-    ┃ ┃ ┣ footer.tsx
-    ┃ ┃ ┗ gnb.tsx
+    ┃ ┃ ┣ footer
+    ┃ ┃ ┗ gnb
     ┣ 📦pages
     ┃ ┣ 📂admin
-    ┃ ┃ ┗ index.tsx
+    ┃ ┃ ┗ index
     ┃ ┣ 📂cart
-    ┃ ┃ ┗ index.tsx
+    ┃ ┃ ┗ index
     ┃ ┣ 📂community
-    ┃ ┃ ┣ [id].tsx
-    ┃ ┃ ┣ index.tsx
-    ┃ ┃ ┗ writeBoard.tsx
+    ┃ ┃ ┣ [id]
+    ┃ ┃ ┣ index
+    ┃ ┃ ┗ writeBoard
     ┃ ┣ 📂login
-    ┃ ┃ ┣ login.tsx
-    ┃ ┃ ┗ signup.tsx
+    ┃ ┃ ┣ login
+    ┃ ┃ ┗ signup
     ┃ ┣ 📂products
-    ┃ ┃ ┣ [id].tsx
-    ┃ ┃ ┗ index.tsx
+    ┃ ┃ ┣ [id]
+    ┃ ┃ ┗ index
 
 📦server
     ┣ 📂middleware
-    ┃ ┣ 📜auth.js
+    ┃ ┣ 📜auth
     ┣ 📂models
-    ┃ ┣ 📜Board.js
-    ┃ ┣ 📜Counter.js
-    ┃ ┣ 📜Product.js
-    ┃ ┗ 📜User.js
+    ┃ ┣ 📜Board
+    ┃ ┣ 📜Counter
+    ┃ ┣ 📜Product
+    ┃ ┗ 📜User
     ┣ 📂routes
-    ┃ ┣ 📜board.js
-    ┃ ┣ 📜product.js
-    ┃ ┗ 📜user.js
-    ┣ 📜index.js
+    ┃ ┣ 📜board
+    ┃ ┣ 📜product
+    ┃ ┗ 📜user
+    ┣ 📜index
 ```
 
 ## 🗓️ 개발 기간
