@@ -62,9 +62,9 @@ npx run dev
 
 **5. 커뮤니티 페이지**
 
-![commu2](https://user-images.githubusercontent.com/48309309/198956528-11f8042c-0b61-4dff-852d-b5095173f5ec.PNG)
-
 ![commu1](https://user-images.githubusercontent.com/48309309/198956534-4fc646dd-7d87-4133-aef6-65b988473247.PNG)
+
+![commu2](https://user-images.githubusercontent.com/48309309/198956528-11f8042c-0b61-4dff-852d-b5095173f5ec.PNG)
 
 ## ⚒️ 기술 스택
 
