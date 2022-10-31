@@ -48,7 +48,7 @@ npx run dev
 
 **2.  로그인/회원가입 페이지**
 
-![sign](https://user-images.githubusercontent.com/48309309/198955254-950ef979-c4e6-4a5c-8a6c-ce45358f9407.PNG)
+![sign](https://user-images.githubusercontent.com/48309309/198956741-8766e204-75ed-447c-aa4c-b3c00cd5b4c2.PNG)
 
 ![login](https://user-images.githubusercontent.com/48309309/198956350-df6f7609-f258-4c6f-90bb-67c10885c91c.PNG)
 
